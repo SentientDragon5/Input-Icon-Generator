@@ -422,6 +422,7 @@ func generate_spritesheets() -> void:
 	var cell_w = current_size
 	var cell_h = current_size
 	var theme_display_name = current_theme_name if not current_theme_name.is_empty() else "Default"
+	var theme_slug = theme_display_name.to_lower().replace(" ", "_")
 	
 	progress_bar.visible = true
 	progress_bar.min_value = 0
@@ -443,16 +444,22 @@ func generate_spritesheets() -> void:
 		var sheet_w = cols * cell_w
 		var sheet_h = rows * cell_h
 		
+		var file_base = "icons_%s_%s_%d_spritesheet" % [cat_name, theme_slug, cell_w]
+		var png_name = file_base + ".png"
+		var json_name = file_base + ".json"
+		
 		var sheet_img = Image.create(sheet_w, sheet_h, false, Image.FORMAT_RGBA8)
 		sheet_img.fill(Color(0, 0, 0, 0))
 		
 		var json_data = {
 			"app_header": {
-				"spritesheet_name": cat_name + "_spritesheet.png",
+				"spritesheet_name": png_name,
 				"version": "1.0",
 				"platform": "godot",
 				"platform_version": "4.7",
 				"theme": theme_display_name,
+				"theme_slug": theme_slug,
+				"icon_size": cell_w,
 				"cell_size": [cell_w, cell_h],
 				"sheet_size": [sheet_w, sheet_h],
 				"total_icons": count
@@ -472,6 +479,8 @@ func generate_spritesheets() -> void:
 			var entry = {
 				"name": icon_key,
 				"readable_name": meta_info.get("readable_name", icon_key),
+				"theme": theme_display_name,
+				"icon_size": cell_w,
 				"x": dest_x,
 				"y": dest_y,
 				"width": cell_w,
@@ -481,14 +490,14 @@ func generate_spritesheets() -> void:
 				entry["keycode"] = meta_info["keycode"]
 			json_data["data"][icon_key] = entry
 			
-		sheet_img.save_png(spritesheet_dir + cat_name + "_spritesheet.png")
+		sheet_img.save_png(spritesheet_dir + png_name)
 		
-		var json_file = FileAccess.open(spritesheet_dir + cat_name + "_spritesheet.json", FileAccess.WRITE)
+		var json_file = FileAccess.open(spritesheet_dir + json_name, FileAccess.WRITE)
 		if json_file:
 			json_file.store_string(JSON.stringify(json_data, "\t"))
 			json_file.close()
 			
-	status_label.text = "Status: Spritesheets generated successfully (" + current_theme_name + ")"
+	status_label.text = "Status: Spritesheets generated successfully (%s - %dpx)" % [theme_display_name, current_size]
 	await get_tree().create_timer(1.2).timeout
 	progress_bar.visible = false
 
