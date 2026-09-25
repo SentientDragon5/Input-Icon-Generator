@@ -13,7 +13,6 @@ class_name SceneRenderer
 @onready var size_slider: HSlider = $UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/SizeSlider
 @onready var size_spin_box: SpinBox = $UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/SizeHeader/SizeSpinBox
 
-@onready var big_preview_rect: TextureRect = $UI/PreviewArea/VBoxContainer/PreviewsHBox/BigPreviewBox/VBoxContainer/BigPreviewPanel/BigPreviewRect
 @onready var exact_preview_rect: TextureRect = $UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox/VBoxContainer/ExactPreviewPanel/CenterContainer/ExactPreviewRect
 @onready var exact_title_label: Label = $UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox/VBoxContainer/ExactTitle
 @onready var selected_header_label: Label = $UI/PreviewArea/VBoxContainer/SelectedHeaderLabel
@@ -62,8 +61,7 @@ func _ready() -> void:
 		
 	populate_icon_buttons()
 	if items_registry.size() > 0:
-		var first_key = items_registry.keys()[0]
-		show_preview(first_key)
+		show_preview(items_registry.keys()[0])
 
 func load_available_themes() -> void:
 	loaded_themes.clear()
@@ -81,15 +79,13 @@ func load_available_themes() -> void:
 	
 	theme_files.sort()
 	for file_name in theme_files:
-		var theme_path = themes_dir + file_name
-		var res = load(theme_path)
+		var res = load(themes_dir + file_name)
 		if res is Theme:
 			loaded_themes.append(res)
 			theme_names.append(file_name.get_basename().replace("_", " ").capitalize())
 	
 	if loaded_themes.is_empty():
-		var default_theme = Theme.new()
-		loaded_themes.append(default_theme)
+		loaded_themes.append(Theme.new())
 		theme_names.append("Default")
 		
 	current_theme = loaded_themes[0]
@@ -104,16 +100,11 @@ func setup_parameters_ui() -> void:
 		theme_option_button.item_selected.connect(_on_theme_selected)
 		
 	if size_slider and size_spin_box:
-		size_slider.min_value = 16
-		size_slider.max_value = 256
-		size_slider.step = 1
-		size_slider.value = current_size
-		
-		size_spin_box.min_value = 16
-		size_spin_box.max_value = 256
-		size_spin_box.step = 1
-		size_spin_box.value = current_size
-		
+		for control in [size_slider, size_spin_box]:
+			control.min_value = 16
+			control.max_value = 256
+			control.step = 1
+			control.value = current_size
 		size_slider.value_changed.connect(_on_size_slider_changed)
 		size_spin_box.value_changed.connect(_on_size_spinbox_changed)
 
@@ -149,7 +140,7 @@ func _apply_size_change() -> void:
 func build_items_registry() -> void:
 	items_registry.clear()
 	
-	# 1. Register handcrafted scenes in res://generated/
+	# Handcrafted scenes
 	var dir = DirAccess.open("res://generated/")
 	if dir:
 		dir.list_dir_begin()
@@ -157,25 +148,21 @@ func build_items_registry() -> void:
 		while file_name != "":
 			if not dir.current_is_dir() and file_name.ends_with(".tscn"):
 				var item_name = file_name.get_basename()
-				var scene_path = "res://generated/" + file_name
-				var loaded_res = load(scene_path)
+				var loaded_res = load("res://generated/" + file_name)
 				if loaded_res is PackedScene:
-					var category = determine_category(item_name)
 					items_registry[item_name] = {
 						"type": "scene",
 						"name": item_name,
 						"scene": loaded_res,
-						"category": category,
+						"category": determine_category(item_name),
 						"readable_name": item_name.replace("_", " ").capitalize(),
 						"keycode": 0
 					}
 			file_name = dir.get_next()
 		dir.list_dir_end()
 		
-	# 2. Register procedural keyboard keys
-	register_procedural_keyboard_keys()
-	
-	print("SceneRenderer: Total items registered -> ", items_registry.size())
+	# Procedural keyboard keys
+	_register_procedural_keys()
 
 func determine_category(item_name: String) -> String:
 	if item_name.begins_with("button_") or item_name.begins_with("dpad_") or item_name.begins_with("bumper_") or item_name.begins_with("trigger_") or item_name.begins_with("stick_") or item_name.begins_with("paddle_"):
@@ -186,408 +173,127 @@ func determine_category(item_name: String) -> String:
 		return "keyboard"
 	return "general"
 
-func register_procedural_keyboard_keys() -> void:
-	# A-Z letters
+func _register_procedural_keys() -> void:
+	# A-Z
 	for code in range(KEY_A, KEY_Z + 1):
 		var char_str = String.chr(code)
-		var item_name = "key_" + char_str.to_lower()
-		items_registry[item_name] = {
-			"type": "procedural_key",
-			"name": item_name,
-			"readable_name": char_str,
-			"label": char_str,
-			"template": key_base_scene,
-			"font_size": 18,
-			"category": "keyboard",
-			"keycode": code
-		}
+		_add_key_entry("key_" + char_str.to_lower(), char_str, char_str, key_base_scene, 18, code)
 		
-	# 0-9 digits
+	# 0-9
 	for code in range(KEY_0, KEY_9 + 1):
 		var char_str = String.chr(code)
-		var item_name = "key_" + char_str
-		items_registry[item_name] = {
-			"type": "procedural_key",
-			"name": item_name,
-			"readable_name": char_str,
-			"label": char_str,
-			"template": key_base_scene,
-			"font_size": 18,
-			"category": "keyboard",
-			"keycode": code
-		}
+		_add_key_entry("key_" + char_str, char_str, char_str, key_base_scene, 18, code)
 		
-	# F1-F12 function keys
+	# F1-F12
 	for i in range(1, 13):
-		var label_str = "F" + str(i)
-		var item_name = "key_f" + str(i)
-		var keycode = KEY_F1 + (i - 1)
-		items_registry[item_name] = {
-			"type": "procedural_key",
-			"name": item_name,
-			"readable_name": label_str,
-			"label": label_str,
-			"template": key_base_scene,
-			"font_size": 14,
-			"category": "keyboard",
-			"keycode": keycode
-		}
+		_add_key_entry("key_f" + str(i), "F" + str(i), "F" + str(i), key_base_scene, 14, KEY_F1 + (i - 1))
 		
-	# Symbols & punctuation
+	# Symbols
 	var symbols = [
-		{"name": "key_comma", "label": ",", "readable": ",", "code": KEY_COMMA, "font_size": 20},
-		{"name": "key_period", "label": ".", "readable": ".", "code": KEY_PERIOD, "font_size": 20},
-		{"name": "key_slash", "label": "/", "readable": "/", "code": KEY_SLASH, "font_size": 18},
-		{"name": "key_backslash", "label": "\\", "readable": "\\", "code": KEY_BACKSLASH, "font_size": 18},
-		{"name": "key_semicolon", "label": ";", "readable": ";", "code": KEY_SEMICOLON, "font_size": 18},
-		{"name": "key_apostrophe", "label": "'", "readable": "'", "code": KEY_APOSTROPHE, "font_size": 20},
-		{"name": "key_bracketleft", "label": "[", "readable": "[", "code": KEY_BRACKETLEFT, "font_size": 18},
-		{"name": "key_bracketright", "label": "]", "readable": "]", "code": KEY_BRACKETRIGHT, "font_size": 18},
-		{"name": "key_minus", "label": "-", "readable": "-", "code": KEY_MINUS, "font_size": 20},
-		{"name": "key_equal", "label": "=", "readable": "=", "code": KEY_EQUAL, "font_size": 18},
-		{"name": "key_backquote", "label": "`", "readable": "`", "code": KEY_QUOTELEFT, "font_size": 20},
-		{"name": "key_exclam", "label": "!", "readable": "!", "code": KEY_EXCLAM, "font_size": 18},
-		{"name": "key_question", "label": "?", "readable": "?", "code": KEY_QUESTION, "font_size": 18},
-		{"name": "key_plus", "label": "+", "readable": "+", "code": KEY_PLUS, "font_size": 18},
-		{"name": "key_colon", "label": ":", "readable": ":", "code": KEY_COLON, "font_size": 18},
-		{"name": "key_quotedbl", "label": "\"", "readable": "\"", "code": KEY_QUOTEDBL, "font_size": 18},
-		{"name": "key_less", "label": "<", "readable": "<", "code": KEY_LESS, "font_size": 18},
-		{"name": "key_greater", "label": ">", "readable": ">", "code": KEY_GREATER, "font_size": 18},
-		{"name": "key_underscore", "label": "_", "readable": "_", "code": KEY_UNDERSCORE, "font_size": 18},
-		{"name": "key_braceleft", "label": "{", "readable": "{", "code": KEY_BRACELEFT, "font_size": 18},
-		{"name": "key_braceright", "label": "}", "readable": "}", "code": KEY_BRACERIGHT, "font_size": 18},
-		{"name": "key_bar", "label": "|", "readable": "|", "code": KEY_BAR, "font_size": 18},
-		{"name": "key_asciitilde", "label": "~", "readable": "~", "code": KEY_ASCIITILDE, "font_size": 18},
-		{"name": "key_at", "label": "@", "readable": "@", "code": KEY_AT, "font_size": 16},
-		{"name": "key_hash", "label": "#", "readable": "#", "code": KEY_NUMBERSIGN, "font_size": 18},
-		{"name": "key_dollar", "label": "$", "readable": "$", "code": KEY_DOLLAR, "font_size": 18},
-		{"name": "key_percent", "label": "%", "readable": "%", "code": KEY_PERCENT, "font_size": 16},
-		{"name": "key_ampersand", "label": "&", "readable": "&", "code": KEY_AMPERSAND, "font_size": 16},
-		{"name": "key_asterisk", "label": "*", "readable": "*", "code": KEY_ASTERISK, "font_size": 20},
+		[",", "key_comma", KEY_COMMA, 20], [".", "key_period", KEY_PERIOD, 20], ["/", "key_slash", KEY_SLASH, 18],
+		["\\", "key_backslash", KEY_BACKSLASH, 18], [";", "key_semicolon", KEY_SEMICOLON, 18], ["'", "key_apostrophe", KEY_APOSTROPHE, 20],
+		["[", "key_bracketleft", KEY_BRACKETLEFT, 18], ["]", "key_bracketright", KEY_BRACKETRIGHT, 18], ["-", "key_minus", KEY_MINUS, 20],
+		["=", "key_equal", KEY_EQUAL, 18], ["`", "key_backquote", KEY_QUOTELEFT, 20], ["!", "key_exclam", KEY_EXCLAM, 18],
+		["?", "key_question", KEY_QUESTION, 18], ["+", "key_plus", KEY_PLUS, 18], [":", "key_colon", KEY_COLON, 18],
+		["\"", "key_quotedbl", KEY_QUOTEDBL, 18], ["<", "key_less", KEY_LESS, 18], [">", "key_greater", KEY_GREATER, 18],
+		["_", "key_underscore", KEY_UNDERSCORE, 18], ["{", "key_braceleft", KEY_BRACELEFT, 18], ["}", "key_braceright", KEY_BRACERIGHT, 18],
+		["|", "key_bar", KEY_BAR, 18], ["~", "key_asciitilde", KEY_ASCIITILDE, 18], ["@", "key_at", KEY_AT, 16],
+		["#", "key_hash", KEY_NUMBERSIGN, 18], ["$", "key_dollar", KEY_DOLLAR, 18], ["%", "key_percent", KEY_PERCENT, 16],
+		["&", "key_ampersand", KEY_AMPERSAND, 16], ["*", "key_asterisk", KEY_ASTERISK, 20]
 	]
 	for sym in symbols:
-		items_registry[sym["name"]] = {
-			"type": "procedural_key",
-			"name": sym["name"],
-			"readable_name": sym["readable"],
-			"label": sym["label"],
-			"template": key_base_scene,
-			"font_size": sym["font_size"],
-			"category": "keyboard",
-			"keycode": sym["code"]
-		}
+		_add_key_entry(sym[1], sym[0], sym[0], key_base_scene, sym[3], sym[2])
 		
-	# Numpad keys
+	# Numpad
 	for i in range(10):
-		var item_name = "key_kp_" + str(i)
-		var label_str = "Num " + str(i)
-		items_registry[item_name] = {
-			"type": "procedural_key",
-			"name": item_name,
-			"readable_name": label_str,
-			"label": label_str,
-			"template": key_base_scene,
-			"font_size": 11,
-			"category": "keyboard",
-			"keycode": KEY_KP_0 + i
-		}
+		_add_key_entry("key_kp_" + str(i), "Num " + str(i), "Num " + str(i), key_base_scene, 11, KEY_KP_0 + i)
 	var numpad_ops = [
-		{"name": "key_kp_add", "label": "Num +", "code": KEY_KP_ADD},
-		{"name": "key_kp_subtract", "label": "Num -", "code": KEY_KP_SUBTRACT},
-		{"name": "key_kp_multiply", "label": "Num *", "code": KEY_KP_MULTIPLY},
-		{"name": "key_kp_divide", "label": "Num /", "code": KEY_KP_DIVIDE},
-		{"name": "key_kp_period", "label": "Num .", "code": KEY_KP_PERIOD},
-		{"name": "key_kp_enter", "label": "Num Enter", "code": KEY_KP_ENTER},
+		["key_kp_add", "Num +", KEY_KP_ADD], ["key_kp_subtract", "Num -", KEY_KP_SUBTRACT],
+		["key_kp_multiply", "Num *", KEY_KP_MULTIPLY], ["key_kp_divide", "Num /", KEY_KP_DIVIDE],
+		["key_kp_period", "Num .", KEY_KP_PERIOD], ["key_kp_enter", "Num Enter", KEY_KP_ENTER]
 	]
 	for op in numpad_ops:
-		items_registry[op["name"]] = {
-			"type": "procedural_key",
-			"name": op["name"],
-			"readable_name": op["label"],
-			"label": op["label"],
-			"template": key_base_scene,
-			"font_size": 10,
-			"category": "keyboard",
-			"keycode": op["code"]
-		}
+		_add_key_entry(op[0], op[1], op[1], key_base_scene, 10, op[2])
 		
 	# Navigation & special keys
 	var nav_keys = [
-		{"name": "key_escape", "label": "Esc", "readable": "Escape", "code": KEY_ESCAPE, "wide": false},
-		{"name": "key_insert", "label": "Ins", "readable": "Insert", "code": KEY_INSERT, "wide": false},
-		{"name": "key_delete", "label": "Del", "readable": "Delete", "code": KEY_DELETE, "wide": false},
-		{"name": "key_home", "label": "Home", "readable": "Home", "code": KEY_HOME, "wide": false},
-		{"name": "key_end", "label": "End", "readable": "End", "code": KEY_END, "wide": false},
-		{"name": "key_pageup", "label": "PgUp", "readable": "Page Up", "code": KEY_PAGEUP, "wide": false},
-		{"name": "key_pagedown", "label": "PgDn", "readable": "Page Down", "code": KEY_PAGEDOWN, "wide": false},
-		{"name": "key_up", "label": "Up", "readable": "Up Arrow", "code": KEY_UP, "wide": false},
-		{"name": "key_down", "label": "Down", "readable": "Down Arrow", "code": KEY_DOWN, "wide": false},
-		{"name": "key_left", "label": "Left", "readable": "Left Arrow", "code": KEY_LEFT, "wide": false},
-		{"name": "key_right", "label": "Right", "readable": "Right Arrow", "code": KEY_RIGHT, "wide": false},
-		{"name": "key_capslock", "label": "Caps", "readable": "Caps Lock", "code": KEY_CAPSLOCK, "wide": true},
-		{"name": "key_numlock", "label": "NumLk", "readable": "Num Lock", "code": KEY_NUMLOCK, "wide": true},
-		{"name": "key_scrolllock", "label": "ScrLk", "readable": "Scroll Lock", "code": KEY_SCROLLLOCK, "wide": true},
-		{"name": "key_printscreen", "label": "PrtSc", "readable": "Print Screen", "code": KEY_PRINT, "wide": true},
-		{"name": "key_pause", "label": "Pause", "readable": "Pause", "code": KEY_PAUSE, "wide": false},
-		{"name": "key_meta", "label": "Meta", "readable": "Win / Cmd", "code": KEY_META, "wide": true},
+		["key_escape", "Esc", "Escape", KEY_ESCAPE, false], ["key_insert", "Ins", "Insert", KEY_INSERT, false],
+		["key_delete", "Del", "Delete", KEY_DELETE, false], ["key_home", "Home", "Home", KEY_HOME, false],
+		["key_end", "End", "End", KEY_END, false], ["key_pageup", "PgUp", "Page Up", KEY_PAGEUP, false],
+		["key_pagedown", "PgDn", "Page Down", KEY_PAGEDOWN, false], ["key_up", "Up", "Up Arrow", KEY_UP, false],
+		["key_down", "Down", "Down Arrow", KEY_DOWN, false], ["key_left", "Left", "Left Arrow", KEY_LEFT, false],
+		["key_right", "Right", "Right Arrow", KEY_RIGHT, false], ["key_capslock", "Caps", "Caps Lock", KEY_CAPSLOCK, true],
+		["key_numlock", "NumLk", "Num Lock", KEY_NUMLOCK, true], ["key_scrolllock", "ScrLk", "Scroll Lock", KEY_SCROLLLOCK, true],
+		["key_printscreen", "PrtSc", "Print Screen", KEY_PRINT, true], ["key_pause", "Pause", "Pause", KEY_PAUSE, false],
+		["key_meta", "Meta", "Win / Cmd", KEY_META, true]
 	]
 	for nk in nav_keys:
-		var tmpl = key_wide_base_scene if nk["wide"] else key_base_scene
-		items_registry[nk["name"]] = {
-			"type": "procedural_key",
-			"name": nk["name"],
-			"readable_name": nk["readable"],
-			"label": nk["label"],
-			"template": tmpl,
-			"font_size": 12,
-			"category": "keyboard",
-			"keycode": nk["code"]
-		}
+		_add_key_entry(nk[0], nk[1], nk[2], key_wide_base_scene if nk[4] else key_base_scene, 12, nk[3])
+
+func _add_key_entry(id_name: String, label: String, readable: String, tmpl: PackedScene, font_size: int, code: int) -> void:
+	items_registry[id_name] = {
+		"type": "procedural_key",
+		"name": id_name,
+		"readable_name": readable,
+		"label": label,
+		"template": tmpl,
+		"font_size": font_size,
+		"category": "keyboard",
+		"keycode": code
+	}
 
 func apply_theme_to_tree(node: Node, theme_res: Theme) -> void:
 	if not node or not theme_res:
 		return
 		
-	var theme_sb: StyleBoxFlat = null
-	if theme_res.has_stylebox("panel", "Panel"):
-		var sb_res = theme_res.get_stylebox("panel", "Panel")
-		if sb_res is StyleBoxFlat:
-			theme_sb = sb_res
-			
-	var main_bg_color: Color = theme_sb.bg_color if theme_sb else Color(0.18, 0.18, 0.18, 1.0)
-	var main_border_color: Color = theme_sb.border_color if theme_sb else Color(0.55, 0.55, 0.55, 1.0)
-	var border_w: int = theme_sb.border_width_left if (theme_sb and theme_sb.border_width_left > 0) else 2
-	var is_open_theme: bool = (main_bg_color.a <= 0.01)
-	
-	var fg_color: Color = Color(1.0, 1.0, 1.0, 1.0)
-	if theme_res.has_color("font_color", "Label"):
-		fg_color = theme_res.get_color("font_color", "Label")
-	elif theme_res.has_color("font_color", "Button"):
-		fg_color = theme_res.get_color("font_color", "Button")
-		
-	var inactive_fg_color: Color = Color(fg_color.r, fg_color.g, fg_color.b, 0.35)
-	var secondary_bg_color: Color = main_bg_color.lerp(main_border_color, 0.2) if not is_open_theme else Color(0, 0, 0, 0)
-	
-	_apply_theme_recursive(node, theme_res, theme_sb, main_bg_color, main_border_color, border_w, is_open_theme, fg_color, inactive_fg_color, secondary_bg_color)
+	var theme_sb = theme_res.get_stylebox("panel", "Panel") as StyleBoxFlat
+	var fg = theme_res.get_color("font_color", "Label") if theme_res.has_color("font_color", "Label") else Color.WHITE
+	var inactive_fg = Color(fg.r, fg.g, fg.b, 0.35)
+	var is_open = (theme_sb != null and theme_sb.bg_color.a <= 0.01)
 
-func _apply_theme_recursive(
-	node: Node,
-	theme_res: Theme,
-	theme_sb: StyleBoxFlat,
-	main_bg: Color,
-	main_border: Color,
-	border_w: int,
-	is_open: bool,
-	fg: Color,
-	inactive_fg: Color,
-	secondary_bg: Color
-) -> void:
-	if not node:
-		return
-		
-	var node_name: String = String(node.name)
-	
+	_apply_theme_node(node, theme_sb, fg, inactive_fg, is_open)
+
+func _apply_theme_node(node: Node, theme_sb: StyleBoxFlat, fg: Color, inactive_fg: Color, is_open: bool) -> void:
 	if node is Label:
 		node.add_theme_color_override("font_color", fg)
-		
 	elif node is Panel:
 		var current_sb = node.get_theme_stylebox("panel")
-		var sb: StyleBoxFlat = null
-		if current_sb is StyleBoxFlat:
-			sb = current_sb.duplicate() as StyleBoxFlat
-		else:
-			sb = StyleBoxFlat.new()
-			
-		match node_name:
-			"Bar1", "Bar2", "Bar3":
+		if current_sb is StyleBoxFlat and theme_sb:
+			var sb = current_sb.duplicate() as StyleBoxFlat
+			if current_sb.bg_color.v > 0.8 and current_sb.bg_color.a > 0.8: # Active highlight
 				sb.bg_color = fg
-				sb.border_width_left = 0
-				sb.border_width_top = 0
-				sb.border_width_right = 0
-				sb.border_width_bottom = 0
-				
-			"Body" when node.get_parent() and node.get_parent().name == "HomeIcon":
-				sb.bg_color = fg
-				sb.border_width_left = 0
-				sb.border_width_top = 0
-				sb.border_width_right = 0
-				sb.border_width_bottom = 0
-				
-			"Door":
-				if is_open:
-					sb.bg_color = Color(0, 0, 0, 0)
-					sb.border_color = fg
-					sb.border_width_left = 1
-					sb.border_width_top = 1
-					sb.border_width_right = 1
-					sb.border_width_bottom = 0
-				else:
-					sb.bg_color = main_bg
-					sb.border_width_left = 0
-					sb.border_width_top = 0
-					sb.border_width_right = 0
-					sb.border_width_bottom = 0
-					
-			"BackSquare":
-				sb.bg_color = Color(0, 0, 0, 0)
-				sb.border_color = fg
-				sb.border_width_left = border_w
-				sb.border_width_top = border_w
-				sb.border_width_right = border_w
-				sb.border_width_bottom = border_w
-				
-			"FrontSquare":
-				if is_open:
-					sb.bg_color = Color(0.08, 0.08, 0.1, 0.95)
-				else:
-					sb.bg_color = main_bg
-				sb.border_color = fg
-				sb.border_width_left = border_w
-				sb.border_width_top = border_w
-				sb.border_width_right = border_w
-				sb.border_width_bottom = border_w
-				
-			"Tray":
-				sb.bg_color = Color(0, 0, 0, 0)
-				sb.border_color = fg
-				sb.border_width_left = border_w
-				sb.border_width_bottom = border_w
-				sb.border_width_right = border_w
-				sb.border_width_top = 0
-				
-			"LeftButton", "RightButton":
-				var is_active: bool = (current_sb is StyleBoxFlat and current_sb.bg_color.v > 0.8 and current_sb.bg_color.s < 0.2)
-				if is_active:
-					sb.bg_color = fg
-					sb.border_color = fg
-					sb.border_width_left = 0
-					sb.border_width_top = 0
-					sb.border_width_right = 0
-					sb.border_width_bottom = 0
-				else:
-					if is_open:
-						sb.bg_color = Color(main_border.r, main_border.g, main_border.b, 0.12)
-						sb.border_color = Color(main_border.r, main_border.g, main_border.b, 0.35)
-						sb.border_width_left = 1
-						sb.border_width_top = 1
-						sb.border_width_right = 1
-						sb.border_width_bottom = 1
-					else:
-						sb.bg_color = secondary_bg
-						sb.border_width_left = 0
-						sb.border_width_top = 0
-						sb.border_width_right = 0
-						sb.border_width_bottom = 0
-						
-			"ScrollWheel":
-				var is_active: bool = (current_sb is StyleBoxFlat and current_sb.bg_color.v > 0.8 and current_sb.bg_color.s < 0.2)
-				if is_active:
-					sb.bg_color = fg
-					sb.border_color = fg
-					sb.border_width_left = 0
-					sb.border_width_top = 0
-					sb.border_width_right = 0
-					sb.border_width_bottom = 0
-				else:
-					if is_open:
-						sb.bg_color = Color(main_border.r, main_border.g, main_border.b, 0.25)
-						sb.border_color = main_border
-						sb.border_width_left = 1
-						sb.border_width_top = 1
-						sb.border_width_right = 1
-						sb.border_width_bottom = 1
-					else:
-						sb.bg_color = secondary_bg
-						sb.border_width_left = 0
-						sb.border_width_top = 0
-						sb.border_width_right = 0
-						sb.border_width_bottom = 0
-						
-			"SideButton1", "SideButton2":
-				if node.visible:
-					sb.bg_color = fg
-					sb.border_color = fg
-				else:
-					sb.bg_color = secondary_bg
-					
-			"InnerCap":
-				if is_open:
-					sb.bg_color = Color(0, 0, 0, 0)
-				else:
-					sb.bg_color = secondary_bg
-				sb.border_color = main_border
-				sb.border_width_left = border_w
-				sb.border_width_top = border_w
-				sb.border_width_right = border_w
-				sb.border_width_bottom = border_w
-				
-			"TrackArea":
-				if is_open:
-					sb.bg_color = Color(0, 0, 0, 0)
-					sb.border_color = Color(main_border.r, main_border.g, main_border.b, 0.4)
-					sb.border_width_left = 1
-					sb.border_width_top = 1
-					sb.border_width_right = 1
-					sb.border_width_bottom = 1
-				else:
-					sb.bg_color = secondary_bg
-					sb.border_width_left = 0
-					sb.border_width_top = 0
-					sb.border_width_right = 0
-					sb.border_width_bottom = 0
-					
-			_:
-				sb.bg_color = main_bg
-				sb.border_color = main_border
-				if sb.border_width_left > 0 or sb.border_width_top > 0 or sb.border_width_right > 0 or sb.border_width_bottom > 0:
-					sb.border_width_left = border_w
-					sb.border_width_top = border_w
-					sb.border_width_right = border_w
-					sb.border_width_bottom = border_w
-					
-		node.add_theme_stylebox_override("panel", sb)
-		
+			else:
+				sb.bg_color = theme_sb.bg_color if not is_open else Color(0, 0, 0, 0)
+			sb.border_color = theme_sb.border_color
+			node.add_theme_stylebox_override("panel", sb)
 	elif node is Polygon2D:
-		match node_name:
-			"CrossShape":
-				node.color = main_bg
-			"ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight":
-				var is_active: bool = (node.color.v > 0.8 and node.color.a > 0.8)
-				node.color = fg if is_active else inactive_fg
-			"Roof", "ArrowHead", "ScrollArrowUp", "ScrollArrowDown":
-				node.color = fg
-			_:
-				node.color = fg
-				
+		if node.name == "CrossShape":
+			node.color = theme_sb.bg_color if (theme_sb and not is_open) else Color(0, 0, 0, 0)
+		elif node.color.v > 0.8 and node.color.a > 0.8:
+			node.color = fg
+		else:
+			node.color = inactive_fg
 	elif node is Line2D:
-		match node_name:
-			"CrossOutline":
-				node.default_color = main_border
-				node.width = float(border_w)
-			"ArrowStem":
-				node.default_color = fg
-				node.width = float(border_w)
-			_:
-				node.default_color = fg
-				
+		if node.name == "CrossOutline":
+			node.default_color = theme_sb.border_color if theme_sb else fg
+		else:
+			node.default_color = fg
+			
 	for child in node.get_children():
-		_apply_theme_recursive(child, theme_res, theme_sb, main_bg, main_border, border_w, is_open, fg, inactive_fg, secondary_bg)
+		_apply_theme_node(child, theme_sb, fg, inactive_fg, is_open)
 
 func instantiate_item(item_data: Dictionary) -> Node:
 	var inst: Node = null
 	if item_data["type"] == "scene":
-		var sc: PackedScene = item_data["scene"]
-		inst = sc.instantiate()
+		inst = item_data["scene"].instantiate()
 	elif item_data["type"] == "procedural_key":
-		var tmpl: PackedScene = item_data["template"]
-		inst = tmpl.instantiate()
+		inst = item_data["template"].instantiate()
 		var label_node = inst.get_node_or_null("Panel/Label") as Label
 		if label_node:
 			label_node.text = item_data["label"]
 			if item_data.has("font_size"):
 				var scale_factor = float(current_size) / 64.0
-				var scaled_font_size = max(8, int(round(float(item_data["font_size"]) * scale_factor)))
-				label_node.add_theme_font_size_override("font_size", scaled_font_size)
+				label_node.add_theme_font_size_override("font_size", max(8, int(round(float(item_data["font_size"]) * scale_factor))))
 	
 	if inst and current_theme:
 		apply_theme_to_tree(inst, current_theme)
@@ -621,24 +327,19 @@ func show_preview(item_name: String) -> void:
 		return
 		
 	to_render.add_child(instance)
-	
-	var target_size = Vector2i(current_size, current_size)
-	sub_viewport.size = target_size
+	sub_viewport.size = Vector2i(current_size, current_size)
 	
 	if instance is Control:
 		instance.custom_minimum_size = Vector2(current_size, current_size)
 		instance.size = Vector2(current_size, current_size)
-		if instance is ColorRect:
-			instance.position = Vector2.ZERO
 		
 	var theme_display_name = current_theme_name if not current_theme_name.is_empty() else "Default"
 	if selected_header_label:
-		selected_header_label.text = "Selected: " + item_name + " | Size: " + str(current_size) + "x" + str(current_size) + " | Theme: " + theme_display_name
+		selected_header_label.text = "Selected: %s | Size: %dx%d | Theme: %s" % [item_name, current_size, current_size, theme_display_name]
 	if dims_label:
-		dims_label.text = "Dimensions: " + str(current_size) + "x" + str(current_size) + " px (" + theme_display_name + ")"
+		dims_label.text = "Dimensions: %dx%d px (%s)" % [current_size, current_size, theme_display_name]
 	if exact_title_label:
-		exact_title_label.text = "Exact 1:1 Pixel Size (" + str(current_size) + "x" + str(current_size) + ")"
-		
+		exact_title_label.text = "Exact 1:1 Pixel Size (%dx%d)" % [current_size, current_size]
 	if exact_preview_rect:
 		exact_preview_rect.custom_minimum_size = Vector2(current_size, current_size)
 
@@ -656,31 +357,25 @@ func render_item_to_file(item_name: String) -> String:
 	
 	var image = sub_viewport.get_texture().get_image()
 	if not image or image.is_empty():
-		printerr("SceneRenderer: Empty image for ", item_name)
 		return ""
 		
 	var out_dir = get_output_icons_dir()
 	DirAccess.make_dir_recursive_absolute(out_dir)
 	var file_path = out_dir + item_name + ".png"
 	
-	var err = image.save_png(file_path)
-	if err == OK:
+	if image.save_png(file_path) == OK:
 		rendered_images[item_name] = image
 		status_label.text = "Status: Saved " + item_name + ".png"
 		return file_path
-	else:
-		printerr("SceneRenderer: Failed to save ", file_path)
-		return ""
+	return ""
 
 func render_all() -> void:
 	status_label.text = "Status: Rendering all icons..."
 	var keys = items_registry.keys()
 	keys.sort()
-	
 	for key in keys:
 		await render_item_to_file(key)
 		await get_tree().process_frame
-		
 	status_label.text = "Status: Finished rendering " + str(keys.size()) + " icons"
 
 func generate_spritesheets() -> void:
@@ -689,13 +384,7 @@ func generate_spritesheets() -> void:
 		
 	status_label.text = "Status: Packing spritesheets..."
 	
-	var categories = {
-		"gamepad": [],
-		"keyboard": [],
-		"mouse": [],
-		"all": []
-	}
-	
+	var categories = {"gamepad": [], "keyboard": [], "mouse": [], "all": []}
 	for key in rendered_images.keys():
 		categories["all"].append(key)
 		var cat = items_registry[key]["category"] if items_registry.has(key) else determine_category(key)
@@ -707,6 +396,7 @@ func generate_spritesheets() -> void:
 	
 	var cell_w = current_size
 	var cell_h = current_size
+	var theme_display_name = current_theme_name if not current_theme_name.is_empty() else "Default"
 	
 	for cat_name in categories.keys():
 		var icon_keys: Array = categories[cat_name]
@@ -717,14 +407,12 @@ func generate_spritesheets() -> void:
 		var count = icon_keys.size()
 		var cols = int(ceil(sqrt(count)))
 		var rows = int(ceil(float(count) / float(cols)))
-		
 		var sheet_w = cols * cell_w
 		var sheet_h = rows * cell_h
 		
 		var sheet_img = Image.create(sheet_w, sheet_h, false, Image.FORMAT_RGBA8)
-		sheet_img.fill(Color(0, 0, 0, 0)) # 100% transparent background
+		sheet_img.fill(Color(0, 0, 0, 0))
 		
-		var theme_display_name = current_theme_name if not current_theme_name.is_empty() else "Default"
 		var json_data = {
 			"app_header": {
 				"spritesheet_name": cat_name + "_spritesheet.png",
@@ -742,10 +430,8 @@ func generate_spritesheets() -> void:
 		for i in range(count):
 			var icon_key = icon_keys[i]
 			var img: Image = rendered_images[icon_key]
-			var col = i % cols
-			var row = floori(float(i) / float(cols))
-			var dest_x = col * cell_w
-			var dest_y = row * cell_h
+			var dest_x = (i % cols) * cell_w
+			var dest_y = floori(float(i) / float(cols)) * cell_h
 			
 			sheet_img.blit_rect(img, Rect2i(0, 0, img.get_width(), img.get_height()), Vector2i(dest_x, dest_y))
 			
@@ -760,21 +446,15 @@ func generate_spritesheets() -> void:
 			}
 			if meta_info.has("keycode") and meta_info["keycode"] != 0:
 				entry["keycode"] = meta_info["keycode"]
-				
 			json_data["data"][icon_key] = entry
 			
-		var png_path = spritesheet_dir + cat_name + "_spritesheet.png"
-		var json_path = spritesheet_dir + cat_name + "_spritesheet.json"
+		sheet_img.save_png(spritesheet_dir + cat_name + "_spritesheet.png")
 		
-		sheet_img.save_png(png_path)
-		
-		var json_file = FileAccess.open(json_path, FileAccess.WRITE)
+		var json_file = FileAccess.open(spritesheet_dir + cat_name + "_spritesheet.json", FileAccess.WRITE)
 		if json_file:
 			json_file.store_string(JSON.stringify(json_data, "\t"))
 			json_file.close()
 			
-		print("SceneRenderer: Generated spritesheet -> ", png_path, " & ", json_path)
-		
 	status_label.text = "Status: Spritesheets generated successfully (" + current_theme_name + ")"
 
 func create_gdignore(path: String) -> void:
