@@ -13,7 +13,7 @@ config_version=5
 config/name="Gen-Input-Icons"
 run/main_scene="res://scene_renderer.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://depvc27rfw7jh"
 
 [display]
 

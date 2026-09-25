@@ -1,56 +1,5 @@
 {
-	"data": {
-		"key_alt": {
-			"height": 64,
-			"name": "key_alt",
-			"width": 64,
-			"x": 0,
-			"y": 0
-		},
-		"key_backspace": {
-			"height": 64,
-			"name": "key_backspace",
-			"width": 64,
-			"x": 64,
-			"y": 0
-		},
-		"key_ctrl": {
-			"height": 64,
-			"name": "key_ctrl",
-			"width": 64,
-			"x": 128,
-			"y": 0
-		},
-		"key_enter": {
-			"height": 64,
-			"name": "key_enter",
-			"width": 64,
-			"x": 0,
-			"y": 64
-		},
-		"key_shift": {
-			"height": 64,
-			"name": "key_shift",
-			"width": 64,
-			"x": 64,
-			"y": 64
-		},
-		"key_space": {
-			"height": 64,
-			"name": "key_space",
-			"width": 64,
-			"x": 128,
-			"y": 64
-		},
-		"key_tab": {
-			"height": 64,
-			"name": "key_tab",
-			"width": 64,
-			"x": 0,
-			"y": 128
-		}
-	},
-	"info": {
+	"app_header": {
 		"cell_size": [
 			64,
 			64
@@ -58,11 +7,1059 @@
 		"platform": "godot",
 		"platform_version": "4.7",
 		"sheet_size": [
-			192,
-			192
+			704,
+			704
 		],
 		"spritesheet_name": "keyboard_spritesheet.png",
-		"total_icons": 7,
+		"total_icons": 117,
 		"version": "1.0"
+	},
+	"data": {
+		"key_0": {
+			"height": 64,
+			"keycode": 48,
+			"name": "key_0",
+			"readable_name": "0",
+			"width": 64,
+			"x": 0,
+			"y": 0
+		},
+		"key_1": {
+			"height": 64,
+			"keycode": 49,
+			"name": "key_1",
+			"readable_name": "1",
+			"width": 64,
+			"x": 64,
+			"y": 0
+		},
+		"key_2": {
+			"height": 64,
+			"keycode": 50,
+			"name": "key_2",
+			"readable_name": "2",
+			"width": 64,
+			"x": 128,
+			"y": 0
+		},
+		"key_3": {
+			"height": 64,
+			"keycode": 51,
+			"name": "key_3",
+			"readable_name": "3",
+			"width": 64,
+			"x": 192,
+			"y": 0
+		},
+		"key_4": {
+			"height": 64,
+			"keycode": 52,
+			"name": "key_4",
+			"readable_name": "4",
+			"width": 64,
+			"x": 256,
+			"y": 0
+		},
+		"key_5": {
+			"height": 64,
+			"keycode": 53,
+			"name": "key_5",
+			"readable_name": "5",
+			"width": 64,
+			"x": 320,
+			"y": 0
+		},
+		"key_6": {
+			"height": 64,
+			"keycode": 54,
+			"name": "key_6",
+			"readable_name": "6",
+			"width": 64,
+			"x": 384,
+			"y": 0
+		},
+		"key_7": {
+			"height": 64,
+			"keycode": 55,
+			"name": "key_7",
+			"readable_name": "7",
+			"width": 64,
+			"x": 448,
+			"y": 0
+		},
+		"key_8": {
+			"height": 64,
+			"keycode": 56,
+			"name": "key_8",
+			"readable_name": "8",
+			"width": 64,
+			"x": 512,
+			"y": 0
+		},
+		"key_9": {
+			"height": 64,
+			"keycode": 57,
+			"name": "key_9",
+			"readable_name": "9",
+			"width": 64,
+			"x": 576,
+			"y": 0
+		},
+		"key_a": {
+			"height": 64,
+			"keycode": 65,
+			"name": "key_a",
+			"readable_name": "A",
+			"width": 64,
+			"x": 640,
+			"y": 0
+		},
+		"key_alt": {
+			"height": 64,
+			"name": "key_alt",
+			"readable_name": "Key Alt",
+			"width": 64,
+			"x": 0,
+			"y": 64
+		},
+		"key_ampersand": {
+			"height": 64,
+			"keycode": 38,
+			"name": "key_ampersand",
+			"readable_name": "&",
+			"width": 64,
+			"x": 64,
+			"y": 64
+		},
+		"key_apostrophe": {
+			"height": 64,
+			"keycode": 39,
+			"name": "key_apostrophe",
+			"readable_name": "'",
+			"width": 64,
+			"x": 128,
+			"y": 64
+		},
+		"key_asciitilde": {
+			"height": 64,
+			"keycode": 126,
+			"name": "key_asciitilde",
+			"readable_name": "~",
+			"width": 64,
+			"x": 192,
+			"y": 64
+		},
+		"key_asterisk": {
+			"height": 64,
+			"keycode": 42,
+			"name": "key_asterisk",
+			"readable_name": "*",
+			"width": 64,
+			"x": 256,
+			"y": 64
+		},
+		"key_at": {
+			"height": 64,
+			"keycode": 64,
+			"name": "key_at",
+			"readable_name": "@",
+			"width": 64,
+			"x": 320,
+			"y": 64
+		},
+		"key_b": {
+			"height": 64,
+			"keycode": 66,
+			"name": "key_b",
+			"readable_name": "B",
+			"width": 64,
+			"x": 384,
+			"y": 64
+		},
+		"key_backquote": {
+			"height": 64,
+			"keycode": 96,
+			"name": "key_backquote",
+			"readable_name": "`",
+			"width": 64,
+			"x": 448,
+			"y": 64
+		},
+		"key_backslash": {
+			"height": 64,
+			"keycode": 92,
+			"name": "key_backslash",
+			"readable_name": "\\",
+			"width": 64,
+			"x": 512,
+			"y": 64
+		},
+		"key_backspace": {
+			"height": 64,
+			"name": "key_backspace",
+			"readable_name": "Key Backspace",
+			"width": 64,
+			"x": 576,
+			"y": 64
+		},
+		"key_bar": {
+			"height": 64,
+			"keycode": 124,
+			"name": "key_bar",
+			"readable_name": "|",
+			"width": 64,
+			"x": 640,
+			"y": 64
+		},
+		"key_braceleft": {
+			"height": 64,
+			"keycode": 123,
+			"name": "key_braceleft",
+			"readable_name": "{",
+			"width": 64,
+			"x": 0,
+			"y": 128
+		},
+		"key_braceright": {
+			"height": 64,
+			"keycode": 125,
+			"name": "key_braceright",
+			"readable_name": "}",
+			"width": 64,
+			"x": 64,
+			"y": 128
+		},
+		"key_bracketleft": {
+			"height": 64,
+			"keycode": 91,
+			"name": "key_bracketleft",
+			"readable_name": "[",
+			"width": 64,
+			"x": 128,
+			"y": 128
+		},
+		"key_bracketright": {
+			"height": 64,
+			"keycode": 93,
+			"name": "key_bracketright",
+			"readable_name": "]",
+			"width": 64,
+			"x": 192,
+			"y": 128
+		},
+		"key_c": {
+			"height": 64,
+			"keycode": 67,
+			"name": "key_c",
+			"readable_name": "C",
+			"width": 64,
+			"x": 256,
+			"y": 128
+		},
+		"key_capslock": {
+			"height": 64,
+			"keycode": 4194329,
+			"name": "key_capslock",
+			"readable_name": "Caps Lock",
+			"width": 64,
+			"x": 320,
+			"y": 128
+		},
+		"key_colon": {
+			"height": 64,
+			"keycode": 58,
+			"name": "key_colon",
+			"readable_name": ":",
+			"width": 64,
+			"x": 384,
+			"y": 128
+		},
+		"key_comma": {
+			"height": 64,
+			"keycode": 44,
+			"name": "key_comma",
+			"readable_name": ",",
+			"width": 64,
+			"x": 448,
+			"y": 128
+		},
+		"key_ctrl": {
+			"height": 64,
+			"name": "key_ctrl",
+			"readable_name": "Key Ctrl",
+			"width": 64,
+			"x": 512,
+			"y": 128
+		},
+		"key_d": {
+			"height": 64,
+			"keycode": 68,
+			"name": "key_d",
+			"readable_name": "D",
+			"width": 64,
+			"x": 576,
+			"y": 128
+		},
+		"key_delete": {
+			"height": 64,
+			"keycode": 4194312,
+			"name": "key_delete",
+			"readable_name": "Delete",
+			"width": 64,
+			"x": 640,
+			"y": 128
+		},
+		"key_dollar": {
+			"height": 64,
+			"keycode": 36,
+			"name": "key_dollar",
+			"readable_name": "$",
+			"width": 64,
+			"x": 0,
+			"y": 192
+		},
+		"key_down": {
+			"height": 64,
+			"keycode": 4194322,
+			"name": "key_down",
+			"readable_name": "Down Arrow",
+			"width": 64,
+			"x": 64,
+			"y": 192
+		},
+		"key_e": {
+			"height": 64,
+			"keycode": 69,
+			"name": "key_e",
+			"readable_name": "E",
+			"width": 64,
+			"x": 128,
+			"y": 192
+		},
+		"key_end": {
+			"height": 64,
+			"keycode": 4194318,
+			"name": "key_end",
+			"readable_name": "End",
+			"width": 64,
+			"x": 192,
+			"y": 192
+		},
+		"key_enter": {
+			"height": 64,
+			"name": "key_enter",
+			"readable_name": "Key Enter",
+			"width": 64,
+			"x": 256,
+			"y": 192
+		},
+		"key_equal": {
+			"height": 64,
+			"keycode": 61,
+			"name": "key_equal",
+			"readable_name": "=",
+			"width": 64,
+			"x": 320,
+			"y": 192
+		},
+		"key_escape": {
+			"height": 64,
+			"keycode": 4194305,
+			"name": "key_escape",
+			"readable_name": "Escape",
+			"width": 64,
+			"x": 384,
+			"y": 192
+		},
+		"key_exclam": {
+			"height": 64,
+			"keycode": 33,
+			"name": "key_exclam",
+			"readable_name": "!",
+			"width": 64,
+			"x": 448,
+			"y": 192
+		},
+		"key_f": {
+			"height": 64,
+			"keycode": 70,
+			"name": "key_f",
+			"readable_name": "F",
+			"width": 64,
+			"x": 512,
+			"y": 192
+		},
+		"key_f1": {
+			"height": 64,
+			"keycode": 4194332,
+			"name": "key_f1",
+			"readable_name": "F1",
+			"width": 64,
+			"x": 576,
+			"y": 192
+		},
+		"key_f10": {
+			"height": 64,
+			"keycode": 4194341,
+			"name": "key_f10",
+			"readable_name": "F10",
+			"width": 64,
+			"x": 640,
+			"y": 192
+		},
+		"key_f11": {
+			"height": 64,
+			"keycode": 4194342,
+			"name": "key_f11",
+			"readable_name": "F11",
+			"width": 64,
+			"x": 0,
+			"y": 256
+		},
+		"key_f12": {
+			"height": 64,
+			"keycode": 4194343,
+			"name": "key_f12",
+			"readable_name": "F12",
+			"width": 64,
+			"x": 64,
+			"y": 256
+		},
+		"key_f2": {
+			"height": 64,
+			"keycode": 4194333,
+			"name": "key_f2",
+			"readable_name": "F2",
+			"width": 64,
+			"x": 128,
+			"y": 256
+		},
+		"key_f3": {
+			"height": 64,
+			"keycode": 4194334,
+			"name": "key_f3",
+			"readable_name": "F3",
+			"width": 64,
+			"x": 192,
+			"y": 256
+		},
+		"key_f4": {
+			"height": 64,
+			"keycode": 4194335,
+			"name": "key_f4",
+			"readable_name": "F4",
+			"width": 64,
+			"x": 256,
+			"y": 256
+		},
+		"key_f5": {
+			"height": 64,
+			"keycode": 4194336,
+			"name": "key_f5",
+			"readable_name": "F5",
+			"width": 64,
+			"x": 320,
+			"y": 256
+		},
+		"key_f6": {
+			"height": 64,
+			"keycode": 4194337,
+			"name": "key_f6",
+			"readable_name": "F6",
+			"width": 64,
+			"x": 384,
+			"y": 256
+		},
+		"key_f7": {
+			"height": 64,
+			"keycode": 4194338,
+			"name": "key_f7",
+			"readable_name": "F7",
+			"width": 64,
+			"x": 448,
+			"y": 256
+		},
+		"key_f8": {
+			"height": 64,
+			"keycode": 4194339,
+			"name": "key_f8",
+			"readable_name": "F8",
+			"width": 64,
+			"x": 512,
+			"y": 256
+		},
+		"key_f9": {
+			"height": 64,
+			"keycode": 4194340,
+			"name": "key_f9",
+			"readable_name": "F9",
+			"width": 64,
+			"x": 576,
+			"y": 256
+		},
+		"key_g": {
+			"height": 64,
+			"keycode": 71,
+			"name": "key_g",
+			"readable_name": "G",
+			"width": 64,
+			"x": 640,
+			"y": 256
+		},
+		"key_greater": {
+			"height": 64,
+			"keycode": 62,
+			"name": "key_greater",
+			"readable_name": ">",
+			"width": 64,
+			"x": 0,
+			"y": 320
+		},
+		"key_h": {
+			"height": 64,
+			"keycode": 72,
+			"name": "key_h",
+			"readable_name": "H",
+			"width": 64,
+			"x": 64,
+			"y": 320
+		},
+		"key_hash": {
+			"height": 64,
+			"keycode": 35,
+			"name": "key_hash",
+			"readable_name": "#",
+			"width": 64,
+			"x": 128,
+			"y": 320
+		},
+		"key_home": {
+			"height": 64,
+			"keycode": 4194317,
+			"name": "key_home",
+			"readable_name": "Home",
+			"width": 64,
+			"x": 192,
+			"y": 320
+		},
+		"key_i": {
+			"height": 64,
+			"keycode": 73,
+			"name": "key_i",
+			"readable_name": "I",
+			"width": 64,
+			"x": 256,
+			"y": 320
+		},
+		"key_insert": {
+			"height": 64,
+			"keycode": 4194311,
+			"name": "key_insert",
+			"readable_name": "Insert",
+			"width": 64,
+			"x": 320,
+			"y": 320
+		},
+		"key_j": {
+			"height": 64,
+			"keycode": 74,
+			"name": "key_j",
+			"readable_name": "J",
+			"width": 64,
+			"x": 384,
+			"y": 320
+		},
+		"key_k": {
+			"height": 64,
+			"keycode": 75,
+			"name": "key_k",
+			"readable_name": "K",
+			"width": 64,
+			"x": 448,
+			"y": 320
+		},
+		"key_kp_0": {
+			"height": 64,
+			"keycode": 4194438,
+			"name": "key_kp_0",
+			"readable_name": "Num 0",
+			"width": 64,
+			"x": 512,
+			"y": 320
+		},
+		"key_kp_1": {
+			"height": 64,
+			"keycode": 4194439,
+			"name": "key_kp_1",
+			"readable_name": "Num 1",
+			"width": 64,
+			"x": 576,
+			"y": 320
+		},
+		"key_kp_2": {
+			"height": 64,
+			"keycode": 4194440,
+			"name": "key_kp_2",
+			"readable_name": "Num 2",
+			"width": 64,
+			"x": 640,
+			"y": 320
+		},
+		"key_kp_3": {
+			"height": 64,
+			"keycode": 4194441,
+			"name": "key_kp_3",
+			"readable_name": "Num 3",
+			"width": 64,
+			"x": 0,
+			"y": 384
+		},
+		"key_kp_4": {
+			"height": 64,
+			"keycode": 4194442,
+			"name": "key_kp_4",
+			"readable_name": "Num 4",
+			"width": 64,
+			"x": 64,
+			"y": 384
+		},
+		"key_kp_5": {
+			"height": 64,
+			"keycode": 4194443,
+			"name": "key_kp_5",
+			"readable_name": "Num 5",
+			"width": 64,
+			"x": 128,
+			"y": 384
+		},
+		"key_kp_6": {
+			"height": 64,
+			"keycode": 4194444,
+			"name": "key_kp_6",
+			"readable_name": "Num 6",
+			"width": 64,
+			"x": 192,
+			"y": 384
+		},
+		"key_kp_7": {
+			"height": 64,
+			"keycode": 4194445,
+			"name": "key_kp_7",
+			"readable_name": "Num 7",
+			"width": 64,
+			"x": 256,
+			"y": 384
+		},
+		"key_kp_8": {
+			"height": 64,
+			"keycode": 4194446,
+			"name": "key_kp_8",
+			"readable_name": "Num 8",
+			"width": 64,
+			"x": 320,
+			"y": 384
+		},
+		"key_kp_9": {
+			"height": 64,
+			"keycode": 4194447,
+			"name": "key_kp_9",
+			"readable_name": "Num 9",
+			"width": 64,
+			"x": 384,
+			"y": 384
+		},
+		"key_kp_add": {
+			"height": 64,
+			"keycode": 4194437,
+			"name": "key_kp_add",
+			"readable_name": "Num +",
+			"width": 64,
+			"x": 448,
+			"y": 384
+		},
+		"key_kp_divide": {
+			"height": 64,
+			"keycode": 4194434,
+			"name": "key_kp_divide",
+			"readable_name": "Num /",
+			"width": 64,
+			"x": 512,
+			"y": 384
+		},
+		"key_kp_enter": {
+			"height": 64,
+			"keycode": 4194310,
+			"name": "key_kp_enter",
+			"readable_name": "Num Enter",
+			"width": 64,
+			"x": 576,
+			"y": 384
+		},
+		"key_kp_multiply": {
+			"height": 64,
+			"keycode": 4194433,
+			"name": "key_kp_multiply",
+			"readable_name": "Num *",
+			"width": 64,
+			"x": 640,
+			"y": 384
+		},
+		"key_kp_period": {
+			"height": 64,
+			"keycode": 4194436,
+			"name": "key_kp_period",
+			"readable_name": "Num .",
+			"width": 64,
+			"x": 0,
+			"y": 448
+		},
+		"key_kp_subtract": {
+			"height": 64,
+			"keycode": 4194435,
+			"name": "key_kp_subtract",
+			"readable_name": "Num -",
+			"width": 64,
+			"x": 64,
+			"y": 448
+		},
+		"key_l": {
+			"height": 64,
+			"keycode": 76,
+			"name": "key_l",
+			"readable_name": "L",
+			"width": 64,
+			"x": 128,
+			"y": 448
+		},
+		"key_left": {
+			"height": 64,
+			"keycode": 4194319,
+			"name": "key_left",
+			"readable_name": "Left Arrow",
+			"width": 64,
+			"x": 192,
+			"y": 448
+		},
+		"key_less": {
+			"height": 64,
+			"keycode": 60,
+			"name": "key_less",
+			"readable_name": "<",
+			"width": 64,
+			"x": 256,
+			"y": 448
+		},
+		"key_m": {
+			"height": 64,
+			"keycode": 77,
+			"name": "key_m",
+			"readable_name": "M",
+			"width": 64,
+			"x": 320,
+			"y": 448
+		},
+		"key_meta": {
+			"height": 64,
+			"keycode": 4194327,
+			"name": "key_meta",
+			"readable_name": "Win / Cmd",
+			"width": 64,
+			"x": 384,
+			"y": 448
+		},
+		"key_minus": {
+			"height": 64,
+			"keycode": 45,
+			"name": "key_minus",
+			"readable_name": "-",
+			"width": 64,
+			"x": 448,
+			"y": 448
+		},
+		"key_n": {
+			"height": 64,
+			"keycode": 78,
+			"name": "key_n",
+			"readable_name": "N",
+			"width": 64,
+			"x": 512,
+			"y": 448
+		},
+		"key_numlock": {
+			"height": 64,
+			"keycode": 4194330,
+			"name": "key_numlock",
+			"readable_name": "Num Lock",
+			"width": 64,
+			"x": 576,
+			"y": 448
+		},
+		"key_o": {
+			"height": 64,
+			"keycode": 79,
+			"name": "key_o",
+			"readable_name": "O",
+			"width": 64,
+			"x": 640,
+			"y": 448
+		},
+		"key_p": {
+			"height": 64,
+			"keycode": 80,
+			"name": "key_p",
+			"readable_name": "P",
+			"width": 64,
+			"x": 0,
+			"y": 512
+		},
+		"key_pagedown": {
+			"height": 64,
+			"keycode": 4194324,
+			"name": "key_pagedown",
+			"readable_name": "Page Down",
+			"width": 64,
+			"x": 64,
+			"y": 512
+		},
+		"key_pageup": {
+			"height": 64,
+			"keycode": 4194323,
+			"name": "key_pageup",
+			"readable_name": "Page Up",
+			"width": 64,
+			"x": 128,
+			"y": 512
+		},
+		"key_pause": {
+			"height": 64,
+			"keycode": 4194313,
+			"name": "key_pause",
+			"readable_name": "Pause",
+			"width": 64,
+			"x": 192,
+			"y": 512
+		},
+		"key_percent": {
+			"height": 64,
+			"keycode": 37,
+			"name": "key_percent",
+			"readable_name": "%",
+			"width": 64,
+			"x": 256,
+			"y": 512
+		},
+		"key_period": {
+			"height": 64,
+			"keycode": 46,
+			"name": "key_period",
+			"readable_name": ".",
+			"width": 64,
+			"x": 320,
+			"y": 512
+		},
+		"key_plus": {
+			"height": 64,
+			"keycode": 43,
+			"name": "key_plus",
+			"readable_name": "+",
+			"width": 64,
+			"x": 384,
+			"y": 512
+		},
+		"key_printscreen": {
+			"height": 64,
+			"keycode": 4194314,
+			"name": "key_printscreen",
+			"readable_name": "Print Screen",
+			"width": 64,
+			"x": 448,
+			"y": 512
+		},
+		"key_q": {
+			"height": 64,
+			"keycode": 81,
+			"name": "key_q",
+			"readable_name": "Q",
+			"width": 64,
+			"x": 512,
+			"y": 512
+		},
+		"key_question": {
+			"height": 64,
+			"keycode": 63,
+			"name": "key_question",
+			"readable_name": "?",
+			"width": 64,
+			"x": 576,
+			"y": 512
+		},
+		"key_quotedbl": {
+			"height": 64,
+			"keycode": 34,
+			"name": "key_quotedbl",
+			"readable_name": "\"",
+			"width": 64,
+			"x": 640,
+			"y": 512
+		},
+		"key_r": {
+			"height": 64,
+			"keycode": 82,
+			"name": "key_r",
+			"readable_name": "R",
+			"width": 64,
+			"x": 0,
+			"y": 576
+		},
+		"key_right": {
+			"height": 64,
+			"keycode": 4194321,
+			"name": "key_right",
+			"readable_name": "Right Arrow",
+			"width": 64,
+			"x": 64,
+			"y": 576
+		},
+		"key_s": {
+			"height": 64,
+			"keycode": 83,
+			"name": "key_s",
+			"readable_name": "S",
+			"width": 64,
+			"x": 128,
+			"y": 576
+		},
+		"key_scrolllock": {
+			"height": 64,
+			"keycode": 4194331,
+			"name": "key_scrolllock",
+			"readable_name": "Scroll Lock",
+			"width": 64,
+			"x": 192,
+			"y": 576
+		},
+		"key_semicolon": {
+			"height": 64,
+			"keycode": 59,
+			"name": "key_semicolon",
+			"readable_name": ";",
+			"width": 64,
+			"x": 256,
+			"y": 576
+		},
+		"key_shift": {
+			"height": 64,
+			"name": "key_shift",
+			"readable_name": "Key Shift",
+			"width": 64,
+			"x": 320,
+			"y": 576
+		},
+		"key_slash": {
+			"height": 64,
+			"keycode": 47,
+			"name": "key_slash",
+			"readable_name": "/",
+			"width": 64,
+			"x": 384,
+			"y": 576
+		},
+		"key_space": {
+			"height": 64,
+			"name": "key_space",
+			"readable_name": "Key Space",
+			"width": 64,
+			"x": 448,
+			"y": 576
+		},
+		"key_t": {
+			"height": 64,
+			"keycode": 84,
+			"name": "key_t",
+			"readable_name": "T",
+			"width": 64,
+			"x": 512,
+			"y": 576
+		},
+		"key_tab": {
+			"height": 64,
+			"name": "key_tab",
+			"readable_name": "Key Tab",
+			"width": 64,
+			"x": 576,
+			"y": 576
+		},
+		"key_u": {
+			"height": 64,
+			"keycode": 85,
+			"name": "key_u",
+			"readable_name": "U",
+			"width": 64,
+			"x": 640,
+			"y": 576
+		},
+		"key_underscore": {
+			"height": 64,
+			"keycode": 95,
+			"name": "key_underscore",
+			"readable_name": "_",
+			"width": 64,
+			"x": 0,
+			"y": 640
+		},
+		"key_up": {
+			"height": 64,
+			"keycode": 4194320,
+			"name": "key_up",
+			"readable_name": "Up Arrow",
+			"width": 64,
+			"x": 64,
+			"y": 640
+		},
+		"key_v": {
+			"height": 64,
+			"keycode": 86,
+			"name": "key_v",
+			"readable_name": "V",
+			"width": 64,
+			"x": 128,
+			"y": 640
+		},
+		"key_w": {
+			"height": 64,
+			"keycode": 87,
+			"name": "key_w",
+			"readable_name": "W",
+			"width": 64,
+			"x": 192,
+			"y": 640
+		},
+		"key_x": {
+			"height": 64,
+			"keycode": 88,
+			"name": "key_x",
+			"readable_name": "X",
+			"width": 64,
+			"x": 256,
+			"y": 640
+		},
+		"key_y": {
+			"height": 64,
+			"keycode": 89,
+			"name": "key_y",
+			"readable_name": "Y",
+			"width": 64,
+			"x": 320,
+			"y": 640
+		},
+		"key_z": {
+			"height": 64,
+			"keycode": 90,
+			"name": "key_z",
+			"readable_name": "Z",
+			"width": 64,
+			"x": 384,
+			"y": 640
+		}
 	}
 }

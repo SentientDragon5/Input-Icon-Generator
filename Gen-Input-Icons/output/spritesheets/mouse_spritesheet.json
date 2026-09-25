@@ -1,56 +1,5 @@
 {
-	"data": {
-		"mouse_left": {
-			"height": 64,
-			"name": "mouse_left",
-			"width": 64,
-			"x": 0,
-			"y": 0
-		},
-		"mouse_middle": {
-			"height": 64,
-			"name": "mouse_middle",
-			"width": 64,
-			"x": 64,
-			"y": 0
-		},
-		"mouse_right": {
-			"height": 64,
-			"name": "mouse_right",
-			"width": 64,
-			"x": 128,
-			"y": 0
-		},
-		"mouse_scroll_down": {
-			"height": 64,
-			"name": "mouse_scroll_down",
-			"width": 64,
-			"x": 0,
-			"y": 64
-		},
-		"mouse_scroll_up": {
-			"height": 64,
-			"name": "mouse_scroll_up",
-			"width": 64,
-			"x": 64,
-			"y": 64
-		},
-		"mouse_side_1": {
-			"height": 64,
-			"name": "mouse_side_1",
-			"width": 64,
-			"x": 128,
-			"y": 64
-		},
-		"mouse_side_2": {
-			"height": 64,
-			"name": "mouse_side_2",
-			"width": 64,
-			"x": 0,
-			"y": 128
-		}
-	},
-	"info": {
+	"app_header": {
 		"cell_size": [
 			64,
 			64
@@ -64,5 +13,63 @@
 		"spritesheet_name": "mouse_spritesheet.png",
 		"total_icons": 7,
 		"version": "1.0"
+	},
+	"data": {
+		"mouse_left": {
+			"height": 64,
+			"name": "mouse_left",
+			"readable_name": "Mouse Left",
+			"width": 64,
+			"x": 0,
+			"y": 0
+		},
+		"mouse_middle": {
+			"height": 64,
+			"name": "mouse_middle",
+			"readable_name": "Mouse Middle",
+			"width": 64,
+			"x": 64,
+			"y": 0
+		},
+		"mouse_right": {
+			"height": 64,
+			"name": "mouse_right",
+			"readable_name": "Mouse Right",
+			"width": 64,
+			"x": 128,
+			"y": 0
+		},
+		"mouse_scroll_down": {
+			"height": 64,
+			"name": "mouse_scroll_down",
+			"readable_name": "Mouse Scroll Down",
+			"width": 64,
+			"x": 0,
+			"y": 64
+		},
+		"mouse_scroll_up": {
+			"height": 64,
+			"name": "mouse_scroll_up",
+			"readable_name": "Mouse Scroll Up",
+			"width": 64,
+			"x": 64,
+			"y": 64
+		},
+		"mouse_side_1": {
+			"height": 64,
+			"name": "mouse_side_1",
+			"readable_name": "Mouse Side 1",
+			"width": 64,
+			"x": 128,
+			"y": 64
+		},
+		"mouse_side_2": {
+			"height": 64,
+			"name": "mouse_side_2",
+			"readable_name": "Mouse Side 2",
+			"width": 64,
+			"x": 0,
+			"y": 128
+		}
 	}
 }
