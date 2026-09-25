@@ -6,7 +6,6 @@ This tool is to generate a labeled spritesheet of input icons for use in godot o
 
 planned engines
 - Godot
-- Unity
 
 planned platforms
 - keyboard
@@ -31,3 +30,4 @@ projects
 - Gen-Input-Icons
     - a tool using godot's ui system to procedurally render the spritesheet
 - Godot-Input-Tester
+    - An interactive tester/demo that lets the user press a key, and the icon for the pressed key

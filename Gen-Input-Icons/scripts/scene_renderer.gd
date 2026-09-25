@@ -170,7 +170,7 @@ func generate_spritesheets() -> void:
 		sheet_img.fill(Color(0, 0, 0, 0))
 		
 		var json_data = {
-			"info": {
+			"app_header": {
 				"spritesheet_name": cat_name + "_spritesheet.png",
 				"version": "1.0",
 				"platform": "godot",
