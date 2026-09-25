@@ -1,0 +1,1950 @@
+{
+    "info": {
+        "engine": "godot",
+        "platform_version": "4.7",
+        "source_url": "https://raw.githubusercontent.com/godotengine/godot/4.7/doc/classes/%40GlobalScope.xml",
+        "generated_at": "2026-09-25T01:01:42.253809+00:00",
+        "stats": {
+            "keyboard": 193,
+            "mouse": 10,
+            "gamepad_buttons": 29,
+            "gamepad_axes": 9
+        }
+    },
+    "platforms": {
+        "keyboard": {
+            "KEY_NONE": {
+                "name": "KEY_NONE",
+                "enum": "Key",
+                "value": 0,
+                "readable_name": "None",
+                "category": "general_key",
+                "description": "Enum value which doesn't correspond to any key. This is used to initialize [enum Key] properties with a generic state."
+            },
+            "KEY_SPECIAL": {
+                "name": "KEY_SPECIAL",
+                "enum": "Key",
+                "value": 4194304,
+                "readable_name": "Special",
+                "category": "general_key",
+                "description": "Keycodes with this bit applied are non-printable."
+            },
+            "KEY_ESCAPE": {
+                "name": "KEY_ESCAPE",
+                "enum": "Key",
+                "value": 4194305,
+                "readable_name": "Esc",
+                "category": "navigation",
+                "description": "Escape key."
+            },
+            "KEY_TAB": {
+                "name": "KEY_TAB",
+                "enum": "Key",
+                "value": 4194306,
+                "readable_name": "Tab",
+                "category": "navigation",
+                "description": "Tab key."
+            },
+            "KEY_BACKTAB": {
+                "name": "KEY_BACKTAB",
+                "enum": "Key",
+                "value": 4194307,
+                "readable_name": "Backtab",
+                "category": "general_key",
+                "description": "Shift + Tab key."
+            },
+            "KEY_BACKSPACE": {
+                "name": "KEY_BACKSPACE",
+                "enum": "Key",
+                "value": 4194308,
+                "readable_name": "Backspace",
+                "category": "navigation",
+                "description": "Backspace key."
+            },
+            "KEY_ENTER": {
+                "name": "KEY_ENTER",
+                "enum": "Key",
+                "value": 4194309,
+                "readable_name": "Enter",
+                "category": "navigation",
+                "description": "Return key (on the main keyboard)."
+            },
+            "KEY_KP_ENTER": {
+                "name": "KEY_KP_ENTER",
+                "enum": "Key",
+                "value": 4194310,
+                "readable_name": "Num Enter",
+                "category": "numpad",
+                "description": "Enter key on the numeric keypad."
+            },
+            "KEY_INSERT": {
+                "name": "KEY_INSERT",
+                "enum": "Key",
+                "value": 4194311,
+                "readable_name": "Insert",
+                "category": "navigation",
+                "description": "Insert key."
+            },
+            "KEY_DELETE": {
+                "name": "KEY_DELETE",
+                "enum": "Key",
+                "value": 4194312,
+                "readable_name": "Delete",
+                "category": "navigation",
+                "description": "Delete key."
+            },
+            "KEY_PAUSE": {
+                "name": "KEY_PAUSE",
+                "enum": "Key",
+                "value": 4194313,
+                "readable_name": "Pause",
+                "category": "general_key",
+                "description": "Pause key."
+            },
+            "KEY_PRINT": {
+                "name": "KEY_PRINT",
+                "enum": "Key",
+                "value": 4194314,
+                "readable_name": "Print Screen",
+                "category": "general_key",
+                "description": "Print Screen key."
+            },
+            "KEY_SYSREQ": {
+                "name": "KEY_SYSREQ",
+                "enum": "Key",
+                "value": 4194315,
+                "readable_name": "Sysreq",
+                "category": "general_key",
+                "description": "System Request key."
+            },
+            "KEY_CLEAR": {
+                "name": "KEY_CLEAR",
+                "enum": "Key",
+                "value": 4194316,
+                "readable_name": "Clear",
+                "category": "general_key",
+                "description": "Clear key."
+            },
+            "KEY_HOME": {
+                "name": "KEY_HOME",
+                "enum": "Key",
+                "value": 4194317,
+                "readable_name": "Home",
+                "category": "navigation",
+                "description": "Home key."
+            },
+            "KEY_END": {
+                "name": "KEY_END",
+                "enum": "Key",
+                "value": 4194318,
+                "readable_name": "End",
+                "category": "navigation",
+                "description": "End key."
+            },
+            "KEY_LEFT": {
+                "name": "KEY_LEFT",
+                "enum": "Key",
+                "value": 4194319,
+                "readable_name": "Left Arrow",
+                "category": "navigation",
+                "description": "Left arrow key."
+            },
+            "KEY_UP": {
+                "name": "KEY_UP",
+                "enum": "Key",
+                "value": 4194320,
+                "readable_name": "Up Arrow",
+                "category": "navigation",
+                "description": "Up arrow key."
+            },
+            "KEY_RIGHT": {
+                "name": "KEY_RIGHT",
+                "enum": "Key",
+                "value": 4194321,
+                "readable_name": "Right Arrow",
+                "category": "navigation",
+                "description": "Right arrow key."
+            },
+            "KEY_DOWN": {
+                "name": "KEY_DOWN",
+                "enum": "Key",
+                "value": 4194322,
+                "readable_name": "Down Arrow",
+                "category": "navigation",
+                "description": "Down arrow key."
+            },
+            "KEY_PAGEUP": {
+                "name": "KEY_PAGEUP",
+                "enum": "Key",
+                "value": 4194323,
+                "readable_name": "Page Up",
+                "category": "navigation",
+                "description": "Page Up key."
+            },
+            "KEY_PAGEDOWN": {
+                "name": "KEY_PAGEDOWN",
+                "enum": "Key",
+                "value": 4194324,
+                "readable_name": "Page Down",
+                "category": "navigation",
+                "description": "Page Down key."
+            },
+            "KEY_SHIFT": {
+                "name": "KEY_SHIFT",
+                "enum": "Key",
+                "value": 4194325,
+                "readable_name": "Shift",
+                "category": "modifier",
+                "description": "Shift key."
+            },
+            "KEY_CTRL": {
+                "name": "KEY_CTRL",
+                "enum": "Key",
+                "value": 4194326,
+                "readable_name": "Ctrl",
+                "category": "modifier",
+                "description": "Control key."
+            },
+            "KEY_META": {
+                "name": "KEY_META",
+                "enum": "Key",
+                "value": 4194327,
+                "readable_name": "Win / Command",
+                "category": "modifier",
+                "description": "Meta key."
+            },
+            "KEY_ALT": {
+                "name": "KEY_ALT",
+                "enum": "Key",
+                "value": 4194328,
+                "readable_name": "Alt",
+                "category": "modifier",
+                "description": "Alt key."
+            },
+            "KEY_CAPSLOCK": {
+                "name": "KEY_CAPSLOCK",
+                "enum": "Key",
+                "value": 4194329,
+                "readable_name": "Caps Lock",
+                "category": "modifier",
+                "description": "Caps Lock key."
+            },
+            "KEY_NUMLOCK": {
+                "name": "KEY_NUMLOCK",
+                "enum": "Key",
+                "value": 4194330,
+                "readable_name": "Num Lock",
+                "category": "modifier",
+                "description": "Num Lock key."
+            },
+            "KEY_SCROLLLOCK": {
+                "name": "KEY_SCROLLLOCK",
+                "enum": "Key",
+                "value": 4194331,
+                "readable_name": "Scroll Lock",
+                "category": "modifier",
+                "description": "Scroll Lock key."
+            },
+            "KEY_F1": {
+                "name": "KEY_F1",
+                "enum": "Key",
+                "value": 4194332,
+                "readable_name": "F1",
+                "category": "function",
+                "description": "F1 key."
+            },
+            "KEY_F2": {
+                "name": "KEY_F2",
+                "enum": "Key",
+                "value": 4194333,
+                "readable_name": "F2",
+                "category": "function",
+                "description": "F2 key."
+            },
+            "KEY_F3": {
+                "name": "KEY_F3",
+                "enum": "Key",
+                "value": 4194334,
+                "readable_name": "F3",
+                "category": "function",
+                "description": "F3 key."
+            },
+            "KEY_F4": {
+                "name": "KEY_F4",
+                "enum": "Key",
+                "value": 4194335,
+                "readable_name": "F4",
+                "category": "function",
+                "description": "F4 key."
+            },
+            "KEY_F5": {
+                "name": "KEY_F5",
+                "enum": "Key",
+                "value": 4194336,
+                "readable_name": "F5",
+                "category": "function",
+                "description": "F5 key."
+            },
+            "KEY_F6": {
+                "name": "KEY_F6",
+                "enum": "Key",
+                "value": 4194337,
+                "readable_name": "F6",
+                "category": "function",
+                "description": "F6 key."
+            },
+            "KEY_F7": {
+                "name": "KEY_F7",
+                "enum": "Key",
+                "value": 4194338,
+                "readable_name": "F7",
+                "category": "function",
+                "description": "F7 key."
+            },
+            "KEY_F8": {
+                "name": "KEY_F8",
+                "enum": "Key",
+                "value": 4194339,
+                "readable_name": "F8",
+                "category": "function",
+                "description": "F8 key."
+            },
+            "KEY_F9": {
+                "name": "KEY_F9",
+                "enum": "Key",
+                "value": 4194340,
+                "readable_name": "F9",
+                "category": "function",
+                "description": "F9 key."
+            },
+            "KEY_F10": {
+                "name": "KEY_F10",
+                "enum": "Key",
+                "value": 4194341,
+                "readable_name": "F10",
+                "category": "function",
+                "description": "F10 key."
+            },
+            "KEY_F11": {
+                "name": "KEY_F11",
+                "enum": "Key",
+                "value": 4194342,
+                "readable_name": "F11",
+                "category": "function",
+                "description": "F11 key."
+            },
+            "KEY_F12": {
+                "name": "KEY_F12",
+                "enum": "Key",
+                "value": 4194343,
+                "readable_name": "F12",
+                "category": "function",
+                "description": "F12 key."
+            },
+            "KEY_F13": {
+                "name": "KEY_F13",
+                "enum": "Key",
+                "value": 4194344,
+                "readable_name": "F13",
+                "category": "function",
+                "description": "F13 key."
+            },
+            "KEY_F14": {
+                "name": "KEY_F14",
+                "enum": "Key",
+                "value": 4194345,
+                "readable_name": "F14",
+                "category": "function",
+                "description": "F14 key."
+            },
+            "KEY_F15": {
+                "name": "KEY_F15",
+                "enum": "Key",
+                "value": 4194346,
+                "readable_name": "F15",
+                "category": "function",
+                "description": "F15 key."
+            },
+            "KEY_F16": {
+                "name": "KEY_F16",
+                "enum": "Key",
+                "value": 4194347,
+                "readable_name": "F16",
+                "category": "function",
+                "description": "F16 key."
+            },
+            "KEY_F17": {
+                "name": "KEY_F17",
+                "enum": "Key",
+                "value": 4194348,
+                "readable_name": "F17",
+                "category": "function",
+                "description": "F17 key."
+            },
+            "KEY_F18": {
+                "name": "KEY_F18",
+                "enum": "Key",
+                "value": 4194349,
+                "readable_name": "F18",
+                "category": "function",
+                "description": "F18 key."
+            },
+            "KEY_F19": {
+                "name": "KEY_F19",
+                "enum": "Key",
+                "value": 4194350,
+                "readable_name": "F19",
+                "category": "function",
+                "description": "F19 key."
+            },
+            "KEY_F20": {
+                "name": "KEY_F20",
+                "enum": "Key",
+                "value": 4194351,
+                "readable_name": "F20",
+                "category": "function",
+                "description": "F20 key."
+            },
+            "KEY_F21": {
+                "name": "KEY_F21",
+                "enum": "Key",
+                "value": 4194352,
+                "readable_name": "F21",
+                "category": "function",
+                "description": "F21 key."
+            },
+            "KEY_F22": {
+                "name": "KEY_F22",
+                "enum": "Key",
+                "value": 4194353,
+                "readable_name": "F22",
+                "category": "function",
+                "description": "F22 key."
+            },
+            "KEY_F23": {
+                "name": "KEY_F23",
+                "enum": "Key",
+                "value": 4194354,
+                "readable_name": "F23",
+                "category": "function",
+                "description": "F23 key."
+            },
+            "KEY_F24": {
+                "name": "KEY_F24",
+                "enum": "Key",
+                "value": 4194355,
+                "readable_name": "F24",
+                "category": "function",
+                "description": "F24 key."
+            },
+            "KEY_F25": {
+                "name": "KEY_F25",
+                "enum": "Key",
+                "value": 4194356,
+                "readable_name": "F25",
+                "category": "function",
+                "description": "F25 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_F26": {
+                "name": "KEY_F26",
+                "enum": "Key",
+                "value": 4194357,
+                "readable_name": "F26",
+                "category": "function",
+                "description": "F26 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_F27": {
+                "name": "KEY_F27",
+                "enum": "Key",
+                "value": 4194358,
+                "readable_name": "F27",
+                "category": "function",
+                "description": "F27 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_F28": {
+                "name": "KEY_F28",
+                "enum": "Key",
+                "value": 4194359,
+                "readable_name": "F28",
+                "category": "function",
+                "description": "F28 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_F29": {
+                "name": "KEY_F29",
+                "enum": "Key",
+                "value": 4194360,
+                "readable_name": "F29",
+                "category": "function",
+                "description": "F29 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_F30": {
+                "name": "KEY_F30",
+                "enum": "Key",
+                "value": 4194361,
+                "readable_name": "F30",
+                "category": "function",
+                "description": "F30 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_F31": {
+                "name": "KEY_F31",
+                "enum": "Key",
+                "value": 4194362,
+                "readable_name": "F31",
+                "category": "function",
+                "description": "F31 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_F32": {
+                "name": "KEY_F32",
+                "enum": "Key",
+                "value": 4194363,
+                "readable_name": "F32",
+                "category": "function",
+                "description": "F32 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_F33": {
+                "name": "KEY_F33",
+                "enum": "Key",
+                "value": 4194364,
+                "readable_name": "F33",
+                "category": "function",
+                "description": "F33 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_F34": {
+                "name": "KEY_F34",
+                "enum": "Key",
+                "value": 4194365,
+                "readable_name": "F34",
+                "category": "function",
+                "description": "F34 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_F35": {
+                "name": "KEY_F35",
+                "enum": "Key",
+                "value": 4194366,
+                "readable_name": "F35",
+                "category": "function",
+                "description": "F35 key. Only supported on macOS and Linux due to a Windows limitation."
+            },
+            "KEY_KP_MULTIPLY": {
+                "name": "KEY_KP_MULTIPLY",
+                "enum": "Key",
+                "value": 4194433,
+                "readable_name": "Num Multiply",
+                "category": "numpad",
+                "description": "Multiply (*) key on the numeric keypad."
+            },
+            "KEY_KP_DIVIDE": {
+                "name": "KEY_KP_DIVIDE",
+                "enum": "Key",
+                "value": 4194434,
+                "readable_name": "Num Divide",
+                "category": "numpad",
+                "description": "Divide (/) key on the numeric keypad."
+            },
+            "KEY_KP_SUBTRACT": {
+                "name": "KEY_KP_SUBTRACT",
+                "enum": "Key",
+                "value": 4194435,
+                "readable_name": "Num Subtract",
+                "category": "numpad",
+                "description": "Subtract (-) key on the numeric keypad."
+            },
+            "KEY_KP_PERIOD": {
+                "name": "KEY_KP_PERIOD",
+                "enum": "Key",
+                "value": 4194436,
+                "readable_name": "Num Period",
+                "category": "numpad",
+                "description": "Period (.) key on the numeric keypad."
+            },
+            "KEY_KP_ADD": {
+                "name": "KEY_KP_ADD",
+                "enum": "Key",
+                "value": 4194437,
+                "readable_name": "Num Add",
+                "category": "numpad",
+                "description": "Add (+) key on the numeric keypad."
+            },
+            "KEY_KP_0": {
+                "name": "KEY_KP_0",
+                "enum": "Key",
+                "value": 4194438,
+                "readable_name": "Num 0",
+                "category": "numpad",
+                "description": "Number 0 on the numeric keypad."
+            },
+            "KEY_KP_1": {
+                "name": "KEY_KP_1",
+                "enum": "Key",
+                "value": 4194439,
+                "readable_name": "Num 1",
+                "category": "numpad",
+                "description": "Number 1 on the numeric keypad."
+            },
+            "KEY_KP_2": {
+                "name": "KEY_KP_2",
+                "enum": "Key",
+                "value": 4194440,
+                "readable_name": "Num 2",
+                "category": "numpad",
+                "description": "Number 2 on the numeric keypad."
+            },
+            "KEY_KP_3": {
+                "name": "KEY_KP_3",
+                "enum": "Key",
+                "value": 4194441,
+                "readable_name": "Num 3",
+                "category": "numpad",
+                "description": "Number 3 on the numeric keypad."
+            },
+            "KEY_KP_4": {
+                "name": "KEY_KP_4",
+                "enum": "Key",
+                "value": 4194442,
+                "readable_name": "Num 4",
+                "category": "numpad",
+                "description": "Number 4 on the numeric keypad."
+            },
+            "KEY_KP_5": {
+                "name": "KEY_KP_5",
+                "enum": "Key",
+                "value": 4194443,
+                "readable_name": "Num 5",
+                "category": "numpad",
+                "description": "Number 5 on the numeric keypad."
+            },
+            "KEY_KP_6": {
+                "name": "KEY_KP_6",
+                "enum": "Key",
+                "value": 4194444,
+                "readable_name": "Num 6",
+                "category": "numpad",
+                "description": "Number 6 on the numeric keypad."
+            },
+            "KEY_KP_7": {
+                "name": "KEY_KP_7",
+                "enum": "Key",
+                "value": 4194445,
+                "readable_name": "Num 7",
+                "category": "numpad",
+                "description": "Number 7 on the numeric keypad."
+            },
+            "KEY_KP_8": {
+                "name": "KEY_KP_8",
+                "enum": "Key",
+                "value": 4194446,
+                "readable_name": "Num 8",
+                "category": "numpad",
+                "description": "Number 8 on the numeric keypad."
+            },
+            "KEY_KP_9": {
+                "name": "KEY_KP_9",
+                "enum": "Key",
+                "value": 4194447,
+                "readable_name": "Num 9",
+                "category": "numpad",
+                "description": "Number 9 on the numeric keypad."
+            },
+            "KEY_MENU": {
+                "name": "KEY_MENU",
+                "enum": "Key",
+                "value": 4194370,
+                "readable_name": "Menu",
+                "category": "general_key",
+                "description": "Context menu key."
+            },
+            "KEY_HYPER": {
+                "name": "KEY_HYPER",
+                "enum": "Key",
+                "value": 4194371,
+                "readable_name": "Hyper",
+                "category": "general_key",
+                "description": "Hyper key. (On Linux/X11 only)."
+            },
+            "KEY_HELP": {
+                "name": "KEY_HELP",
+                "enum": "Key",
+                "value": 4194373,
+                "readable_name": "Help",
+                "category": "general_key",
+                "description": "Help key."
+            },
+            "KEY_BACK": {
+                "name": "KEY_BACK",
+                "enum": "Key",
+                "value": 4194376,
+                "readable_name": "Back",
+                "category": "general_key",
+                "description": "Back key."
+            },
+            "KEY_FORWARD": {
+                "name": "KEY_FORWARD",
+                "enum": "Key",
+                "value": 4194377,
+                "readable_name": "Forward",
+                "category": "general_key",
+                "description": "Forward key."
+            },
+            "KEY_STOP": {
+                "name": "KEY_STOP",
+                "enum": "Key",
+                "value": 4194378,
+                "readable_name": "Stop",
+                "category": "media",
+                "description": "Media stop key."
+            },
+            "KEY_REFRESH": {
+                "name": "KEY_REFRESH",
+                "enum": "Key",
+                "value": 4194379,
+                "readable_name": "Refresh",
+                "category": "general_key",
+                "description": "Refresh key."
+            },
+            "KEY_VOLUMEDOWN": {
+                "name": "KEY_VOLUMEDOWN",
+                "enum": "Key",
+                "value": 4194380,
+                "readable_name": "Volumedown",
+                "category": "media",
+                "description": "Volume down key."
+            },
+            "KEY_VOLUMEMUTE": {
+                "name": "KEY_VOLUMEMUTE",
+                "enum": "Key",
+                "value": 4194381,
+                "readable_name": "Volumemute",
+                "category": "media",
+                "description": "Mute volume key."
+            },
+            "KEY_VOLUMEUP": {
+                "name": "KEY_VOLUMEUP",
+                "enum": "Key",
+                "value": 4194382,
+                "readable_name": "Volumeup",
+                "category": "media",
+                "description": "Volume up key."
+            },
+            "KEY_MEDIAPLAY": {
+                "name": "KEY_MEDIAPLAY",
+                "enum": "Key",
+                "value": 4194388,
+                "readable_name": "Mediaplay",
+                "category": "media",
+                "description": "Media play key."
+            },
+            "KEY_MEDIASTOP": {
+                "name": "KEY_MEDIASTOP",
+                "enum": "Key",
+                "value": 4194389,
+                "readable_name": "Mediastop",
+                "category": "media",
+                "description": "Media stop key."
+            },
+            "KEY_MEDIAPREVIOUS": {
+                "name": "KEY_MEDIAPREVIOUS",
+                "enum": "Key",
+                "value": 4194390,
+                "readable_name": "Mediaprevious",
+                "category": "media",
+                "description": "Previous song key."
+            },
+            "KEY_MEDIANEXT": {
+                "name": "KEY_MEDIANEXT",
+                "enum": "Key",
+                "value": 4194391,
+                "readable_name": "Medianext",
+                "category": "media",
+                "description": "Next song key."
+            },
+            "KEY_MEDIARECORD": {
+                "name": "KEY_MEDIARECORD",
+                "enum": "Key",
+                "value": 4194392,
+                "readable_name": "Mediarecord",
+                "category": "media",
+                "description": "Media record key."
+            },
+            "KEY_HOMEPAGE": {
+                "name": "KEY_HOMEPAGE",
+                "enum": "Key",
+                "value": 4194393,
+                "readable_name": "Homepage",
+                "category": "general_key",
+                "description": "Home page key."
+            },
+            "KEY_FAVORITES": {
+                "name": "KEY_FAVORITES",
+                "enum": "Key",
+                "value": 4194394,
+                "readable_name": "Favorites",
+                "category": "general_key",
+                "description": "Favorites key."
+            },
+            "KEY_SEARCH": {
+                "name": "KEY_SEARCH",
+                "enum": "Key",
+                "value": 4194395,
+                "readable_name": "Search",
+                "category": "general_key",
+                "description": "Search key."
+            },
+            "KEY_STANDBY": {
+                "name": "KEY_STANDBY",
+                "enum": "Key",
+                "value": 4194396,
+                "readable_name": "Standby",
+                "category": "general_key",
+                "description": "Standby key."
+            },
+            "KEY_OPENURL": {
+                "name": "KEY_OPENURL",
+                "enum": "Key",
+                "value": 4194397,
+                "readable_name": "Openurl",
+                "category": "general_key",
+                "description": "Open URL / Launch Browser key."
+            },
+            "KEY_LAUNCHMAIL": {
+                "name": "KEY_LAUNCHMAIL",
+                "enum": "Key",
+                "value": 4194398,
+                "readable_name": "Launchmail",
+                "category": "general_key",
+                "description": "Launch Mail key."
+            },
+            "KEY_LAUNCHMEDIA": {
+                "name": "KEY_LAUNCHMEDIA",
+                "enum": "Key",
+                "value": 4194399,
+                "readable_name": "Launchmedia",
+                "category": "general_key",
+                "description": "Launch Media key."
+            },
+            "KEY_LAUNCH0": {
+                "name": "KEY_LAUNCH0",
+                "enum": "Key",
+                "value": 4194400,
+                "readable_name": "Launch0",
+                "category": "general_key",
+                "description": "Launch Shortcut 0 key."
+            },
+            "KEY_LAUNCH1": {
+                "name": "KEY_LAUNCH1",
+                "enum": "Key",
+                "value": 4194401,
+                "readable_name": "Launch1",
+                "category": "general_key",
+                "description": "Launch Shortcut 1 key."
+            },
+            "KEY_LAUNCH2": {
+                "name": "KEY_LAUNCH2",
+                "enum": "Key",
+                "value": 4194402,
+                "readable_name": "Launch2",
+                "category": "general_key",
+                "description": "Launch Shortcut 2 key."
+            },
+            "KEY_LAUNCH3": {
+                "name": "KEY_LAUNCH3",
+                "enum": "Key",
+                "value": 4194403,
+                "readable_name": "Launch3",
+                "category": "general_key",
+                "description": "Launch Shortcut 3 key."
+            },
+            "KEY_LAUNCH4": {
+                "name": "KEY_LAUNCH4",
+                "enum": "Key",
+                "value": 4194404,
+                "readable_name": "Launch4",
+                "category": "general_key",
+                "description": "Launch Shortcut 4 key."
+            },
+            "KEY_LAUNCH5": {
+                "name": "KEY_LAUNCH5",
+                "enum": "Key",
+                "value": 4194405,
+                "readable_name": "Launch5",
+                "category": "general_key",
+                "description": "Launch Shortcut 5 key."
+            },
+            "KEY_LAUNCH6": {
+                "name": "KEY_LAUNCH6",
+                "enum": "Key",
+                "value": 4194406,
+                "readable_name": "Launch6",
+                "category": "general_key",
+                "description": "Launch Shortcut 6 key."
+            },
+            "KEY_LAUNCH7": {
+                "name": "KEY_LAUNCH7",
+                "enum": "Key",
+                "value": 4194407,
+                "readable_name": "Launch7",
+                "category": "general_key",
+                "description": "Launch Shortcut 7 key."
+            },
+            "KEY_LAUNCH8": {
+                "name": "KEY_LAUNCH8",
+                "enum": "Key",
+                "value": 4194408,
+                "readable_name": "Launch8",
+                "category": "general_key",
+                "description": "Launch Shortcut 8 key."
+            },
+            "KEY_LAUNCH9": {
+                "name": "KEY_LAUNCH9",
+                "enum": "Key",
+                "value": 4194409,
+                "readable_name": "Launch9",
+                "category": "general_key",
+                "description": "Launch Shortcut 9 key."
+            },
+            "KEY_LAUNCHA": {
+                "name": "KEY_LAUNCHA",
+                "enum": "Key",
+                "value": 4194410,
+                "readable_name": "Launcha",
+                "category": "general_key",
+                "description": "Launch Shortcut A key."
+            },
+            "KEY_LAUNCHB": {
+                "name": "KEY_LAUNCHB",
+                "enum": "Key",
+                "value": 4194411,
+                "readable_name": "Launchb",
+                "category": "general_key",
+                "description": "Launch Shortcut B key."
+            },
+            "KEY_LAUNCHC": {
+                "name": "KEY_LAUNCHC",
+                "enum": "Key",
+                "value": 4194412,
+                "readable_name": "Launchc",
+                "category": "general_key",
+                "description": "Launch Shortcut C key."
+            },
+            "KEY_LAUNCHD": {
+                "name": "KEY_LAUNCHD",
+                "enum": "Key",
+                "value": 4194413,
+                "readable_name": "Launchd",
+                "category": "general_key",
+                "description": "Launch Shortcut D key."
+            },
+            "KEY_LAUNCHE": {
+                "name": "KEY_LAUNCHE",
+                "enum": "Key",
+                "value": 4194414,
+                "readable_name": "Launche",
+                "category": "general_key",
+                "description": "Launch Shortcut E key."
+            },
+            "KEY_LAUNCHF": {
+                "name": "KEY_LAUNCHF",
+                "enum": "Key",
+                "value": 4194415,
+                "readable_name": "Launchf",
+                "category": "general_key",
+                "description": "Launch Shortcut F key."
+            },
+            "KEY_GLOBE": {
+                "name": "KEY_GLOBE",
+                "enum": "Key",
+                "value": 4194416,
+                "readable_name": "Globe",
+                "category": "general_key",
+                "description": "\"Globe\" key on Mac / iPad keyboard."
+            },
+            "KEY_KEYBOARD": {
+                "name": "KEY_KEYBOARD",
+                "enum": "Key",
+                "value": 4194417,
+                "readable_name": "Keyboard",
+                "category": "general_key",
+                "description": "\"On-screen keyboard\" key on iPad keyboard."
+            },
+            "KEY_JIS_EISU": {
+                "name": "KEY_JIS_EISU",
+                "enum": "Key",
+                "value": 4194418,
+                "readable_name": "Jis Eisu",
+                "category": "general_key",
+                "description": "英数 key on Mac keyboard."
+            },
+            "KEY_JIS_KANA": {
+                "name": "KEY_JIS_KANA",
+                "enum": "Key",
+                "value": 4194419,
+                "readable_name": "Jis Kana",
+                "category": "general_key",
+                "description": "かな key on Mac keyboard."
+            },
+            "KEY_UNKNOWN": {
+                "name": "KEY_UNKNOWN",
+                "enum": "Key",
+                "value": 8388607,
+                "readable_name": "Unknown",
+                "category": "general_key",
+                "description": "Unknown key."
+            },
+            "KEY_SPACE": {
+                "name": "KEY_SPACE",
+                "enum": "Key",
+                "value": 32,
+                "readable_name": "Space",
+                "category": "navigation",
+                "description": "Space key."
+            },
+            "KEY_EXCLAM": {
+                "name": "KEY_EXCLAM",
+                "enum": "Key",
+                "value": 33,
+                "readable_name": "Exclam",
+                "category": "general_key",
+                "description": "Exclamation mark ([code]![/code]) key."
+            },
+            "KEY_QUOTEDBL": {
+                "name": "KEY_QUOTEDBL",
+                "enum": "Key",
+                "value": 34,
+                "readable_name": "Quotedbl",
+                "category": "general_key",
+                "description": "Double quotation mark ([code]\"[/code]) key."
+            },
+            "KEY_NUMBERSIGN": {
+                "name": "KEY_NUMBERSIGN",
+                "enum": "Key",
+                "value": 35,
+                "readable_name": "Numbersign",
+                "category": "general_key",
+                "description": "Number sign or [i]hash[/i] ([code]#[/code]) key."
+            },
+            "KEY_DOLLAR": {
+                "name": "KEY_DOLLAR",
+                "enum": "Key",
+                "value": 36,
+                "readable_name": "Dollar",
+                "category": "general_key",
+                "description": "Dollar sign ([code]$[/code]) key."
+            },
+            "KEY_PERCENT": {
+                "name": "KEY_PERCENT",
+                "enum": "Key",
+                "value": 37,
+                "readable_name": "Percent",
+                "category": "general_key",
+                "description": "Percent sign ([code]%[/code]) key."
+            },
+            "KEY_AMPERSAND": {
+                "name": "KEY_AMPERSAND",
+                "enum": "Key",
+                "value": 38,
+                "readable_name": "Ampersand",
+                "category": "general_key",
+                "description": "Ampersand ([code]&[/code]) key."
+            },
+            "KEY_APOSTROPHE": {
+                "name": "KEY_APOSTROPHE",
+                "enum": "Key",
+                "value": 39,
+                "readable_name": "'",
+                "category": "general_key",
+                "description": "Apostrophe ([code]'[/code]) key."
+            },
+            "KEY_PARENLEFT": {
+                "name": "KEY_PARENLEFT",
+                "enum": "Key",
+                "value": 40,
+                "readable_name": "Parenleft",
+                "category": "general_key",
+                "description": "Left parenthesis ([code]([/code]) key."
+            },
+            "KEY_PARENRIGHT": {
+                "name": "KEY_PARENRIGHT",
+                "enum": "Key",
+                "value": 41,
+                "readable_name": "Parenright",
+                "category": "general_key",
+                "description": "Right parenthesis ([code])[/code]) key."
+            },
+            "KEY_ASTERISK": {
+                "name": "KEY_ASTERISK",
+                "enum": "Key",
+                "value": 42,
+                "readable_name": "Asterisk",
+                "category": "general_key",
+                "description": "Asterisk ([code]*[/code]) key."
+            },
+            "KEY_PLUS": {
+                "name": "KEY_PLUS",
+                "enum": "Key",
+                "value": 43,
+                "readable_name": "Plus",
+                "category": "general_key",
+                "description": "Plus ([code]+[/code]) key."
+            },
+            "KEY_COMMA": {
+                "name": "KEY_COMMA",
+                "enum": "Key",
+                "value": 44,
+                "readable_name": ",",
+                "category": "general_key",
+                "description": "Comma ([code],[/code]) key."
+            },
+            "KEY_MINUS": {
+                "name": "KEY_MINUS",
+                "enum": "Key",
+                "value": 45,
+                "readable_name": "-",
+                "category": "general_key",
+                "description": "Minus ([code]-[/code]) key."
+            },
+            "KEY_PERIOD": {
+                "name": "KEY_PERIOD",
+                "enum": "Key",
+                "value": 46,
+                "readable_name": ".",
+                "category": "general_key",
+                "description": "Period ([code].[/code]) key."
+            },
+            "KEY_SLASH": {
+                "name": "KEY_SLASH",
+                "enum": "Key",
+                "value": 47,
+                "readable_name": "/",
+                "category": "general_key",
+                "description": "Slash ([code]/[/code]) key."
+            },
+            "KEY_0": {
+                "name": "KEY_0",
+                "enum": "Key",
+                "value": 48,
+                "readable_name": "0",
+                "category": "alphanumeric",
+                "description": "Number 0 key."
+            },
+            "KEY_1": {
+                "name": "KEY_1",
+                "enum": "Key",
+                "value": 49,
+                "readable_name": "1",
+                "category": "alphanumeric",
+                "description": "Number 1 key."
+            },
+            "KEY_2": {
+                "name": "KEY_2",
+                "enum": "Key",
+                "value": 50,
+                "readable_name": "2",
+                "category": "alphanumeric",
+                "description": "Number 2 key."
+            },
+            "KEY_3": {
+                "name": "KEY_3",
+                "enum": "Key",
+                "value": 51,
+                "readable_name": "3",
+                "category": "alphanumeric",
+                "description": "Number 3 key."
+            },
+            "KEY_4": {
+                "name": "KEY_4",
+                "enum": "Key",
+                "value": 52,
+                "readable_name": "4",
+                "category": "alphanumeric",
+                "description": "Number 4 key."
+            },
+            "KEY_5": {
+                "name": "KEY_5",
+                "enum": "Key",
+                "value": 53,
+                "readable_name": "5",
+                "category": "alphanumeric",
+                "description": "Number 5 key."
+            },
+            "KEY_6": {
+                "name": "KEY_6",
+                "enum": "Key",
+                "value": 54,
+                "readable_name": "6",
+                "category": "alphanumeric",
+                "description": "Number 6 key."
+            },
+            "KEY_7": {
+                "name": "KEY_7",
+                "enum": "Key",
+                "value": 55,
+                "readable_name": "7",
+                "category": "alphanumeric",
+                "description": "Number 7 key."
+            },
+            "KEY_8": {
+                "name": "KEY_8",
+                "enum": "Key",
+                "value": 56,
+                "readable_name": "8",
+                "category": "alphanumeric",
+                "description": "Number 8 key."
+            },
+            "KEY_9": {
+                "name": "KEY_9",
+                "enum": "Key",
+                "value": 57,
+                "readable_name": "9",
+                "category": "alphanumeric",
+                "description": "Number 9 key."
+            },
+            "KEY_COLON": {
+                "name": "KEY_COLON",
+                "enum": "Key",
+                "value": 58,
+                "readable_name": "Colon",
+                "category": "general_key",
+                "description": "Colon ([code]:[/code]) key."
+            },
+            "KEY_SEMICOLON": {
+                "name": "KEY_SEMICOLON",
+                "enum": "Key",
+                "value": 59,
+                "readable_name": ";",
+                "category": "general_key",
+                "description": "Semicolon ([code];[/code]) key."
+            },
+            "KEY_LESS": {
+                "name": "KEY_LESS",
+                "enum": "Key",
+                "value": 60,
+                "readable_name": "Less",
+                "category": "general_key",
+                "description": "Less-than sign ([code]<[/code]) key."
+            },
+            "KEY_EQUAL": {
+                "name": "KEY_EQUAL",
+                "enum": "Key",
+                "value": 61,
+                "readable_name": "=",
+                "category": "general_key",
+                "description": "Equal sign ([code]=[/code]) key."
+            },
+            "KEY_GREATER": {
+                "name": "KEY_GREATER",
+                "enum": "Key",
+                "value": 62,
+                "readable_name": "Greater",
+                "category": "general_key",
+                "description": "Greater-than sign ([code]>[/code]) key."
+            },
+            "KEY_QUESTION": {
+                "name": "KEY_QUESTION",
+                "enum": "Key",
+                "value": 63,
+                "readable_name": "Question",
+                "category": "general_key",
+                "description": "Question mark ([code]?[/code]) key."
+            },
+            "KEY_AT": {
+                "name": "KEY_AT",
+                "enum": "Key",
+                "value": 64,
+                "readable_name": "At",
+                "category": "general_key",
+                "description": "At sign ([code]@[/code]) key."
+            },
+            "KEY_A": {
+                "name": "KEY_A",
+                "enum": "Key",
+                "value": 65,
+                "readable_name": "A",
+                "category": "alphanumeric",
+                "description": "A key."
+            },
+            "KEY_B": {
+                "name": "KEY_B",
+                "enum": "Key",
+                "value": 66,
+                "readable_name": "B",
+                "category": "alphanumeric",
+                "description": "B key."
+            },
+            "KEY_C": {
+                "name": "KEY_C",
+                "enum": "Key",
+                "value": 67,
+                "readable_name": "C",
+                "category": "alphanumeric",
+                "description": "C key."
+            },
+            "KEY_D": {
+                "name": "KEY_D",
+                "enum": "Key",
+                "value": 68,
+                "readable_name": "D",
+                "category": "alphanumeric",
+                "description": "D key."
+            },
+            "KEY_E": {
+                "name": "KEY_E",
+                "enum": "Key",
+                "value": 69,
+                "readable_name": "E",
+                "category": "alphanumeric",
+                "description": "E key."
+            },
+            "KEY_F": {
+                "name": "KEY_F",
+                "enum": "Key",
+                "value": 70,
+                "readable_name": "F",
+                "category": "alphanumeric",
+                "description": "F key."
+            },
+            "KEY_G": {
+                "name": "KEY_G",
+                "enum": "Key",
+                "value": 71,
+                "readable_name": "G",
+                "category": "alphanumeric",
+                "description": "G key."
+            },
+            "KEY_H": {
+                "name": "KEY_H",
+                "enum": "Key",
+                "value": 72,
+                "readable_name": "H",
+                "category": "alphanumeric",
+                "description": "H key."
+            },
+            "KEY_I": {
+                "name": "KEY_I",
+                "enum": "Key",
+                "value": 73,
+                "readable_name": "I",
+                "category": "alphanumeric",
+                "description": "I key."
+            },
+            "KEY_J": {
+                "name": "KEY_J",
+                "enum": "Key",
+                "value": 74,
+                "readable_name": "J",
+                "category": "alphanumeric",
+                "description": "J key."
+            },
+            "KEY_K": {
+                "name": "KEY_K",
+                "enum": "Key",
+                "value": 75,
+                "readable_name": "K",
+                "category": "alphanumeric",
+                "description": "K key."
+            },
+            "KEY_L": {
+                "name": "KEY_L",
+                "enum": "Key",
+                "value": 76,
+                "readable_name": "L",
+                "category": "alphanumeric",
+                "description": "L key."
+            },
+            "KEY_M": {
+                "name": "KEY_M",
+                "enum": "Key",
+                "value": 77,
+                "readable_name": "M",
+                "category": "alphanumeric",
+                "description": "M key."
+            },
+            "KEY_N": {
+                "name": "KEY_N",
+                "enum": "Key",
+                "value": 78,
+                "readable_name": "N",
+                "category": "alphanumeric",
+                "description": "N key."
+            },
+            "KEY_O": {
+                "name": "KEY_O",
+                "enum": "Key",
+                "value": 79,
+                "readable_name": "O",
+                "category": "alphanumeric",
+                "description": "O key."
+            },
+            "KEY_P": {
+                "name": "KEY_P",
+                "enum": "Key",
+                "value": 80,
+                "readable_name": "P",
+                "category": "alphanumeric",
+                "description": "P key."
+            },
+            "KEY_Q": {
+                "name": "KEY_Q",
+                "enum": "Key",
+                "value": 81,
+                "readable_name": "Q",
+                "category": "alphanumeric",
+                "description": "Q key."
+            },
+            "KEY_R": {
+                "name": "KEY_R",
+                "enum": "Key",
+                "value": 82,
+                "readable_name": "R",
+                "category": "alphanumeric",
+                "description": "R key."
+            },
+            "KEY_S": {
+                "name": "KEY_S",
+                "enum": "Key",
+                "value": 83,
+                "readable_name": "S",
+                "category": "alphanumeric",
+                "description": "S key."
+            },
+            "KEY_T": {
+                "name": "KEY_T",
+                "enum": "Key",
+                "value": 84,
+                "readable_name": "T",
+                "category": "alphanumeric",
+                "description": "T key."
+            },
+            "KEY_U": {
+                "name": "KEY_U",
+                "enum": "Key",
+                "value": 85,
+                "readable_name": "U",
+                "category": "alphanumeric",
+                "description": "U key."
+            },
+            "KEY_V": {
+                "name": "KEY_V",
+                "enum": "Key",
+                "value": 86,
+                "readable_name": "V",
+                "category": "alphanumeric",
+                "description": "V key."
+            },
+            "KEY_W": {
+                "name": "KEY_W",
+                "enum": "Key",
+                "value": 87,
+                "readable_name": "W",
+                "category": "alphanumeric",
+                "description": "W key."
+            },
+            "KEY_X": {
+                "name": "KEY_X",
+                "enum": "Key",
+                "value": 88,
+                "readable_name": "X",
+                "category": "alphanumeric",
+                "description": "X key."
+            },
+            "KEY_Y": {
+                "name": "KEY_Y",
+                "enum": "Key",
+                "value": 89,
+                "readable_name": "Y",
+                "category": "alphanumeric",
+                "description": "Y key."
+            },
+            "KEY_Z": {
+                "name": "KEY_Z",
+                "enum": "Key",
+                "value": 90,
+                "readable_name": "Z",
+                "category": "alphanumeric",
+                "description": "Z key."
+            },
+            "KEY_BRACKETLEFT": {
+                "name": "KEY_BRACKETLEFT",
+                "enum": "Key",
+                "value": 91,
+                "readable_name": "[",
+                "category": "general_key",
+                "description": "Left bracket ([code][lb][/code]) key."
+            },
+            "KEY_BACKSLASH": {
+                "name": "KEY_BACKSLASH",
+                "enum": "Key",
+                "value": 92,
+                "readable_name": "\\",
+                "category": "general_key",
+                "description": "Backslash ([code]\\[/code]) key."
+            },
+            "KEY_BRACKETRIGHT": {
+                "name": "KEY_BRACKETRIGHT",
+                "enum": "Key",
+                "value": 93,
+                "readable_name": "]",
+                "category": "general_key",
+                "description": "Right bracket ([code][rb][/code]) key."
+            },
+            "KEY_ASCIICIRCUM": {
+                "name": "KEY_ASCIICIRCUM",
+                "enum": "Key",
+                "value": 94,
+                "readable_name": "Asciicircum",
+                "category": "general_key",
+                "description": "Caret ([code]^[/code]) key."
+            },
+            "KEY_UNDERSCORE": {
+                "name": "KEY_UNDERSCORE",
+                "enum": "Key",
+                "value": 95,
+                "readable_name": "Underscore",
+                "category": "general_key",
+                "description": "Underscore ([code]_[/code]) key."
+            },
+            "KEY_QUOTELEFT": {
+                "name": "KEY_QUOTELEFT",
+                "enum": "Key",
+                "value": 96,
+                "readable_name": "Quoteleft",
+                "category": "general_key",
+                "description": "Backtick ([code]`[/code]) key."
+            },
+            "KEY_BRACELEFT": {
+                "name": "KEY_BRACELEFT",
+                "enum": "Key",
+                "value": 123,
+                "readable_name": "Braceleft",
+                "category": "general_key",
+                "description": "Left brace ([code]{[/code]) key."
+            },
+            "KEY_BAR": {
+                "name": "KEY_BAR",
+                "enum": "Key",
+                "value": 124,
+                "readable_name": "Bar",
+                "category": "general_key",
+                "description": "Vertical bar or [i]pipe[/i] ([code]|[/code]) key."
+            },
+            "KEY_BRACERIGHT": {
+                "name": "KEY_BRACERIGHT",
+                "enum": "Key",
+                "value": 125,
+                "readable_name": "Braceright",
+                "category": "general_key",
+                "description": "Right brace ([code]}[/code]) key."
+            },
+            "KEY_ASCIITILDE": {
+                "name": "KEY_ASCIITILDE",
+                "enum": "Key",
+                "value": 126,
+                "readable_name": "Asciitilde",
+                "category": "general_key",
+                "description": "Tilde ([code]~[/code]) key."
+            },
+            "KEY_YEN": {
+                "name": "KEY_YEN",
+                "enum": "Key",
+                "value": 165,
+                "readable_name": "Yen",
+                "category": "general_key",
+                "description": "Yen symbol ([code]¥[/code]) key."
+            },
+            "KEY_SECTION": {
+                "name": "KEY_SECTION",
+                "enum": "Key",
+                "value": 167,
+                "readable_name": "Section",
+                "category": "general_key",
+                "description": "Section sign ([code]§[/code]) key."
+            }
+        },
+        "mouse": {
+            "MOUSE_BUTTON_NONE": {
+                "name": "MOUSE_BUTTON_NONE",
+                "enum": "MouseButton",
+                "value": 0,
+                "readable_name": "None",
+                "category": "button",
+                "description": "Enum value which doesn't correspond to any mouse button. This is used to initialize [enum MouseButton] properties with a generic state."
+            },
+            "MOUSE_BUTTON_LEFT": {
+                "name": "MOUSE_BUTTON_LEFT",
+                "enum": "MouseButton",
+                "value": 1,
+                "readable_name": "Left Click",
+                "category": "button",
+                "description": "Primary mouse button, usually assigned to the left button."
+            },
+            "MOUSE_BUTTON_RIGHT": {
+                "name": "MOUSE_BUTTON_RIGHT",
+                "enum": "MouseButton",
+                "value": 2,
+                "readable_name": "Right Click",
+                "category": "button",
+                "description": "Secondary mouse button, usually assigned to the right button."
+            },
+            "MOUSE_BUTTON_MIDDLE": {
+                "name": "MOUSE_BUTTON_MIDDLE",
+                "enum": "MouseButton",
+                "value": 3,
+                "readable_name": "Middle Click",
+                "category": "button",
+                "description": "Middle mouse button."
+            },
+            "MOUSE_BUTTON_WHEEL_UP": {
+                "name": "MOUSE_BUTTON_WHEEL_UP",
+                "enum": "MouseButton",
+                "value": 4,
+                "readable_name": "Scroll Up",
+                "category": "wheel",
+                "description": "Mouse wheel scrolling up."
+            },
+            "MOUSE_BUTTON_WHEEL_DOWN": {
+                "name": "MOUSE_BUTTON_WHEEL_DOWN",
+                "enum": "MouseButton",
+                "value": 5,
+                "readable_name": "Scroll Down",
+                "category": "wheel",
+                "description": "Mouse wheel scrolling down."
+            },
+            "MOUSE_BUTTON_WHEEL_LEFT": {
+                "name": "MOUSE_BUTTON_WHEEL_LEFT",
+                "enum": "MouseButton",
+                "value": 6,
+                "readable_name": "Scroll Left",
+                "category": "wheel",
+                "description": "Mouse wheel left button (only present on some mice)."
+            },
+            "MOUSE_BUTTON_WHEEL_RIGHT": {
+                "name": "MOUSE_BUTTON_WHEEL_RIGHT",
+                "enum": "MouseButton",
+                "value": 7,
+                "readable_name": "Scroll Right",
+                "category": "wheel",
+                "description": "Mouse wheel right button (only present on some mice)."
+            },
+            "MOUSE_BUTTON_XBUTTON1": {
+                "name": "MOUSE_BUTTON_XBUTTON1",
+                "enum": "MouseButton",
+                "value": 8,
+                "readable_name": "Mouse 4 (Back)",
+                "category": "button",
+                "description": "Extra mouse button 1. This is sometimes present, usually to the sides of the mouse."
+            },
+            "MOUSE_BUTTON_XBUTTON2": {
+                "name": "MOUSE_BUTTON_XBUTTON2",
+                "enum": "MouseButton",
+                "value": 9,
+                "readable_name": "Mouse 5 (Forward)",
+                "category": "button",
+                "description": "Extra mouse button 2. This is sometimes present, usually to the sides of the mouse."
+            }
+        },
+        "gamepad": {
+            "JOY_BUTTON_INVALID": {
+                "name": "JOY_BUTTON_INVALID",
+                "enum": "JoyButton",
+                "value": -1,
+                "readable_name": "Invalid",
+                "category": "system_button",
+                "description": "An invalid game controller button."
+            },
+            "JOY_BUTTON_A": {
+                "name": "JOY_BUTTON_A",
+                "enum": "JoyButton",
+                "value": 0,
+                "readable_name": "A / Cross",
+                "category": "face_button",
+                "description": "Game controller SDL button A. Corresponds to the bottom action button: Sony Cross, Xbox A, Nintendo B."
+            },
+            "JOY_BUTTON_B": {
+                "name": "JOY_BUTTON_B",
+                "enum": "JoyButton",
+                "value": 1,
+                "readable_name": "B / Circle",
+                "category": "face_button",
+                "description": "Game controller SDL button B. Corresponds to the right action button: Sony Circle, Xbox B, Nintendo A."
+            },
+            "JOY_BUTTON_X": {
+                "name": "JOY_BUTTON_X",
+                "enum": "JoyButton",
+                "value": 2,
+                "readable_name": "X / Square",
+                "category": "face_button",
+                "description": "Game controller SDL button X. Corresponds to the left action button: Sony Square, Xbox X, Nintendo Y."
+            },
+            "JOY_BUTTON_Y": {
+                "name": "JOY_BUTTON_Y",
+                "enum": "JoyButton",
+                "value": 3,
+                "readable_name": "Y / Triangle",
+                "category": "face_button",
+                "description": "Game controller SDL button Y. Corresponds to the top action button: Sony Triangle, Xbox Y, Nintendo X."
+            },
+            "JOY_BUTTON_BACK": {
+                "name": "JOY_BUTTON_BACK",
+                "enum": "JoyButton",
+                "value": 4,
+                "readable_name": "Back / Select / View",
+                "category": "system_button",
+                "description": "Game controller SDL back button. Corresponds to the Sony Select, Xbox Back, Nintendo - button."
+            },
+            "JOY_BUTTON_GUIDE": {
+                "name": "JOY_BUTTON_GUIDE",
+                "enum": "JoyButton",
+                "value": 5,
+                "readable_name": "Guide / Home / PS",
+                "category": "system_button",
+                "description": "Game controller SDL guide button. Corresponds to the Sony PS, Xbox Home button."
+            },
+            "JOY_BUTTON_START": {
+                "name": "JOY_BUTTON_START",
+                "enum": "JoyButton",
+                "value": 6,
+                "readable_name": "Start / Menu / Options",
+                "category": "system_button",
+                "description": "Game controller SDL start button. Corresponds to the Sony Options, Xbox Menu, Nintendo + button."
+            },
+            "JOY_BUTTON_LEFT_STICK": {
+                "name": "JOY_BUTTON_LEFT_STICK",
+                "enum": "JoyButton",
+                "value": 7,
+                "readable_name": "L3 / Left Stick Click",
+                "category": "stick_button",
+                "description": "Game controller SDL left stick button. Corresponds to the Sony L3, Xbox L/LS button."
+            },
+            "JOY_BUTTON_RIGHT_STICK": {
+                "name": "JOY_BUTTON_RIGHT_STICK",
+                "enum": "JoyButton",
+                "value": 8,
+                "readable_name": "R3 / Right Stick Click",
+                "category": "stick_button",
+                "description": "Game controller SDL right stick button. Corresponds to the Sony R3, Xbox R/RS button."
+            },
+            "JOY_BUTTON_LEFT_SHOULDER": {
+                "name": "JOY_BUTTON_LEFT_SHOULDER",
+                "enum": "JoyButton",
+                "value": 9,
+                "readable_name": "LB / L1",
+                "category": "bumper",
+                "description": "Game controller SDL left shoulder button. Corresponds to the Sony L1, Xbox LB button."
+            },
+            "JOY_BUTTON_RIGHT_SHOULDER": {
+                "name": "JOY_BUTTON_RIGHT_SHOULDER",
+                "enum": "JoyButton",
+                "value": 10,
+                "readable_name": "RB / R1",
+                "category": "bumper",
+                "description": "Game controller SDL right shoulder button. Corresponds to the Sony R1, Xbox RB button."
+            },
+            "JOY_BUTTON_DPAD_UP": {
+                "name": "JOY_BUTTON_DPAD_UP",
+                "enum": "JoyButton",
+                "value": 11,
+                "readable_name": "D-Pad Up",
+                "category": "dpad",
+                "description": "Game controller D-pad up button."
+            },
+            "JOY_BUTTON_DPAD_DOWN": {
+                "name": "JOY_BUTTON_DPAD_DOWN",
+                "enum": "JoyButton",
+                "value": 12,
+                "readable_name": "D-Pad Down",
+                "category": "dpad",
+                "description": "Game controller D-pad down button."
+            },
+            "JOY_BUTTON_DPAD_LEFT": {
+                "name": "JOY_BUTTON_DPAD_LEFT",
+                "enum": "JoyButton",
+                "value": 13,
+                "readable_name": "D-Pad Left",
+                "category": "dpad",
+                "description": "Game controller D-pad left button."
+            },
+            "JOY_BUTTON_DPAD_RIGHT": {
+                "name": "JOY_BUTTON_DPAD_RIGHT",
+                "enum": "JoyButton",
+                "value": 14,
+                "readable_name": "D-Pad Right",
+                "category": "dpad",
+                "description": "Game controller D-pad right button."
+            },
+            "JOY_BUTTON_MISC1": {
+                "name": "JOY_BUTTON_MISC1",
+                "enum": "JoyButton",
+                "value": 15,
+                "readable_name": "Share / Capture",
+                "category": "system_button",
+                "description": "Game controller SDL miscellaneous button. Corresponds to Xbox share button, PS5 microphone button, Nintendo Switch capture button."
+            },
+            "JOY_BUTTON_PADDLE1": {
+                "name": "JOY_BUTTON_PADDLE1",
+                "enum": "JoyButton",
+                "value": 16,
+                "readable_name": "Paddle 1 (P1)",
+                "category": "paddle",
+                "description": "Game controller SDL paddle 1 button."
+            },
+            "JOY_BUTTON_PADDLE2": {
+                "name": "JOY_BUTTON_PADDLE2",
+                "enum": "JoyButton",
+                "value": 17,
+                "readable_name": "Paddle 2 (P2)",
+                "category": "paddle",
+                "description": "Game controller SDL paddle 2 button."
+            },
+            "JOY_BUTTON_PADDLE3": {
+                "name": "JOY_BUTTON_PADDLE3",
+                "enum": "JoyButton",
+                "value": 18,
+                "readable_name": "Paddle 3 (P3)",
+                "category": "paddle",
+                "description": "Game controller SDL paddle 3 button."
+            },
+            "JOY_BUTTON_PADDLE4": {
+                "name": "JOY_BUTTON_PADDLE4",
+                "enum": "JoyButton",
+                "value": 19,
+                "readable_name": "Paddle 4 (P4)",
+                "category": "paddle",
+                "description": "Game controller SDL paddle 4 button."
+            },
+            "JOY_BUTTON_TOUCHPAD": {
+                "name": "JOY_BUTTON_TOUCHPAD",
+                "enum": "JoyButton",
+                "value": 20,
+                "readable_name": "Touchpad Click",
+                "category": "system_button",
+                "description": "Game controller SDL touchpad button."
+            },
+            "JOY_BUTTON_MISC2": {
+                "name": "JOY_BUTTON_MISC2",
+                "enum": "JoyButton",
+                "value": 21,
+                "readable_name": "Misc 2 (Switch 2 / Horipad)",
+                "category": "system_button",
+                "description": "Game controller SDL miscellaneous button. Used by Nintendo Switch 2 Pro Controller and Horipad Steam controllers."
+            },
+            "JOY_BUTTON_MISC3": {
+                "name": "JOY_BUTTON_MISC3",
+                "enum": "JoyButton",
+                "value": 22,
+                "readable_name": "Misc 3",
+                "category": "system_button",
+                "description": "Game controller SDL miscellaneous button."
+            },
+            "JOY_BUTTON_MISC4": {
+                "name": "JOY_BUTTON_MISC4",
+                "enum": "JoyButton",
+                "value": 23,
+                "readable_name": "Misc 4",
+                "category": "system_button",
+                "description": "Game controller SDL miscellaneous button."
+            },
+            "JOY_BUTTON_MISC5": {
+                "name": "JOY_BUTTON_MISC5",
+                "enum": "JoyButton",
+                "value": 24,
+                "readable_name": "Misc 5",
+                "category": "system_button",
+                "description": "Game controller SDL miscellaneous button."
+            },
+            "JOY_BUTTON_MISC6": {
+                "name": "JOY_BUTTON_MISC6",
+                "enum": "JoyButton",
+                "value": 25,
+                "readable_name": "Misc 6",
+                "category": "system_button",
+                "description": "Game controller SDL miscellaneous button."
+            },
+            "JOY_BUTTON_SDL_MAX": {
+                "name": "JOY_BUTTON_SDL_MAX",
+                "enum": "JoyButton",
+                "value": 26,
+                "readable_name": "Sdl Max",
+                "category": "system_button",
+                "description": "The number of SDL game controller buttons."
+            },
+            "JOY_BUTTON_MAX": {
+                "name": "JOY_BUTTON_MAX",
+                "enum": "JoyButton",
+                "value": 128,
+                "readable_name": "Max",
+                "category": "system_button",
+                "description": "The maximum number of game controller buttons supported by the engine. The actual limit may be lower on specific platforms:\n\t\t\t- [b]Android:[/b] Up to 36 buttons.\n\t\t\t- [b]Linux:[/b] Up to 80 buttons.\n\t\t\t- [b]Windows[/b] and [b]macOS:[/b] Up to 128 buttons."
+            },
+            "JOY_AXIS_INVALID": {
+                "name": "JOY_AXIS_INVALID",
+                "enum": "JoyAxis",
+                "value": -1,
+                "readable_name": "Invalid",
+                "category": "analog_stick",
+                "description": "An invalid game controller axis."
+            },
+            "JOY_AXIS_LEFT_X": {
+                "name": "JOY_AXIS_LEFT_X",
+                "enum": "JoyAxis",
+                "value": 0,
+                "readable_name": "Left Stick X",
+                "category": "analog_stick",
+                "description": "Game controller left joystick x-axis."
+            },
+            "JOY_AXIS_LEFT_Y": {
+                "name": "JOY_AXIS_LEFT_Y",
+                "enum": "JoyAxis",
+                "value": 1,
+                "readable_name": "Left Stick Y",
+                "category": "analog_stick",
+                "description": "Game controller left joystick y-axis."
+            },
+            "JOY_AXIS_RIGHT_X": {
+                "name": "JOY_AXIS_RIGHT_X",
+                "enum": "JoyAxis",
+                "value": 2,
+                "readable_name": "Right Stick X",
+                "category": "analog_stick",
+                "description": "Game controller right joystick x-axis."
+            },
+            "JOY_AXIS_RIGHT_Y": {
+                "name": "JOY_AXIS_RIGHT_Y",
+                "enum": "JoyAxis",
+                "value": 3,
+                "readable_name": "Right Stick Y",
+                "category": "analog_stick",
+                "description": "Game controller right joystick y-axis."
+            },
+            "JOY_AXIS_TRIGGER_LEFT": {
+                "name": "JOY_AXIS_TRIGGER_LEFT",
+                "enum": "JoyAxis",
+                "value": 4,
+                "readable_name": "LT / L2",
+                "category": "trigger",
+                "description": "Game controller left trigger axis."
+            },
+            "JOY_AXIS_TRIGGER_RIGHT": {
+                "name": "JOY_AXIS_TRIGGER_RIGHT",
+                "enum": "JoyAxis",
+                "value": 5,
+                "readable_name": "RT / R2",
+                "category": "trigger",
+                "description": "Game controller right trigger axis."
+            },
+            "JOY_AXIS_SDL_MAX": {
+                "name": "JOY_AXIS_SDL_MAX",
+                "enum": "JoyAxis",
+                "value": 6,
+                "readable_name": "Sdl Max",
+                "category": "analog_stick",
+                "description": "The number of SDL game controller axes."
+            },
+            "JOY_AXIS_MAX": {
+                "name": "JOY_AXIS_MAX",
+                "enum": "JoyAxis",
+                "value": 10,
+                "readable_name": "Max",
+                "category": "analog_stick",
+                "description": "The maximum number of game controller axes: OpenVR supports up to 5 Joysticks making a total of 10 axes."
+            }
+        }
+    }
+}
