@@ -7,6 +7,18 @@ bg_color = Color(0.12, 0.12, 0.14, 1)
 border_width_right = 1
 border_color = Color(0.25, 0.25, 0.28, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_params"]
+bg_color = Color(0.15, 0.15, 0.18, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.25, 0.3, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_checker"]
 bg_color = Color(0.08, 0.08, 0.1, 1)
 border_width_left = 1
@@ -19,7 +31,10 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_preview"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_big"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_exact"]
 viewport_path = NodePath("SubViewport")
 
 [node name="SceneRenderer" type="Node2D" unique_id=1810449759]
@@ -28,7 +43,7 @@ script = ExtResource("1_gd")
 [node name="SubViewport" type="SubViewport" parent="." unique_id=1119778097]
 transparent_bg = true
 size = Vector2i(64, 64)
-render_target_update_mode = 1
+render_target_update_mode = 3
 
 [node name="ToRender" type="Node2D" parent="SubViewport" unique_id=1666226793]
 
@@ -59,6 +74,62 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Input Icon Renderer"
 
+[node name="ParametersPanel" type="PanelContainer" parent="UI/Sidebar/VBoxContainer" unique_id=1144223311]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_params")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Sidebar/VBoxContainer/ParametersPanel" unique_id=1144223312]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer" unique_id=1144223313]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ParamsTitle" type="Label" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer" unique_id=1144223314]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "Parameters"
+
+[node name="ThemeLabel" type="Label" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer" unique_id=1144223315]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+theme_override_font_sizes/font_size = 12
+text = "Theme:"
+
+[node name="ThemeOptionButton" type="OptionButton" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer" unique_id=1144223316]
+layout_mode = 2
+
+[node name="HSeparatorParam" type="HSeparator" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer" unique_id=1144223317]
+layout_mode = 2
+
+[node name="SizeHeader" type="HBoxContainer" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer" unique_id=1144223318]
+layout_mode = 2
+
+[node name="SizeLabel" type="Label" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/SizeHeader" unique_id=1144223319]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+theme_override_font_sizes/font_size = 12
+text = "Size:"
+
+[node name="SizeSpinBox" type="SpinBox" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/SizeHeader" unique_id=1144223320]
+layout_mode = 2
+min_value = 16.0
+max_value = 256.0
+value = 64.0
+suffix = "px"
+
+[node name="SizeSlider" type="HSlider" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer" unique_id=1144223321]
+layout_mode = 2
+min_value = 16.0
+max_value = 256.0
+value = 64.0
+
 [node name="RenderAllButton" type="Button" parent="UI/Sidebar/VBoxContainer" unique_id=1379768929]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
@@ -80,7 +151,7 @@ layout_mode = 2
 [node name="SectionLabel" type="Label" parent="UI/Sidebar/VBoxContainer" unique_id=629331602]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Generated Icons"
+text = "Available Icons"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Sidebar/VBoxContainer" unique_id=144272631]
 layout_mode = 2
@@ -91,7 +162,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 4
 
-[node name="PreviewContainer" type="Panel" parent="UI" unique_id=1204111263]
+[node name="PreviewArea" type="Control" parent="UI" unique_id=1204111263]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -101,21 +173,94 @@ offset_right = -20.0
 offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PreviewArea" unique_id=1204111264]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="SelectedHeaderLabel" type="Label" parent="UI/PreviewArea/VBoxContainer" unique_id=1204111265]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Selected: (none)"
+
+[node name="PreviewsHBox" type="HBoxContainer" parent="UI/PreviewArea/VBoxContainer" unique_id=1204111266]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="BigPreviewBox" type="PanelContainer" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox" unique_id=1204111267]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.6
 theme_override_styles/panel = SubResource("StyleBoxFlat_checker")
 
-[node name="PreviewRect" type="TextureRect" parent="UI" unique_id=286654374]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox/BigPreviewBox" unique_id=1204111268]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BigTitle" type="Label" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox/BigPreviewBox/VBoxContainer" unique_id=1204111269]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "  Enlarged Preview"
+
+[node name="BigPreviewPanel" type="Panel" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox/BigPreviewBox/VBoxContainer" unique_id=1204111270]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BigPreviewRect" type="TextureRect" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox/BigPreviewBox/VBoxContainer/BigPreviewPanel" unique_id=286654374]
+texture_filter = 1
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 340.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -60.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("ViewportTexture_preview")
+texture = SubResource("ViewportTexture_big")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="ExactPreviewBox" type="PanelContainer" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox" unique_id=1204111271]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_checker")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox" unique_id=1204111272]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ExactTitle" type="Label" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox/VBoxContainer" unique_id=1204111273]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "  Exact 1:1 Pixel Size (64x64)"
+
+[node name="ExactPreviewPanel" type="Panel" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox/VBoxContainer" unique_id=1204111274]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox/VBoxContainer/ExactPreviewPanel" unique_id=1204111275]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ExactPreviewRect" type="TextureRect" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox/VBoxContainer/ExactPreviewPanel/CenterContainer" unique_id=1204111276]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = SubResource("ViewportTexture_exact")
+stretch_mode = 3
 
 [node name="DimsLabel" type="Label" parent="UI" unique_id=297595950]
 anchors_preset = 2
@@ -127,7 +272,7 @@ offset_right = 700.0
 offset_bottom = -15.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 14
-text = "Preview Dimensions: 64x64"
+text = "Dimensions: 64x64 px"
 
 [node name="StatusLabel" type="Label" parent="UI" unique_id=361948523]
 anchors_preset = 3
@@ -135,7 +280,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -400.0
+offset_left = -450.0
 offset_top = -45.0
 offset_right = -20.0
 offset_bottom = -15.0

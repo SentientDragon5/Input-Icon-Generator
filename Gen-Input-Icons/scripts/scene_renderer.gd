@@ -3,10 +3,21 @@ class_name SceneRenderer
 
 @export var output_dir: String = "res://output/"
 @export var default_icon_size: Vector2i = Vector2i(64, 64)
+@export var themes_dir: String = "res://themes/"
 
 @onready var sub_viewport: SubViewport = $SubViewport
 @onready var to_render: Node2D = $SubViewport/ToRender
-@onready var preview_rect: TextureRect = $UI/PreviewRect
+
+# UI Controls
+@onready var theme_option_button: OptionButton = $UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/ThemeOptionButton
+@onready var size_slider: HSlider = $UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/SizeSlider
+@onready var size_spin_box: SpinBox = $UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/SizeHeader/SizeSpinBox
+
+@onready var big_preview_rect: TextureRect = $UI/PreviewArea/VBoxContainer/PreviewsHBox/BigPreviewBox/VBoxContainer/BigPreviewPanel/BigPreviewRect
+@onready var exact_preview_rect: TextureRect = $UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox/VBoxContainer/ExactPreviewPanel/CenterContainer/ExactPreviewRect
+@onready var exact_title_label: Label = $UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox/VBoxContainer/ExactTitle
+@onready var selected_header_label: Label = $UI/PreviewArea/VBoxContainer/SelectedHeaderLabel
+
 @onready var dims_label: Label = $UI/DimsLabel
 @onready var status_label: Label = $UI/StatusLabel
 @onready var button_list: VBoxContainer = $UI/Sidebar/VBoxContainer/ScrollContainer/ButtonList
@@ -16,6 +27,13 @@ var key_wide_base_scene: PackedScene = preload("res://templates/key_wide_base.ts
 
 var items_registry: Dictionary = {}
 var rendered_images: Dictionary = {}
+
+var loaded_themes: Array[Theme] = []
+var theme_names: Array[String] = []
+var current_theme: Theme = null
+var current_theme_name: String = ""
+var current_size: int = 64
+var current_selected_key: String = ""
 
 func get_output_icons_dir() -> String:
 	return output_dir + "icons/"
@@ -28,7 +46,11 @@ func _ready() -> void:
 	create_gdignore(get_output_icons_dir())
 	create_gdignore(get_output_spritesheets_dir())
 	
+	current_size = default_icon_size.x
+	
+	load_available_themes()
 	build_items_registry()
+	setup_parameters_ui()
 	
 	await get_tree().process_frame
 	
@@ -43,10 +65,91 @@ func _ready() -> void:
 		var first_key = items_registry.keys()[0]
 		show_preview(first_key)
 
+func load_available_themes() -> void:
+	loaded_themes.clear()
+	theme_names.clear()
+	var theme_files: Array[String] = []
+	var dir = DirAccess.open(themes_dir)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".tres"):
+				theme_files.append(file_name)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	
+	theme_files.sort()
+	for file_name in theme_files:
+		var theme_path = themes_dir + file_name
+		var res = load(theme_path)
+		if res is Theme:
+			loaded_themes.append(res)
+			theme_names.append(file_name.get_basename().replace("_", " ").capitalize())
+	
+	if loaded_themes.is_empty():
+		var default_theme = Theme.new()
+		loaded_themes.append(default_theme)
+		theme_names.append("Default")
+		
+	current_theme = loaded_themes[0]
+	current_theme_name = theme_names[0]
+
+func setup_parameters_ui() -> void:
+	if theme_option_button:
+		theme_option_button.clear()
+		for i in range(theme_names.size()):
+			theme_option_button.add_item(theme_names[i], i)
+		theme_option_button.selected = 0
+		theme_option_button.item_selected.connect(_on_theme_selected)
+		
+	if size_slider and size_spin_box:
+		size_slider.min_value = 16
+		size_slider.max_value = 256
+		size_slider.step = 1
+		size_slider.value = current_size
+		
+		size_spin_box.min_value = 16
+		size_spin_box.max_value = 256
+		size_spin_box.step = 1
+		size_spin_box.value = current_size
+		
+		size_slider.value_changed.connect(_on_size_slider_changed)
+		size_spin_box.value_changed.connect(_on_size_spinbox_changed)
+
+func _on_theme_selected(index: int) -> void:
+	if index >= 0 and index < loaded_themes.size():
+		current_theme = loaded_themes[index]
+		current_theme_name = theme_names[index]
+		status_label.text = "Theme changed to: " + current_theme_name
+		if not current_selected_key.is_empty():
+			show_preview(current_selected_key)
+
+func _on_size_slider_changed(val: float) -> void:
+	var int_val = int(val)
+	if current_size != int_val:
+		current_size = int_val
+		if size_spin_box and size_spin_box.value != int_val:
+			size_spin_box.set_value_no_signal(int_val)
+		_apply_size_change()
+
+func _on_size_spinbox_changed(val: float) -> void:
+	var int_val = int(val)
+	if current_size != int_val:
+		current_size = int_val
+		if size_slider and size_slider.value != int_val:
+			size_slider.set_value_no_signal(int_val)
+		_apply_size_change()
+
+func _apply_size_change() -> void:
+	sub_viewport.size = Vector2i(current_size, current_size)
+	if not current_selected_key.is_empty():
+		show_preview(current_selected_key)
+
 func build_items_registry() -> void:
 	items_registry.clear()
 	
-	# 1. Register all handcrafted scenes in res://generated/ (Gamepads, Mouse, D-Pad, Custom)
+	# 1. Register handcrafted scenes in res://generated/
 	var dir = DirAccess.open("res://generated/")
 	if dir:
 		dir.list_dir_begin()
@@ -69,7 +172,7 @@ func build_items_registry() -> void:
 			file_name = dir.get_next()
 		dir.list_dir_end()
 		
-	# 2. Procedurally generate all keyboard keys (Letters A-Z, Numbers 0-9, F1-F12, Symbols, Navigation, Numpad)
+	# 2. Register procedural keyboard keys
 	register_procedural_keyboard_keys()
 	
 	print("SceneRenderer: Total items registered -> ", items_registry.size())
@@ -241,20 +344,255 @@ func register_procedural_keyboard_keys() -> void:
 			"keycode": nk["code"]
 		}
 
+func apply_theme_to_tree(node: Node, theme_res: Theme) -> void:
+	if not node or not theme_res:
+		return
+		
+	var theme_sb: StyleBoxFlat = null
+	if theme_res.has_stylebox("panel", "Panel"):
+		var sb_res = theme_res.get_stylebox("panel", "Panel")
+		if sb_res is StyleBoxFlat:
+			theme_sb = sb_res
+			
+	var main_bg_color: Color = theme_sb.bg_color if theme_sb else Color(0.18, 0.18, 0.18, 1.0)
+	var main_border_color: Color = theme_sb.border_color if theme_sb else Color(0.55, 0.55, 0.55, 1.0)
+	var border_w: int = theme_sb.border_width_left if (theme_sb and theme_sb.border_width_left > 0) else 2
+	var is_open_theme: bool = (main_bg_color.a <= 0.01)
+	
+	var fg_color: Color = Color(1.0, 1.0, 1.0, 1.0)
+	if theme_res.has_color("font_color", "Label"):
+		fg_color = theme_res.get_color("font_color", "Label")
+	elif theme_res.has_color("font_color", "Button"):
+		fg_color = theme_res.get_color("font_color", "Button")
+		
+	var inactive_fg_color: Color = Color(fg_color.r, fg_color.g, fg_color.b, 0.35)
+	var secondary_bg_color: Color = main_bg_color.lerp(main_border_color, 0.2) if not is_open_theme else Color(0, 0, 0, 0)
+	
+	_apply_theme_recursive(node, theme_res, theme_sb, main_bg_color, main_border_color, border_w, is_open_theme, fg_color, inactive_fg_color, secondary_bg_color)
+
+func _apply_theme_recursive(
+	node: Node,
+	theme_res: Theme,
+	theme_sb: StyleBoxFlat,
+	main_bg: Color,
+	main_border: Color,
+	border_w: int,
+	is_open: bool,
+	fg: Color,
+	inactive_fg: Color,
+	secondary_bg: Color
+) -> void:
+	if not node:
+		return
+		
+	var node_name: String = String(node.name)
+	
+	if node is Label:
+		node.add_theme_color_override("font_color", fg)
+		
+	elif node is Panel:
+		var current_sb = node.get_theme_stylebox("panel")
+		var sb: StyleBoxFlat = null
+		if current_sb is StyleBoxFlat:
+			sb = current_sb.duplicate() as StyleBoxFlat
+		else:
+			sb = StyleBoxFlat.new()
+			
+		match node_name:
+			"Bar1", "Bar2", "Bar3":
+				sb.bg_color = fg
+				sb.border_width_left = 0
+				sb.border_width_top = 0
+				sb.border_width_right = 0
+				sb.border_width_bottom = 0
+				
+			"Body" when node.get_parent() and node.get_parent().name == "HomeIcon":
+				sb.bg_color = fg
+				sb.border_width_left = 0
+				sb.border_width_top = 0
+				sb.border_width_right = 0
+				sb.border_width_bottom = 0
+				
+			"Door":
+				if is_open:
+					sb.bg_color = Color(0, 0, 0, 0)
+					sb.border_color = fg
+					sb.border_width_left = 1
+					sb.border_width_top = 1
+					sb.border_width_right = 1
+					sb.border_width_bottom = 0
+				else:
+					sb.bg_color = main_bg
+					sb.border_width_left = 0
+					sb.border_width_top = 0
+					sb.border_width_right = 0
+					sb.border_width_bottom = 0
+					
+			"BackSquare":
+				sb.bg_color = Color(0, 0, 0, 0)
+				sb.border_color = fg
+				sb.border_width_left = border_w
+				sb.border_width_top = border_w
+				sb.border_width_right = border_w
+				sb.border_width_bottom = border_w
+				
+			"FrontSquare":
+				if is_open:
+					sb.bg_color = Color(0.08, 0.08, 0.1, 0.95)
+				else:
+					sb.bg_color = main_bg
+				sb.border_color = fg
+				sb.border_width_left = border_w
+				sb.border_width_top = border_w
+				sb.border_width_right = border_w
+				sb.border_width_bottom = border_w
+				
+			"Tray":
+				sb.bg_color = Color(0, 0, 0, 0)
+				sb.border_color = fg
+				sb.border_width_left = border_w
+				sb.border_width_bottom = border_w
+				sb.border_width_right = border_w
+				sb.border_width_top = 0
+				
+			"LeftButton", "RightButton":
+				var is_active: bool = (current_sb is StyleBoxFlat and current_sb.bg_color.v > 0.8 and current_sb.bg_color.s < 0.2)
+				if is_active:
+					sb.bg_color = fg
+					sb.border_color = fg
+					sb.border_width_left = 0
+					sb.border_width_top = 0
+					sb.border_width_right = 0
+					sb.border_width_bottom = 0
+				else:
+					if is_open:
+						sb.bg_color = Color(main_border.r, main_border.g, main_border.b, 0.12)
+						sb.border_color = Color(main_border.r, main_border.g, main_border.b, 0.35)
+						sb.border_width_left = 1
+						sb.border_width_top = 1
+						sb.border_width_right = 1
+						sb.border_width_bottom = 1
+					else:
+						sb.bg_color = secondary_bg
+						sb.border_width_left = 0
+						sb.border_width_top = 0
+						sb.border_width_right = 0
+						sb.border_width_bottom = 0
+						
+			"ScrollWheel":
+				var is_active: bool = (current_sb is StyleBoxFlat and current_sb.bg_color.v > 0.8 and current_sb.bg_color.s < 0.2)
+				if is_active:
+					sb.bg_color = fg
+					sb.border_color = fg
+					sb.border_width_left = 0
+					sb.border_width_top = 0
+					sb.border_width_right = 0
+					sb.border_width_bottom = 0
+				else:
+					if is_open:
+						sb.bg_color = Color(main_border.r, main_border.g, main_border.b, 0.25)
+						sb.border_color = main_border
+						sb.border_width_left = 1
+						sb.border_width_top = 1
+						sb.border_width_right = 1
+						sb.border_width_bottom = 1
+					else:
+						sb.bg_color = secondary_bg
+						sb.border_width_left = 0
+						sb.border_width_top = 0
+						sb.border_width_right = 0
+						sb.border_width_bottom = 0
+						
+			"SideButton1", "SideButton2":
+				if node.visible:
+					sb.bg_color = fg
+					sb.border_color = fg
+				else:
+					sb.bg_color = secondary_bg
+					
+			"InnerCap":
+				if is_open:
+					sb.bg_color = Color(0, 0, 0, 0)
+				else:
+					sb.bg_color = secondary_bg
+				sb.border_color = main_border
+				sb.border_width_left = border_w
+				sb.border_width_top = border_w
+				sb.border_width_right = border_w
+				sb.border_width_bottom = border_w
+				
+			"TrackArea":
+				if is_open:
+					sb.bg_color = Color(0, 0, 0, 0)
+					sb.border_color = Color(main_border.r, main_border.g, main_border.b, 0.4)
+					sb.border_width_left = 1
+					sb.border_width_top = 1
+					sb.border_width_right = 1
+					sb.border_width_bottom = 1
+				else:
+					sb.bg_color = secondary_bg
+					sb.border_width_left = 0
+					sb.border_width_top = 0
+					sb.border_width_right = 0
+					sb.border_width_bottom = 0
+					
+			_:
+				sb.bg_color = main_bg
+				sb.border_color = main_border
+				if sb.border_width_left > 0 or sb.border_width_top > 0 or sb.border_width_right > 0 or sb.border_width_bottom > 0:
+					sb.border_width_left = border_w
+					sb.border_width_top = border_w
+					sb.border_width_right = border_w
+					sb.border_width_bottom = border_w
+					
+		node.add_theme_stylebox_override("panel", sb)
+		
+	elif node is Polygon2D:
+		match node_name:
+			"CrossShape":
+				node.color = main_bg
+			"ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight":
+				var is_active: bool = (node.color.v > 0.8 and node.color.a > 0.8)
+				node.color = fg if is_active else inactive_fg
+			"Roof", "ArrowHead", "ScrollArrowUp", "ScrollArrowDown":
+				node.color = fg
+			_:
+				node.color = fg
+				
+	elif node is Line2D:
+		match node_name:
+			"CrossOutline":
+				node.default_color = main_border
+				node.width = float(border_w)
+			"ArrowStem":
+				node.default_color = fg
+				node.width = float(border_w)
+			_:
+				node.default_color = fg
+				
+	for child in node.get_children():
+		_apply_theme_recursive(child, theme_res, theme_sb, main_bg, main_border, border_w, is_open, fg, inactive_fg, secondary_bg)
+
 func instantiate_item(item_data: Dictionary) -> Node:
+	var inst: Node = null
 	if item_data["type"] == "scene":
 		var sc: PackedScene = item_data["scene"]
-		return sc.instantiate()
+		inst = sc.instantiate()
 	elif item_data["type"] == "procedural_key":
 		var tmpl: PackedScene = item_data["template"]
-		var inst = tmpl.instantiate()
+		inst = tmpl.instantiate()
 		var label_node = inst.get_node_or_null("Panel/Label") as Label
 		if label_node:
 			label_node.text = item_data["label"]
 			if item_data.has("font_size"):
-				label_node.add_theme_font_size_override("font_size", item_data["font_size"])
-		return inst
-	return null
+				var scale_factor = float(current_size) / 64.0
+				var scaled_font_size = max(8, int(round(float(item_data["font_size"]) * scale_factor)))
+				label_node.add_theme_font_size_override("font_size", scaled_font_size)
+	
+	if inst and current_theme:
+		apply_theme_to_tree(inst, current_theme)
+		
+	return inst
 
 func populate_icon_buttons() -> void:
 	for child in button_list.get_children():
@@ -273,6 +611,8 @@ func show_preview(item_name: String) -> void:
 	if not items_registry.has(item_name):
 		return
 		
+	current_selected_key = item_name
+	
 	for child in to_render.get_children():
 		child.queue_free()
 		
@@ -282,11 +622,25 @@ func show_preview(item_name: String) -> void:
 		
 	to_render.add_child(instance)
 	
-	sub_viewport.size = default_icon_size
+	var target_size = Vector2i(current_size, current_size)
+	sub_viewport.size = target_size
+	
 	if instance is Control:
-		instance.size = default_icon_size
+		instance.custom_minimum_size = Vector2(current_size, current_size)
+		instance.size = Vector2(current_size, current_size)
+		if instance is ColorRect:
+			instance.position = Vector2.ZERO
 		
-	dims_label.text = "Selected: " + item_name + " (" + str(default_icon_size.x) + "x" + str(default_icon_size.y) + ")"
+	var theme_display_name = current_theme_name if not current_theme_name.is_empty() else "Default"
+	if selected_header_label:
+		selected_header_label.text = "Selected: " + item_name + " | Size: " + str(current_size) + "x" + str(current_size) + " | Theme: " + theme_display_name
+	if dims_label:
+		dims_label.text = "Dimensions: " + str(current_size) + "x" + str(current_size) + " px (" + theme_display_name + ")"
+	if exact_title_label:
+		exact_title_label.text = "Exact 1:1 Pixel Size (" + str(current_size) + "x" + str(current_size) + ")"
+		
+	if exact_preview_rect:
+		exact_preview_rect.custom_minimum_size = Vector2(current_size, current_size)
 
 func show_and_render_single(item_name: String) -> void:
 	show_preview(item_name)
@@ -351,6 +705,9 @@ func generate_spritesheets() -> void:
 	var spritesheet_dir = get_output_spritesheets_dir()
 	DirAccess.make_dir_recursive_absolute(spritesheet_dir)
 	
+	var cell_w = current_size
+	var cell_h = current_size
+	
 	for cat_name in categories.keys():
 		var icon_keys: Array = categories[cat_name]
 		if icon_keys.is_empty():
@@ -361,19 +718,21 @@ func generate_spritesheets() -> void:
 		var cols = int(ceil(sqrt(count)))
 		var rows = int(ceil(float(count) / float(cols)))
 		
-		var sheet_w = cols * default_icon_size.x
-		var sheet_h = rows * default_icon_size.y
+		var sheet_w = cols * cell_w
+		var sheet_h = rows * cell_h
 		
 		var sheet_img = Image.create(sheet_w, sheet_h, false, Image.FORMAT_RGBA8)
 		sheet_img.fill(Color(0, 0, 0, 0)) # 100% transparent background
 		
+		var theme_display_name = current_theme_name if not current_theme_name.is_empty() else "Default"
 		var json_data = {
 			"app_header": {
 				"spritesheet_name": cat_name + "_spritesheet.png",
 				"version": "1.0",
 				"platform": "godot",
 				"platform_version": "4.7",
-				"cell_size": [default_icon_size.x, default_icon_size.y],
+				"theme": theme_display_name,
+				"cell_size": [cell_w, cell_h],
 				"sheet_size": [sheet_w, sheet_h],
 				"total_icons": count
 			},
@@ -385,8 +744,8 @@ func generate_spritesheets() -> void:
 			var img: Image = rendered_images[icon_key]
 			var col = i % cols
 			var row = floori(float(i) / float(cols))
-			var dest_x = col * default_icon_size.x
-			var dest_y = row * default_icon_size.y
+			var dest_x = col * cell_w
+			var dest_y = row * cell_h
 			
 			sheet_img.blit_rect(img, Rect2i(0, 0, img.get_width(), img.get_height()), Vector2i(dest_x, dest_y))
 			
@@ -396,8 +755,8 @@ func generate_spritesheets() -> void:
 				"readable_name": meta_info.get("readable_name", icon_key),
 				"x": dest_x,
 				"y": dest_y,
-				"width": default_icon_size.x,
-				"height": default_icon_size.y
+				"width": cell_w,
+				"height": cell_h
 			}
 			if meta_info.has("keycode") and meta_info["keycode"] != 0:
 				entry["keycode"] = meta_info["keycode"]
@@ -416,7 +775,7 @@ func generate_spritesheets() -> void:
 			
 		print("SceneRenderer: Generated spritesheet -> ", png_path, " & ", json_path)
 		
-	status_label.text = "Status: Spritesheets generated successfully"
+	status_label.text = "Status: Spritesheets generated successfully (" + current_theme_name + ")"
 
 func create_gdignore(path: String) -> void:
 	DirAccess.make_dir_recursive_absolute(path)
