@@ -1,0 +1,271 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0m5w87a6d1ge"]
+
+[ext_resource type="Script" path="res://input_tester.gd" id="1_script"]
+
+[node name="InputTester" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="PanelContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="Margin" type="MarginContainer" parent="UI/TopBar"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="UI/TopBar/Margin"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/TopBar/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Godot Input Tester (Spritesheet Slices)"
+vertical_alignment = 1
+
+[node name="DeviceBadge" type="PanelContainer" parent="UI/TopBar/Margin/HBox"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BadgeMargin" type="MarginContainer" parent="UI/TopBar/Margin/HBox/DeviceBadge"]
+layout_mode = 2
+
+[node name="DeviceBadgeLabel" type="Label" parent="UI/TopBar/Margin/HBox/DeviceBadge/BadgeMargin"]
+layout_mode = 2
+text = "⌨ Keyboard & Mouse"
+vertical_alignment = 1
+
+[node name="MainArea" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 70.0
+offset_right = -340.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterCard" type="PanelContainer" parent="UI/MainArea"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="UI/MainArea/CenterCard"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="IconCenter" type="CenterContainer" parent="UI/MainArea/CenterCard/VBox"]
+layout_mode = 2
+
+[node name="IconPanel" type="Panel" parent="UI/MainArea/CenterCard/VBox/IconCenter"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 2
+theme_type_variation = &"IconPanel"
+
+[node name="MainIconRect" type="TextureRect" parent="UI/MainArea/CenterCard/VBox/IconCenter"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="InputNameLabel" type="Label" parent="UI/MainArea/CenterCard/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Waiting for Input..."
+horizontal_alignment = 1
+
+[node name="EventTypeLabel" type="Label" parent="UI/MainArea/CenterCard/VBox"]
+layout_mode = 2
+text = "Press any keyboard key, mouse button, or gamepad button"
+horizontal_alignment = 1
+
+[node name="MetaLabel" type="Label" parent="UI/MainArea/CenterCard/VBox"]
+layout_mode = 2
+text = "AtlasTexture Slice details will appear here"
+horizontal_alignment = 1
+
+[node name="AnalogCard" type="PanelContainer" parent="UI/MainArea"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="UI/MainArea/AnalogCard"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="UI/MainArea/AnalogCard/Margin"]
+layout_mode = 2
+
+[node name="LeftStickBox" type="VBoxContainer" parent="UI/MainArea/AnalogCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/LeftStickBox"]
+layout_mode = 2
+text = "LEFT STICK (L3)"
+
+[node name="LeftStickVal" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/LeftStickBox"]
+layout_mode = 2
+text = "X: +0.00  Y: +0.00"
+
+[node name="LeftStickDir" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/LeftStickBox"]
+layout_mode = 2
+text = "Neutral (Mag: 0.00)"
+
+[node name="RightStickBox" type="VBoxContainer" parent="UI/MainArea/AnalogCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/RightStickBox"]
+layout_mode = 2
+text = "RIGHT STICK (R3)"
+
+[node name="RightStickVal" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/RightStickBox"]
+layout_mode = 2
+text = "X: +0.00  Y: +0.00"
+
+[node name="RightStickDir" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/RightStickBox"]
+layout_mode = 2
+text = "Neutral (Mag: 0.00)"
+
+[node name="TriggersBox" type="VBoxContainer" parent="UI/MainArea/AnalogCard/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/TriggersBox"]
+layout_mode = 2
+text = "TRIGGERS (LT / RT)"
+
+[node name="TriggerVal" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/TriggersBox"]
+layout_mode = 2
+text = "LT: 0.00 | RT: 0.00"
+
+[node name="TriggerPct" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/TriggersBox"]
+layout_mode = 2
+text = "LT: 0% | RT: 0%"
+
+[node name="ActiveInputsCard" type="PanelContainer" parent="UI/MainArea"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="UI/MainArea/ActiveInputsCard"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="UI/MainArea/ActiveInputsCard/Margin"]
+layout_mode = 2
+
+[node name="ActiveHeader" type="Label" parent="UI/MainArea/ActiveInputsCard/Margin/VBox"]
+layout_mode = 2
+text = "Currently Held Inputs:"
+
+[node name="ActiveIconsHBox" type="HBoxContainer" parent="UI/MainArea/ActiveInputsCard/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Sidebar" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = 50.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ControlsPanel" type="MarginContainer" parent="UI/Sidebar"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="DeviceCard" type="PanelContainer" parent="UI/Sidebar/ControlsPanel"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="UI/Sidebar/ControlsPanel/DeviceCard"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin"]
+layout_mode = 2
+
+[node name="DeviceTypeLabel" type="Label" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin/VBox"]
+layout_mode = 2
+text = "Active: Keyboard"
+
+[node name="DeviceNameLabel" type="Label" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin/VBox"]
+layout_mode = 2
+text = "Gamepad: None"
+text_overrun_behavior = 3
+
+[node name="DeviceIdLabel" type="Label" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin/VBox"]
+layout_mode = 2
+text = "Device ID: -1 | Total: 0"
+
+[node name="HistoryHeader" type="Label" parent="UI/Sidebar"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 15.0
+offset_top = 110.0
+offset_right = -15.0
+offset_bottom = 130.0
+grow_horizontal = 2
+text = "Input History Log:"
+
+[node name="HistoryScroll" type="ScrollContainer" parent="UI/Sidebar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 140.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HistoryList" type="VBoxContainer" parent="UI/Sidebar/HistoryScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BottomBar" type="PanelContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Margin" type="MarginContainer" parent="UI/BottomBar"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="UI/BottomBar/Margin"]
+layout_mode = 2
+text = "Status: Ready"
+vertical_alignment = 1

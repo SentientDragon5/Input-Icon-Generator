@@ -4,5 +4,5 @@
 
 [node name="ColorRect" instance=ExtResource("1_base")]
 
-[node name="ArrowLeft" parent="DPadRoot" index="4"]
+[node name="ArrowLeft" parent="DPadRoot" index="7"]
 color = Color(1, 1, 1, 1)

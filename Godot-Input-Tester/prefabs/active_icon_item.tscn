@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dmh28g6r1mklq"]
+
+[node name="ActiveIconItem" type="TextureRect"]
+custom_minimum_size = Vector2(48, 48)
+offset_right = 48.0
+offset_bottom = 48.0
+stretch_mode = 5

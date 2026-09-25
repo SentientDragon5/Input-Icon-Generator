@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c72n178u8w61k"]
+
+[node name="HistoryItem" type="HBoxContainer"]
+offset_right = 260.0
+offset_bottom = 32.0
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Button"
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 2
+text = "12:00:00"
+vertical_alignment = 1

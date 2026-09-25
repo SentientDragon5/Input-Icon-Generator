@@ -20,6 +20,10 @@ config/icon="uid://depvc27rfw7jh"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom="res://themes/app_ui_theme.tres"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

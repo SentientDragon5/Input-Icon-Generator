@@ -19,6 +19,7 @@ class_name SceneRenderer
 
 @onready var dims_label: Label = $UI/DimsLabel
 @onready var status_label: Label = $UI/StatusLabel
+@onready var progress_bar: ProgressBar = $UI/ProgressBar
 @onready var button_list: VBoxContainer = $UI/Sidebar/VBoxContainer/ScrollContainer/ButtonList
 
 var key_base_scene: PackedScene = preload("res://templates/key_base.tscn")
@@ -197,7 +198,7 @@ func _register_procedural_keys() -> void:
 		["?", "key_question", KEY_QUESTION, 18], ["+", "key_plus", KEY_PLUS, 18], [":", "key_colon", KEY_COLON, 18],
 		["\"", "key_quotedbl", KEY_QUOTEDBL, 18], ["<", "key_less", KEY_LESS, 18], [">", "key_greater", KEY_GREATER, 18],
 		["_", "key_underscore", KEY_UNDERSCORE, 18], ["{", "key_braceleft", KEY_BRACELEFT, 18], ["}", "key_braceright", KEY_BRACERIGHT, 18],
-		["|", "key_bar", KEY_BAR, 18], ["~", "key_asciitilde", KEY_ASCIITILDE, 18], ["@", "key_at", KEY_AT, 16],
+		["|", "key_bar", KEY_BAR, 18], ["~", "key_tilde", KEY_ASCIITILDE, 18], ["~", "key_asciitilde", KEY_ASCIITILDE, 18], ["@", "key_at", KEY_AT, 16],
 		["#", "key_hash", KEY_NUMBERSIGN, 18], ["$", "key_dollar", KEY_DOLLAR, 18], ["%", "key_percent", KEY_PERCENT, 16],
 		["&", "key_ampersand", KEY_AMPERSAND, 16], ["*", "key_asterisk", KEY_ASTERISK, 20]
 	]
@@ -267,17 +268,12 @@ func _apply_theme_node(node: Node, theme_sb: StyleBoxFlat, fg: Color, inactive_f
 			sb.border_color = theme_sb.border_color
 			node.add_theme_stylebox_override("panel", sb)
 	elif node is Polygon2D:
-		if node.name == "CrossShape":
-			node.color = theme_sb.bg_color if (theme_sb and not is_open) else Color(0, 0, 0, 0)
-		elif node.color.v > 0.8 and node.color.a > 0.8:
+		if node.color.v > 0.8 and node.color.a > 0.8:
 			node.color = fg
 		else:
 			node.color = inactive_fg
 	elif node is Line2D:
-		if node.name == "CrossOutline":
-			node.default_color = theme_sb.border_color if theme_sb else fg
-		else:
-			node.default_color = fg
+		node.default_color = fg
 			
 	for child in node.get_children():
 		_apply_theme_node(child, theme_sb, fg, inactive_fg, is_open)
@@ -373,13 +369,25 @@ func render_item_to_file(item_name: String) -> String:
 	return ""
 
 func render_all() -> void:
-	status_label.text = "Status: Rendering all icons..."
 	var keys = items_registry.keys()
 	keys.sort()
-	for key in keys:
+	var total = keys.size()
+	
+	progress_bar.visible = true
+	progress_bar.min_value = 0
+	progress_bar.max_value = total
+	progress_bar.value = 0
+	
+	for i in range(total):
+		var key = keys[i]
+		status_label.text = "Rendering (%d/%d): %s" % [i + 1, total, key]
+		progress_bar.value = i + 1
 		await render_item_to_file(key)
 		await get_tree().process_frame
-	status_label.text = "Status: Finished rendering " + str(keys.size()) + " icons"
+		
+	status_label.text = "Status: Finished rendering %d icons" % total
+	await get_tree().create_timer(1.2).timeout
+	progress_bar.visible = false
 
 func generate_spritesheets() -> void:
 	if rendered_images.is_empty():
@@ -401,7 +409,15 @@ func generate_spritesheets() -> void:
 	var cell_h = current_size
 	var theme_display_name = current_theme_name if not current_theme_name.is_empty() else "Default"
 	
+	progress_bar.visible = true
+	progress_bar.min_value = 0
+	progress_bar.max_value = categories.size()
+	progress_bar.value = 0
+	var cat_idx = 0
+	
 	for cat_name in categories.keys():
+		cat_idx += 1
+		progress_bar.value = cat_idx
 		var icon_keys: Array = categories[cat_name]
 		if icon_keys.is_empty():
 			continue
@@ -459,6 +475,8 @@ func generate_spritesheets() -> void:
 			json_file.close()
 			
 	status_label.text = "Status: Spritesheets generated successfully (" + current_theme_name + ")"
+	await get_tree().create_timer(1.2).timeout
+	progress_bar.visible = false
 
 func create_gdignore(path: String) -> void:
 	DirAccess.make_dir_recursive_absolute(path)

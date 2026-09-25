@@ -1,5 +1,44 @@
 [gd_scene format=3 uid="uid://btyax03bossym"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arm_up"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0.55, 0.55, 0.55, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arm_down"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.55, 0.55, 1)
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arm_left"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.55, 0.55, 1)
+corner_radius_top_left = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arm_right"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.55, 0.55, 1)
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_center"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+
 [node name="ColorRect" type="ColorRect"]
 custom_minimum_size = Vector2(64, 64)
 offset_right = 64.0
@@ -20,31 +59,56 @@ offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CrossShape" type="Polygon2D" parent="DPadRoot"]
-color = Color(0.18, 0.18, 0.18, 1)
-polygon = PackedVector2Array(14, 0, 30, 0, 30, 14, 44, 14, 44, 30, 30, 30, 30, 44, 14, 44, 14, 30, 0, 30, 0, 14, 14, 14)
+[node name="ArmUp" type="Panel" parent="DPadRoot"]
+layout_mode = 0
+offset_left = 14.0
+offset_right = 30.0
+offset_bottom = 14.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_arm_up")
 
-[node name="CrossOutline" type="Line2D" parent="DPadRoot"]
-points = PackedVector2Array(14, 0, 30, 0, 30, 14, 44, 14, 44, 30, 30, 30, 30, 44, 14, 44, 14, 30, 0, 30, 0, 14, 14, 14, 14, 0)
-width = 2.0
-default_color = Color(0.55, 0.55, 0.55, 1)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-antialiased = true
+[node name="ArmDown" type="Panel" parent="DPadRoot"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 30.0
+offset_right = 30.0
+offset_bottom = 44.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_arm_down")
+
+[node name="ArmLeft" type="Panel" parent="DPadRoot"]
+layout_mode = 0
+offset_top = 14.0
+offset_right = 14.0
+offset_bottom = 30.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_arm_left")
+
+[node name="ArmRight" type="Panel" parent="DPadRoot"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 14.0
+offset_right = 44.0
+offset_bottom = 30.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_arm_right")
+
+[node name="Center" type="Panel" parent="DPadRoot"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 30.0
+offset_bottom = 30.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_center")
 
 [node name="ArrowUp" type="Polygon2D" parent="DPadRoot"]
 color = Color(0.45, 0.45, 0.45, 1)
-polygon = PackedVector2Array(22, 4, 16, 11, 28, 11)
+polygon = PackedVector2Array(22, 4, 16, 10, 28, 10)
 
 [node name="ArrowDown" type="Polygon2D" parent="DPadRoot"]
 color = Color(0.45, 0.45, 0.45, 1)
-polygon = PackedVector2Array(22, 40, 16, 33, 28, 33)
+polygon = PackedVector2Array(22, 40, 16, 34, 28, 34)
 
 [node name="ArrowLeft" type="Polygon2D" parent="DPadRoot"]
 color = Color(0.45, 0.45, 0.45, 1)
-polygon = PackedVector2Array(4, 22, 11, 16, 11, 28)
+polygon = PackedVector2Array(4, 22, 10, 16, 10, 28)
 
 [node name="ArrowRight" type="Polygon2D" parent="DPadRoot"]
 color = Color(0.45, 0.45, 0.45, 1)
-polygon = PackedVector2Array(40, 22, 33, 16, 33, 28)
+polygon = PackedVector2Array(40, 22, 34, 16, 34, 28)
