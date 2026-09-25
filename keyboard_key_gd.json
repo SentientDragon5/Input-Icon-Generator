@@ -1,0 +1,16 @@
+{
+    "info": {
+        "spritesheet_name": "keyboard_spritesheet.png",
+        "version": "0.0",
+        "platform": "godot",
+        "platform_version": "4.7"
+    },
+    "data": {
+        "keycode_a": {
+            "readable_name": "A",
+            "keycode": 67,
+            "x": 0,
+            "y": 0
+        }
+    }
+}
