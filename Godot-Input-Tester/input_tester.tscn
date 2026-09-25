@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0m5w87a6d1ge"]
+[gd_scene format=3 uid="uid://d0m5w87a6d1ge"]
 
-[ext_resource type="Script" path="res://input_tester.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bwdndk53v8sww" path="res://input_tester.gd" id="1_script"]
 
-[node name="InputTester" type="Control"]
+[node name="InputTester" type="Control" unique_id=159580668]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="." unique_id=531000941]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." unique_id=164901921]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,39 +27,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopBar" type="PanelContainer" parent="UI"]
+[node name="TopBar" type="PanelContainer" parent="UI" unique_id=1337279696]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 50.0
 grow_horizontal = 2
 
-[node name="Margin" type="MarginContainer" parent="UI/TopBar"]
+[node name="Margin" type="MarginContainer" parent="UI/TopBar" unique_id=1958057812]
 layout_mode = 2
 
-[node name="HBox" type="HBoxContainer" parent="UI/TopBar/Margin"]
+[node name="HBox" type="HBoxContainer" parent="UI/TopBar/Margin" unique_id=1936491963]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="UI/TopBar/Margin/HBox"]
+[node name="Title" type="Label" parent="UI/TopBar/Margin/HBox" unique_id=1211389109]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
 text = "Godot Input Tester (Spritesheet Slices)"
 vertical_alignment = 1
 
-[node name="DeviceBadge" type="PanelContainer" parent="UI/TopBar/Margin/HBox"]
+[node name="DeviceBadge" type="PanelContainer" parent="UI/TopBar/Margin/HBox" unique_id=444033567]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="BadgeMargin" type="MarginContainer" parent="UI/TopBar/Margin/HBox/DeviceBadge"]
+[node name="BadgeMargin" type="MarginContainer" parent="UI/TopBar/Margin/HBox/DeviceBadge" unique_id=803365980]
 layout_mode = 2
 
-[node name="DeviceBadgeLabel" type="Label" parent="UI/TopBar/Margin/HBox/DeviceBadge/BadgeMargin"]
+[node name="DeviceBadgeLabel" type="Label" parent="UI/TopBar/Margin/HBox/DeviceBadge/BadgeMargin" unique_id=1557858182]
 layout_mode = 2
 text = "⌨ Keyboard & Mouse"
 vertical_alignment = 1
 
-[node name="MainArea" type="VBoxContainer" parent="UI"]
+[node name="MainArea" type="VBoxContainer" parent="UI" unique_id=1591697234]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,120 +71,120 @@ offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterCard" type="PanelContainer" parent="UI/MainArea"]
+[node name="CenterCard" type="PanelContainer" parent="UI/MainArea" unique_id=309514513]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBox" type="VBoxContainer" parent="UI/MainArea/CenterCard"]
+[node name="VBox" type="VBoxContainer" parent="UI/MainArea/CenterCard" unique_id=155078375]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="IconCenter" type="CenterContainer" parent="UI/MainArea/CenterCard/VBox"]
+[node name="IconCenter" type="CenterContainer" parent="UI/MainArea/CenterCard/VBox" unique_id=1016178390]
 layout_mode = 2
 
-[node name="IconPanel" type="Panel" parent="UI/MainArea/CenterCard/VBox/IconCenter"]
+[node name="IconPanel" type="Panel" parent="UI/MainArea/CenterCard/VBox/IconCenter" unique_id=2008260036]
 custom_minimum_size = Vector2(140, 140)
 layout_mode = 2
 theme_type_variation = &"IconPanel"
 
-[node name="MainIconRect" type="TextureRect" parent="UI/MainArea/CenterCard/VBox/IconCenter"]
+[node name="MainIconRect" type="TextureRect" parent="UI/MainArea/CenterCard/VBox/IconCenter" unique_id=1494162387]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 stretch_mode = 5
 
-[node name="InputNameLabel" type="Label" parent="UI/MainArea/CenterCard/VBox"]
+[node name="InputNameLabel" type="Label" parent="UI/MainArea/CenterCard/VBox" unique_id=93535994]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Waiting for Input..."
 horizontal_alignment = 1
 
-[node name="EventTypeLabel" type="Label" parent="UI/MainArea/CenterCard/VBox"]
+[node name="EventTypeLabel" type="Label" parent="UI/MainArea/CenterCard/VBox" unique_id=1557838023]
 layout_mode = 2
 text = "Press any keyboard key, mouse button, or gamepad button"
 horizontal_alignment = 1
 
-[node name="MetaLabel" type="Label" parent="UI/MainArea/CenterCard/VBox"]
+[node name="MetaLabel" type="Label" parent="UI/MainArea/CenterCard/VBox" unique_id=731439745]
 layout_mode = 2
 text = "AtlasTexture Slice details will appear here"
 horizontal_alignment = 1
 
-[node name="AnalogCard" type="PanelContainer" parent="UI/MainArea"]
+[node name="AnalogCard" type="PanelContainer" parent="UI/MainArea" unique_id=1706285596]
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
-[node name="Margin" type="MarginContainer" parent="UI/MainArea/AnalogCard"]
+[node name="Margin" type="MarginContainer" parent="UI/MainArea/AnalogCard" unique_id=118360465]
 layout_mode = 2
 
-[node name="HBox" type="HBoxContainer" parent="UI/MainArea/AnalogCard/Margin"]
+[node name="HBox" type="HBoxContainer" parent="UI/MainArea/AnalogCard/Margin" unique_id=329482294]
 layout_mode = 2
 
-[node name="LeftStickBox" type="VBoxContainer" parent="UI/MainArea/AnalogCard/Margin/HBox"]
+[node name="LeftStickBox" type="VBoxContainer" parent="UI/MainArea/AnalogCard/Margin/HBox" unique_id=519765637]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/LeftStickBox"]
+[node name="Title" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/LeftStickBox" unique_id=59542905]
 layout_mode = 2
 text = "LEFT STICK (L3)"
 
-[node name="LeftStickVal" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/LeftStickBox"]
+[node name="LeftStickVal" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/LeftStickBox" unique_id=995162765]
 layout_mode = 2
 text = "X: +0.00  Y: +0.00"
 
-[node name="LeftStickDir" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/LeftStickBox"]
+[node name="LeftStickDir" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/LeftStickBox" unique_id=864901838]
 layout_mode = 2
 text = "Neutral (Mag: 0.00)"
 
-[node name="RightStickBox" type="VBoxContainer" parent="UI/MainArea/AnalogCard/Margin/HBox"]
+[node name="RightStickBox" type="VBoxContainer" parent="UI/MainArea/AnalogCard/Margin/HBox" unique_id=1813652245]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/RightStickBox"]
+[node name="Title" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/RightStickBox" unique_id=1583456507]
 layout_mode = 2
 text = "RIGHT STICK (R3)"
 
-[node name="RightStickVal" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/RightStickBox"]
+[node name="RightStickVal" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/RightStickBox" unique_id=1391793014]
 layout_mode = 2
 text = "X: +0.00  Y: +0.00"
 
-[node name="RightStickDir" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/RightStickBox"]
+[node name="RightStickDir" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/RightStickBox" unique_id=869087317]
 layout_mode = 2
 text = "Neutral (Mag: 0.00)"
 
-[node name="TriggersBox" type="VBoxContainer" parent="UI/MainArea/AnalogCard/Margin/HBox"]
+[node name="TriggersBox" type="VBoxContainer" parent="UI/MainArea/AnalogCard/Margin/HBox" unique_id=1409810946]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/TriggersBox"]
+[node name="Title" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/TriggersBox" unique_id=1344758831]
 layout_mode = 2
 text = "TRIGGERS (LT / RT)"
 
-[node name="TriggerVal" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/TriggersBox"]
+[node name="TriggerVal" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/TriggersBox" unique_id=916229254]
 layout_mode = 2
 text = "LT: 0.00 | RT: 0.00"
 
-[node name="TriggerPct" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/TriggersBox"]
+[node name="TriggerPct" type="Label" parent="UI/MainArea/AnalogCard/Margin/HBox/TriggersBox" unique_id=1966271204]
 layout_mode = 2
 text = "LT: 0% | RT: 0%"
 
-[node name="ActiveInputsCard" type="PanelContainer" parent="UI/MainArea"]
+[node name="ActiveInputsCard" type="PanelContainer" parent="UI/MainArea" unique_id=765105312]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 
-[node name="Margin" type="MarginContainer" parent="UI/MainArea/ActiveInputsCard"]
+[node name="Margin" type="MarginContainer" parent="UI/MainArea/ActiveInputsCard" unique_id=1874085331]
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="UI/MainArea/ActiveInputsCard/Margin"]
+[node name="VBox" type="VBoxContainer" parent="UI/MainArea/ActiveInputsCard/Margin" unique_id=817889717]
 layout_mode = 2
 
-[node name="ActiveHeader" type="Label" parent="UI/MainArea/ActiveInputsCard/Margin/VBox"]
+[node name="ActiveHeader" type="Label" parent="UI/MainArea/ActiveInputsCard/Margin/VBox" unique_id=1937051358]
 layout_mode = 2
 text = "Currently Held Inputs:"
 
-[node name="ActiveIconsHBox" type="HBoxContainer" parent="UI/MainArea/ActiveInputsCard/Margin/VBox"]
+[node name="ActiveIconsHBox" type="HBoxContainer" parent="UI/MainArea/ActiveInputsCard/Margin/VBox" unique_id=1427664216]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Sidebar" type="Panel" parent="UI"]
+[node name="Sidebar" type="Panel" parent="UI" unique_id=523663538]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -196,36 +196,36 @@ offset_bottom = -40.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="ControlsPanel" type="MarginContainer" parent="UI/Sidebar"]
+[node name="ControlsPanel" type="MarginContainer" parent="UI/Sidebar" unique_id=1957256270]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 100.0
 grow_horizontal = 2
 
-[node name="DeviceCard" type="PanelContainer" parent="UI/Sidebar/ControlsPanel"]
+[node name="DeviceCard" type="PanelContainer" parent="UI/Sidebar/ControlsPanel" unique_id=72294757]
 layout_mode = 2
 
-[node name="Margin" type="MarginContainer" parent="UI/Sidebar/ControlsPanel/DeviceCard"]
+[node name="Margin" type="MarginContainer" parent="UI/Sidebar/ControlsPanel/DeviceCard" unique_id=1025422602]
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin"]
+[node name="VBox" type="VBoxContainer" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin" unique_id=1169288481]
 layout_mode = 2
 
-[node name="DeviceTypeLabel" type="Label" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin/VBox"]
+[node name="DeviceTypeLabel" type="Label" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin/VBox" unique_id=1756157078]
 layout_mode = 2
 text = "Active: Keyboard"
 
-[node name="DeviceNameLabel" type="Label" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin/VBox"]
+[node name="DeviceNameLabel" type="Label" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin/VBox" unique_id=1215089660]
 layout_mode = 2
 text = "Gamepad: None"
 text_overrun_behavior = 3
 
-[node name="DeviceIdLabel" type="Label" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin/VBox"]
+[node name="DeviceIdLabel" type="Label" parent="UI/Sidebar/ControlsPanel/DeviceCard/Margin/VBox" unique_id=1343296896]
 layout_mode = 2
 text = "Device ID: -1 | Total: 0"
 
-[node name="HistoryHeader" type="Label" parent="UI/Sidebar"]
+[node name="HistoryHeader" type="Label" parent="UI/Sidebar" unique_id=1523996990]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -236,7 +236,7 @@ offset_bottom = 130.0
 grow_horizontal = 2
 text = "Input History Log:"
 
-[node name="HistoryScroll" type="ScrollContainer" parent="UI/Sidebar"]
+[node name="HistoryScroll" type="ScrollContainer" parent="UI/Sidebar" unique_id=1685257559]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -248,11 +248,11 @@ offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HistoryList" type="VBoxContainer" parent="UI/Sidebar/HistoryScroll"]
+[node name="HistoryList" type="VBoxContainer" parent="UI/Sidebar/HistoryScroll" unique_id=1434980012]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BottomBar" type="PanelContainer" parent="UI"]
+[node name="BottomBar" type="PanelContainer" parent="UI" unique_id=116516249]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -262,10 +262,10 @@ offset_top = -40.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Margin" type="MarginContainer" parent="UI/BottomBar"]
+[node name="Margin" type="MarginContainer" parent="UI/BottomBar" unique_id=123601843]
 layout_mode = 2
 
-[node name="StatusLabel" type="Label" parent="UI/BottomBar/Margin"]
+[node name="StatusLabel" type="Label" parent="UI/BottomBar/Margin" unique_id=1290854868]
 layout_mode = 2
 text = "Status: Ready"
 vertical_alignment = 1

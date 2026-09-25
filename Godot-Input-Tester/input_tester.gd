@@ -9,9 +9,9 @@ const ACTIVE_ICON_PREFAB: PackedScene = preload("res://prefabs/active_icon_item.
 @onready var event_type_label: Label = $UI/MainArea/CenterCard/VBox/EventTypeLabel
 @onready var meta_label: Label = $UI/MainArea/CenterCard/VBox/MetaLabel
 
-@onready var active_icons_container: HBoxContainer = $UI/MainArea/ActiveInputsCard/VBox/ActiveIconsHBox
+@onready var active_icons_container: HBoxContainer = $UI/MainArea/ActiveInputsCard/Margin/VBox/ActiveIconsHBox
 @onready var history_container: VBoxContainer = $UI/Sidebar/HistoryScroll/HistoryList
-@onready var status_label: Label = $UI/BottomBar/StatusLabel
+@onready var status_label: Label = $UI/BottomBar/Margin/StatusLabel
 
 @onready var device_badge_lbl: Label = $UI/TopBar/Margin/HBox/DeviceBadge/BadgeMargin/DeviceBadgeLabel
 @onready var device_type_lbl: Label = $UI/Sidebar/ControlsPanel/DeviceCard/Margin/VBox/DeviceTypeLabel

@@ -163,7 +163,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="BigPreviewRect" type="TextureRect" parent="UI/PreviewArea/VBoxContainer/PreviewsHBox/BigPreviewBox/VBoxContainer/BigPreviewPanel"]
-texture_filter = 1
+texture_filter = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

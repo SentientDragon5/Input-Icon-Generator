@@ -79,25 +79,34 @@ func load_available_themes() -> void:
 		dir.list_dir_end()
 	
 	theme_files.sort()
-	for file_name in theme_files:
+	var default_index = 0
+	for i in range(theme_files.size()):
+		var file_name = theme_files[i]
 		var res = load(themes_dir + file_name)
 		if res is Theme:
 			loaded_themes.append(res)
-			theme_names.append(file_name.get_basename().replace("_", " ").capitalize())
+			var display_name = file_name.get_basename().replace("_", " ").capitalize()
+			theme_names.append(display_name)
+			if file_name == "simple_grey.tres":
+				default_index = loaded_themes.size() - 1
 	
 	if loaded_themes.is_empty():
 		loaded_themes.append(Theme.new())
 		theme_names.append("Default")
+		default_index = 0
 		
-	current_theme = loaded_themes[0]
-	current_theme_name = theme_names[0]
+	current_theme = loaded_themes[default_index]
+	current_theme_name = theme_names[default_index]
 
 func setup_parameters_ui() -> void:
 	if theme_option_button:
 		theme_option_button.clear()
+		var default_idx = 0
 		for i in range(theme_names.size()):
 			theme_option_button.add_item(theme_names[i], i)
-		theme_option_button.selected = 0
+			if theme_names[i].to_lower() == "simple grey":
+				default_idx = i
+		theme_option_button.selected = default_idx
 		theme_option_button.item_selected.connect(_on_theme_selected)
 		
 	if size_slider and size_spin_box:
@@ -134,9 +143,14 @@ func _on_size_spinbox_changed(val: float) -> void:
 		_apply_size_change()
 
 func _apply_size_change() -> void:
-	sub_viewport.size = Vector2i(current_size, current_size)
+	_update_viewport_scale()
 	if not current_selected_key.is_empty():
 		show_preview(current_selected_key)
+
+func _update_viewport_scale() -> void:
+	sub_viewport.size = Vector2i(current_size, current_size)
+	var scale_factor = float(current_size) / float(default_icon_size.x)
+	to_render.scale = Vector2(scale_factor, scale_factor)
 
 func build_items_registry() -> void:
 	items_registry.clear()
@@ -288,8 +302,7 @@ func instantiate_item(item_data: Dictionary) -> Node:
 		if label_node:
 			label_node.text = item_data["label"]
 			if item_data.has("font_size"):
-				var scale_factor = float(current_size) / 64.0
-				label_node.add_theme_font_size_override("font_size", max(8, int(round(float(item_data["font_size"]) * scale_factor))))
+				label_node.add_theme_font_size_override("font_size", item_data["font_size"])
 	
 	if inst and current_theme:
 		apply_theme_to_tree(inst, current_theme)
@@ -323,12 +336,13 @@ func show_preview(item_name: String) -> void:
 		return
 		
 	to_render.add_child(instance)
-	sub_viewport.size = Vector2i(current_size, current_size)
+	_update_viewport_scale()
 	sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	
 	if instance is Control:
-		instance.custom_minimum_size = Vector2(current_size, current_size)
-		instance.size = Vector2(current_size, current_size)
+		instance.custom_minimum_size = Vector2(default_icon_size.x, default_icon_size.y)
+		instance.size = Vector2(default_icon_size.x, default_icon_size.y)
+		instance.position = Vector2.ZERO
 		
 	var theme_display_name = current_theme_name if not current_theme_name.is_empty() else "Default"
 	if selected_header_label:
