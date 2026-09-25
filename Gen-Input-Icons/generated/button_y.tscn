@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://templates/button_circle_base.tscn" id="1_base"]
+
+[node name="ColorRect" instance=ExtResource("1_base")]
+
+[node name="Label" parent="Panel" index="0"]
+text = "Y"

@@ -1,0 +1,68 @@
+{
+	"data": {
+		"key_alt": {
+			"height": 64,
+			"name": "key_alt",
+			"width": 64,
+			"x": 0,
+			"y": 0
+		},
+		"key_backspace": {
+			"height": 64,
+			"name": "key_backspace",
+			"width": 64,
+			"x": 64,
+			"y": 0
+		},
+		"key_ctrl": {
+			"height": 64,
+			"name": "key_ctrl",
+			"width": 64,
+			"x": 128,
+			"y": 0
+		},
+		"key_enter": {
+			"height": 64,
+			"name": "key_enter",
+			"width": 64,
+			"x": 0,
+			"y": 64
+		},
+		"key_shift": {
+			"height": 64,
+			"name": "key_shift",
+			"width": 64,
+			"x": 64,
+			"y": 64
+		},
+		"key_space": {
+			"height": 64,
+			"name": "key_space",
+			"width": 64,
+			"x": 128,
+			"y": 64
+		},
+		"key_tab": {
+			"height": 64,
+			"name": "key_tab",
+			"width": 64,
+			"x": 0,
+			"y": 128
+		}
+	},
+	"info": {
+		"cell_size": [
+			64,
+			64
+		],
+		"platform": "godot",
+		"platform_version": "4.7",
+		"sheet_size": [
+			192,
+			192
+		],
+		"spritesheet_name": "keyboard_spritesheet.png",
+		"total_icons": 7,
+		"version": "1.0"
+	}
+}

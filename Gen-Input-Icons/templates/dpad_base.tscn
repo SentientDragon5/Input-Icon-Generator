@@ -1,0 +1,97 @@
+[gd_scene format=3]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cross_bar"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_center_mask"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+
+[node name="ColorRect2" type="ColorRect" unique_id=1938525414]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 0)
+
+[node name="DPadRoot" type="Control" parent="." unique_id=993754103]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CrossH" type="Panel" parent="DPadRoot" unique_id=1423461907]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -8.0
+offset_right = 22.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cross_bar")
+
+[node name="CrossV" type="Panel" parent="DPadRoot" unique_id=632409879]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -22.0
+offset_right = 8.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cross_bar")
+
+[node name="CenterMask" type="Panel" parent="DPadRoot" unique_id=1913309423]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_center_mask")
+
+[node name="ArrowUp" type="Polygon2D" parent="DPadRoot" unique_id=749070289]
+color = Color(0.45, 0.45, 0.45, 1)
+polygon = PackedVector2Array(22, 5, 17, 12, 27, 12)
+
+[node name="ArrowDown" type="Polygon2D" parent="DPadRoot" unique_id=1143669458]
+color = Color(0.45, 0.45, 0.45, 1)
+polygon = PackedVector2Array(22, 39, 17, 32, 27, 32)
+
+[node name="ArrowLeft" type="Polygon2D" parent="DPadRoot" unique_id=1506113937]
+color = Color(0.45, 0.45, 0.45, 1)
+polygon = PackedVector2Array(5, 22, 12, 17, 12, 27)
+
+[node name="ArrowRight" type="Polygon2D" parent="DPadRoot" unique_id=149961200]
+color = Color(0.45, 0.45, 0.45, 1)
+polygon = PackedVector2Array(39, 22, 32, 17, 32, 27)

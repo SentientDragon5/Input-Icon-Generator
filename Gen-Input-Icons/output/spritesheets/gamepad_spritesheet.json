@@ -1,0 +1,187 @@
+{
+	"data": {
+		"bumper_left": {
+			"height": 64,
+			"name": "bumper_left",
+			"width": 64,
+			"x": 0,
+			"y": 0
+		},
+		"bumper_right": {
+			"height": 64,
+			"name": "bumper_right",
+			"width": 64,
+			"x": 64,
+			"y": 0
+		},
+		"button_a": {
+			"height": 64,
+			"name": "button_a",
+			"width": 64,
+			"x": 128,
+			"y": 0
+		},
+		"button_b": {
+			"height": 64,
+			"name": "button_b",
+			"width": 64,
+			"x": 192,
+			"y": 0
+		},
+		"button_home": {
+			"height": 64,
+			"name": "button_home",
+			"width": 64,
+			"x": 256,
+			"y": 0
+		},
+		"button_options": {
+			"height": 64,
+			"name": "button_options",
+			"width": 64,
+			"x": 0,
+			"y": 64
+		},
+		"button_select": {
+			"height": 64,
+			"name": "button_select",
+			"width": 64,
+			"x": 64,
+			"y": 64
+		},
+		"button_share": {
+			"height": 64,
+			"name": "button_share",
+			"width": 64,
+			"x": 128,
+			"y": 64
+		},
+		"button_start": {
+			"height": 64,
+			"name": "button_start",
+			"width": 64,
+			"x": 192,
+			"y": 64
+		},
+		"button_view": {
+			"height": 64,
+			"name": "button_view",
+			"width": 64,
+			"x": 256,
+			"y": 64
+		},
+		"button_x": {
+			"height": 64,
+			"name": "button_x",
+			"width": 64,
+			"x": 0,
+			"y": 128
+		},
+		"button_y": {
+			"height": 64,
+			"name": "button_y",
+			"width": 64,
+			"x": 64,
+			"y": 128
+		},
+		"dpad_down": {
+			"height": 64,
+			"name": "dpad_down",
+			"width": 64,
+			"x": 128,
+			"y": 128
+		},
+		"dpad_left": {
+			"height": 64,
+			"name": "dpad_left",
+			"width": 64,
+			"x": 192,
+			"y": 128
+		},
+		"dpad_right": {
+			"height": 64,
+			"name": "dpad_right",
+			"width": 64,
+			"x": 256,
+			"y": 128
+		},
+		"dpad_up": {
+			"height": 64,
+			"name": "dpad_up",
+			"width": 64,
+			"x": 0,
+			"y": 192
+		},
+		"paddle_p1": {
+			"height": 64,
+			"name": "paddle_p1",
+			"width": 64,
+			"x": 64,
+			"y": 192
+		},
+		"paddle_p2": {
+			"height": 64,
+			"name": "paddle_p2",
+			"width": 64,
+			"x": 128,
+			"y": 192
+		},
+		"paddle_p3": {
+			"height": 64,
+			"name": "paddle_p3",
+			"width": 64,
+			"x": 192,
+			"y": 192
+		},
+		"paddle_p4": {
+			"height": 64,
+			"name": "paddle_p4",
+			"width": 64,
+			"x": 256,
+			"y": 192
+		},
+		"stick_l3": {
+			"height": 64,
+			"name": "stick_l3",
+			"width": 64,
+			"x": 0,
+			"y": 256
+		},
+		"stick_r3": {
+			"height": 64,
+			"name": "stick_r3",
+			"width": 64,
+			"x": 64,
+			"y": 256
+		},
+		"trigger_left": {
+			"height": 64,
+			"name": "trigger_left",
+			"width": 64,
+			"x": 128,
+			"y": 256
+		},
+		"trigger_right": {
+			"height": 64,
+			"name": "trigger_right",
+			"width": 64,
+			"x": 192,
+			"y": 256
+		}
+	},
+	"info": {
+		"cell_size": [
+			64,
+			64
+		],
+		"platform": "godot",
+		"platform_version": "4.7",
+		"sheet_size": [
+			320,
+			320
+		],
+		"spritesheet_name": "gamepad_spritesheet.png",
+		"total_icons": 24,
+		"version": "1.0"
+	}
+}

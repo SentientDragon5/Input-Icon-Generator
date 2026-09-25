@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://templates/dpad_base.tscn" id="1_base"]
+
+[node name="ColorRect" instance=ExtResource("1_base")]
+
+[node name="ArrowDown" parent="DPadRoot" index="4"]
+color = Color(1, 1, 1, 1)

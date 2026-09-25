@@ -7,7 +7,7 @@ corner_radius_bottom_right = 8
 custom_minimum_size = Vector2(64, 64)
 offset_right = 40.0
 offset_bottom = 40.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0)
 
 [node name="Panel" type="Panel" parent="." unique_id=122556388]
 layout_mode = 1

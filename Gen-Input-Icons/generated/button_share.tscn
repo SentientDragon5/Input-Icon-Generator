@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://gbtnshare027"]
+
+[ext_resource type="PackedScene" uid="uid://bbtnpill004" path="res://templates/button_pill_base.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://icons/share_icon.tscn" id="2_share_icon"]
+
+
+[node name="ColorRect" instance=ExtResource("1_base")]
+
+[node name="Label" parent="Panel" index="0"]
+text = ""
+
+[node name="ShareIcon" parent="Panel/IconContainer" index="0" instance=ExtResource("2_share_icon")]
+layout_mode = 1

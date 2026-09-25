@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://cnbmaxgt5blgb"]
+
+[ext_resource type="Script" uid="uid://beljnkbaqv0f5" path="res://scripts/scene_renderer.gd" id="1_gd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sidebar"]
+bg_color = Color(0.12, 0.12, 0.14, 1)
+border_width_right = 1
+border_color = Color(0.25, 0.25, 0.28, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_checker"]
+bg_color = Color(0.08, 0.08, 0.1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.2, 0.24, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_preview"]
+viewport_path = NodePath("SubViewport")
+
+[node name="SceneRenderer" type="Node2D" unique_id=1810449759]
+script = ExtResource("1_gd")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1119778097]
+transparent_bg = true
+size = Vector2i(64, 64)
+render_target_update_mode = 1
+
+[node name="ToRender" type="Node2D" parent="SubViewport" unique_id=1666226793]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1776121979]
+
+[node name="Sidebar" type="Panel" parent="UI" unique_id=1585087605]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 320.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sidebar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Sidebar" unique_id=1857374845]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="UI/Sidebar/VBoxContainer" unique_id=396053574]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Input Icon Renderer"
+
+[node name="RenderAllButton" type="Button" parent="UI/Sidebar/VBoxContainer" unique_id=1379768929]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Render All Icons"
+
+[node name="ExportSheetsButton" type="Button" parent="UI/Sidebar/VBoxContainer" unique_id=939623675]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Generate Spritesheets + JSON"
+
+[node name="OpenFolderButton" type="Button" parent="UI/Sidebar/VBoxContainer" unique_id=1175572135]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Open Output Folder"
+
+[node name="HSeparator" type="HSeparator" parent="UI/Sidebar/VBoxContainer" unique_id=1079271729]
+layout_mode = 2
+
+[node name="SectionLabel" type="Label" parent="UI/Sidebar/VBoxContainer" unique_id=629331602]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Generated Icons"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Sidebar/VBoxContainer" unique_id=144272631]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonList" type="VBoxContainer" parent="UI/Sidebar/VBoxContainer/ScrollContainer" unique_id=1987301842]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="PreviewContainer" type="Panel" parent="UI" unique_id=1204111263]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 340.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_checker")
+
+[node name="PreviewRect" type="TextureRect" parent="UI" unique_id=286654374]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 340.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_preview")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DimsLabel" type="Label" parent="UI" unique_id=297595950]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 340.0
+offset_top = -45.0
+offset_right = 700.0
+offset_bottom = -15.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "Preview Dimensions: 64x64"
+
+[node name="StatusLabel" type="Label" parent="UI" unique_id=361948523]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -45.0
+offset_right = -20.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.7, 0.9, 0.7, 1)
+theme_override_font_sizes/font_size = 14
+text = "Status: Ready"
+horizontal_alignment = 2
+
+[connection signal="pressed" from="UI/Sidebar/VBoxContainer/RenderAllButton" to="." method="render_all"]
+[connection signal="pressed" from="UI/Sidebar/VBoxContainer/ExportSheetsButton" to="." method="generate_spritesheets"]
+[connection signal="pressed" from="UI/Sidebar/VBoxContainer/OpenFolderButton" to="." method="open_folder"]

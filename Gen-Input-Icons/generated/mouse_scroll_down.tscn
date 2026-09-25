@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://templates/mouse_base.tscn" id="1_base"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wheel_active"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="ColorRect" instance=ExtResource("1_base")]
+
+[node name="ScrollWheel" parent="MouseRoot" index="3"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_wheel_active")
+
+[node name="ScrollArrowDown" type="Polygon2D" parent="MouseRoot" index="6"]
+color = Color(1, 1, 1, 1)
+polygon = PackedVector2Array(16, 23, 12, 18, 20, 18)

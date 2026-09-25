@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://templates/mouse_base.tscn" id="1_base"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_active_left"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+
+[node name="ColorRect" instance=ExtResource("1_base")]
+
+[node name="LeftButton" parent="MouseRoot" index="1"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_btn_active_left")
