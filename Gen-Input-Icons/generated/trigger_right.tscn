@@ -1,8 +1,23 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="PackedScene" path="res://templates/trigger_base.tscn" id="1_base"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rt"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 4
+
 [node name="ColorRect" instance=ExtResource("1_base")]
+
+[node name="Panel" parent="." index="0"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_rt")
 
 [node name="Label" parent="Panel" index="0"]
 text = "RT"

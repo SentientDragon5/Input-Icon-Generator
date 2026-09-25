@@ -11,6 +11,7 @@
 			768
 		],
 		"spritesheet_name": "all_spritesheet.png",
+		"theme": "Simple Filled",
 		"total_icons": 148,
 		"version": "1.0"
 	},

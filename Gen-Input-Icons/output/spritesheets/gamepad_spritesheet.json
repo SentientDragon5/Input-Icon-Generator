@@ -11,6 +11,7 @@
 			320
 		],
 		"spritesheet_name": "gamepad_spritesheet.png",
+		"theme": "Simple Filled",
 		"total_icons": 24,
 		"version": "1.0"
 	},

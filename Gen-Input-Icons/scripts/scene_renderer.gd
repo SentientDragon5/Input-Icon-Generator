@@ -328,6 +328,7 @@ func show_preview(item_name: String) -> void:
 		
 	to_render.add_child(instance)
 	sub_viewport.size = Vector2i(current_size, current_size)
+	sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	
 	if instance is Control:
 		instance.custom_minimum_size = Vector2(current_size, current_size)
@@ -356,6 +357,8 @@ func render_item_to_file(item_name: String) -> String:
 	await get_tree().process_frame
 	
 	var image = sub_viewport.get_texture().get_image()
+	sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	
 	if not image or image.is_empty():
 		return ""
 		
