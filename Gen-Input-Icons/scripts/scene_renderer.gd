@@ -3,6 +3,7 @@ class_name SceneRenderer
 
 @export var output_dir: String = "res://output/"
 @export var default_icon_size: Vector2i = Vector2i(64, 64)
+@export var spritesheet_padding: int = 4
 @export var themes_dir: String = "res://themes/"
 
 @onready var sub_viewport: SubViewport = $SubViewport
@@ -12,6 +13,8 @@ class_name SceneRenderer
 @onready var theme_option_button: OptionButton = $UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/ThemeOptionButton
 @onready var size_slider: HSlider = $UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/SizeSlider
 @onready var size_spin_box: SpinBox = $UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/SizeHeader/SizeSpinBox
+@onready var padding_slider: HSlider = $UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/PaddingSlider
+@onready var padding_spin_box: SpinBox = $UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/PaddingHeader/PaddingSpinBox
 
 @onready var exact_preview_rect: TextureRect = $UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox/VBoxContainer/ExactPreviewPanel/CenterContainer/ExactPreviewRect
 @onready var exact_title_label: Label = $UI/PreviewArea/VBoxContainer/PreviewsHBox/ExactPreviewBox/VBoxContainer/ExactTitle
@@ -172,6 +175,15 @@ func setup_parameters_ui() -> void:
 		size_slider.value_changed.connect(_on_size_slider_changed)
 		size_spin_box.value_changed.connect(_on_size_spinbox_changed)
 
+	if padding_slider and padding_spin_box:
+		for control in [padding_slider, padding_spin_box]:
+			control.min_value = 0
+			control.max_value = 32
+			control.step = 1
+			control.value = spritesheet_padding
+		padding_slider.value_changed.connect(_on_padding_slider_changed)
+		padding_spin_box.value_changed.connect(_on_padding_spinbox_changed)
+
 func _on_theme_selected(index: int) -> void:
 	if index >= 0 and index < loaded_themes.size():
 		current_theme = loaded_themes[index]
@@ -195,6 +207,22 @@ func _on_size_spinbox_changed(val: float) -> void:
 		if size_slider and size_slider.value != int_val:
 			size_slider.set_value_no_signal(int_val)
 		_apply_size_change()
+
+func _on_padding_slider_changed(val: float) -> void:
+	var int_val = int(val)
+	if spritesheet_padding != int_val:
+		spritesheet_padding = int_val
+		if padding_spin_box and padding_spin_box.value != int_val:
+			padding_spin_box.set_value_no_signal(int_val)
+		status_label.text = "Spritesheet padding set to: %d px" % spritesheet_padding
+
+func _on_padding_spinbox_changed(val: float) -> void:
+	var int_val = int(val)
+	if spritesheet_padding != int_val:
+		spritesheet_padding = int_val
+		if padding_slider and padding_slider.value != int_val:
+			padding_slider.set_value_no_signal(int_val)
+		status_label.text = "Spritesheet padding set to: %d px" % spritesheet_padding
 
 func _apply_size_change() -> void:
 	_update_viewport_scale()
@@ -254,56 +282,56 @@ func _register_procedural_keys() -> void:
 	# A-Z
 	for code in range(KEY_A, KEY_Z + 1):
 		var char_str = String.chr(code)
-		_add_key_entry("key_" + char_str.to_lower(), char_str, char_str, key_base_scene, 28, code)
+		_add_key_entry("key_" + char_str.to_lower(), char_str, char_str, key_base_scene, 22, code)
 		
 	# 0-9
 	for code in range(KEY_0, KEY_9 + 1):
 		var char_str = String.chr(code)
-		_add_key_entry("key_" + char_str, char_str, char_str, key_base_scene, 28, code)
+		_add_key_entry("key_" + char_str, char_str, char_str, key_base_scene, 22, code)
 		
 	# F1-F12
 	for i in range(1, 13):
-		_add_key_entry("key_f" + str(i), "F" + str(i), "F" + str(i), key_base_scene, 20, KEY_F1 + (i - 1))
+		_add_key_entry("key_f" + str(i), "F" + str(i), "F" + str(i), key_base_scene, 15, KEY_F1 + (i - 1))
 		
 	# Symbols
 	var symbols = [
-		[",", "key_comma", KEY_COMMA, 28], [".", "key_period", KEY_PERIOD, 28], ["/", "key_slash", KEY_SLASH, 26],
-		["\\", "key_backslash", KEY_BACKSLASH, 26], [";", "key_semicolon", KEY_SEMICOLON, 26], ["'", "key_apostrophe", KEY_APOSTROPHE, 28],
-		["[", "key_bracketleft", KEY_BRACKETLEFT, 26], ["]", "key_bracketright", KEY_BRACKETRIGHT, 26], ["-", "key_minus", KEY_MINUS, 28],
-		["=", "key_equal", KEY_EQUAL, 26], ["`", "key_backquote", KEY_QUOTELEFT, 28], ["!", "key_exclam", KEY_EXCLAM, 26],
-		["?", "key_question", KEY_QUESTION, 26], ["+", "key_plus", KEY_PLUS, 26], [":", "key_colon", KEY_COLON, 26],
-		["\"", "key_quotedbl", KEY_QUOTEDBL, 26], ["<", "key_less", KEY_LESS, 26], [">", "key_greater", KEY_GREATER, 26],
-		["_", "key_underscore", KEY_UNDERSCORE, 26], ["{", "key_braceleft", KEY_BRACELEFT, 26], ["}", "key_braceright", KEY_BRACERIGHT, 26],
-		["|", "key_bar", KEY_BAR, 26], ["~", "key_tilde", KEY_ASCIITILDE, 26], ["~", "key_asciitilde", KEY_ASCIITILDE, 26], ["@", "key_at", KEY_AT, 22],
-		["#", "key_hash", KEY_NUMBERSIGN, 26], ["$", "key_dollar", KEY_DOLLAR, 26], ["%", "key_percent", KEY_PERCENT, 22],
-		["&", "key_ampersand", KEY_AMPERSAND, 22], ["*", "key_asterisk", KEY_ASTERISK, 28]
+		[",", "key_comma", KEY_COMMA, 22], [".", "key_period", KEY_PERIOD, 22], ["/", "key_slash", KEY_SLASH, 20],
+		["\\", "key_backslash", KEY_BACKSLASH, 20], [";", "key_semicolon", KEY_SEMICOLON, 20], ["'", "key_apostrophe", KEY_APOSTROPHE, 22],
+		["[", "key_bracketleft", KEY_BRACKETLEFT, 20], ["]", "key_bracketright", KEY_BRACKETRIGHT, 20], ["-", "key_minus", KEY_MINUS, 22],
+		["=", "key_equal", KEY_EQUAL, 20], ["`", "key_backquote", KEY_QUOTELEFT, 22], ["!", "key_exclam", KEY_EXCLAM, 20],
+		["?", "key_question", KEY_QUESTION, 20], ["+", "key_plus", KEY_PLUS, 20], [":", "key_colon", KEY_COLON, 20],
+		["\"", "key_quotedbl", KEY_QUOTEDBL, 20], ["<", "key_less", KEY_LESS, 20], [">", "key_greater", KEY_GREATER, 20],
+		["_", "key_underscore", KEY_UNDERSCORE, 20], ["{", "key_braceleft", KEY_BRACELEFT, 20], ["}", "key_braceright", KEY_BRACERIGHT, 20],
+		["|", "key_bar", KEY_BAR, 20], ["~", "key_tilde", KEY_ASCIITILDE, 20], ["~", "key_asciitilde", KEY_ASCIITILDE, 20], ["@", "key_at", KEY_AT, 18],
+		["#", "key_hash", KEY_NUMBERSIGN, 20], ["$", "key_dollar", KEY_DOLLAR, 20], ["%", "key_percent", KEY_PERCENT, 18],
+		["&", "key_ampersand", KEY_AMPERSAND, 18], ["*", "key_asterisk", KEY_ASTERISK, 22]
 	]
 	for sym in symbols:
 		_add_key_entry(sym[1], sym[0], sym[0], key_base_scene, sym[3], sym[2])
 		
 	# Numpad
 	for i in range(10):
-		_add_key_entry("key_kp_" + str(i), "Num " + str(i), "Num " + str(i), key_base_scene, 18, KEY_KP_0 + i)
+		_add_key_entry("key_kp_" + str(i), "Num " + str(i), "Num " + str(i), key_base_scene, 13, KEY_KP_0 + i)
 	var numpad_ops = [
 		["key_kp_add", "Num +", KEY_KP_ADD], ["key_kp_subtract", "Num -", KEY_KP_SUBTRACT],
 		["key_kp_multiply", "Num *", KEY_KP_MULTIPLY], ["key_kp_divide", "Num /", KEY_KP_DIVIDE],
 		["key_kp_period", "Num .", KEY_KP_PERIOD]
 	]
 	for op in numpad_ops:
-		_add_key_entry(op[0], op[1], op[1], key_base_scene, 18, op[2])
-	_add_key_entry("key_kp_enter", "Num Enter", "Num Enter", key_wide_base_scene, 14, KEY_KP_ENTER)
+		_add_key_entry(op[0], op[1], op[1], key_base_scene, 13, op[2])
+	_add_key_entry("key_kp_enter", "Num Enter", "Num Enter", key_wide_base_scene, 11, KEY_KP_ENTER)
 		
 	# Navigation & special keys
 	var nav_keys = [
-		["key_escape", "Esc", "Escape", KEY_ESCAPE, false, 20], ["key_insert", "Ins", "Insert", KEY_INSERT, false, 20],
-		["key_delete", "Del", "Delete", KEY_DELETE, false, 20], ["key_home", "Home", "Home", KEY_HOME, false, 18],
-		["key_end", "End", "End", KEY_END, false, 20], ["key_pageup", "PgUp", "Page Up", KEY_PAGEUP, false, 18],
-		["key_pagedown", "PgDn", "Page Down", KEY_PAGEDOWN, false, 18], ["key_up", "Up", "Up Arrow", KEY_UP, false, 20],
-		["key_down", "Down", "Down Arrow", KEY_DOWN, false, 18], ["key_left", "Left", "Left Arrow", KEY_LEFT, false, 18],
-		["key_right", "Right", "Right Arrow", KEY_RIGHT, false, 18], ["key_capslock", "Caps", "Caps Lock", KEY_CAPSLOCK, true, 18],
-		["key_numlock", "NumLk", "Num Lock", KEY_NUMLOCK, true, 18], ["key_scrolllock", "ScrLk", "Scroll Lock", KEY_SCROLLLOCK, true, 18],
-		["key_printscreen", "PrtSc", "Print Screen", KEY_PRINT, true, 18], ["key_pause", "Pause", "Pause", KEY_PAUSE, false, 18],
-		["key_meta", "Meta", "Win / Cmd", KEY_META, true, 18]
+		["key_escape", "Esc", "Escape", KEY_ESCAPE, false, 14], ["key_insert", "Ins", "Insert", KEY_INSERT, false, 14],
+		["key_delete", "Del", "Delete", KEY_DELETE, false, 14], ["key_home", "Home", "Home", KEY_HOME, false, 13],
+		["key_end", "End", "End", KEY_END, false, 14], ["key_pageup", "PgUp", "Page Up", KEY_PAGEUP, false, 13],
+		["key_pagedown", "PgDn", "Page Down", KEY_PAGEDOWN, false, 13], ["key_up", "Up", "Up Arrow", KEY_UP, false, 14],
+		["key_down", "Down", "Down Arrow", KEY_DOWN, false, 13], ["key_left", "Left", "Left Arrow", KEY_LEFT, false, 13],
+		["key_right", "Right", "Right Arrow", KEY_RIGHT, false, 13], ["key_capslock", "Caps", "Caps Lock", KEY_CAPSLOCK, true, 13],
+		["key_numlock", "NumLk", "Num Lock", KEY_NUMLOCK, true, 13], ["key_scrolllock", "ScrLk", "Scroll Lock", KEY_SCROLLLOCK, true, 13],
+		["key_printscreen", "PrtSc", "Print Screen", KEY_PRINT, true, 13], ["key_pause", "Pause", "Pause", KEY_PAUSE, false, 13],
+		["key_meta", "Meta", "Win / Cmd", KEY_META, true, 13]
 	]
 	for nk in nav_keys:
 		_add_key_entry(nk[0], nk[1], nk[2], key_wide_base_scene if nk[4] else key_base_scene, nk[5], nk[3])
@@ -348,10 +376,10 @@ func _apply_theme_node(node: Node, theme_sb: StyleBoxFlat, fg: Color, inactive_f
 			else:
 				sb.bg_color = theme_sb.bg_color if not is_open else Color(0, 0, 0, 0)
 			sb.border_color = theme_sb.border_color
-			sb.border_width_left = theme_sb.border_width_left
-			sb.border_width_top = theme_sb.border_width_top
-			sb.border_width_right = theme_sb.border_width_right
-			sb.border_width_bottom = theme_sb.border_width_bottom
+			sb.border_width_left = theme_sb.border_width_left if current_sb.border_width_left > 0 else 0
+			sb.border_width_top = theme_sb.border_width_top if current_sb.border_width_top > 0 else 0
+			sb.border_width_right = theme_sb.border_width_right if current_sb.border_width_right > 0 else 0
+			sb.border_width_bottom = theme_sb.border_width_bottom if current_sb.border_width_bottom > 0 else 0
 			node.add_theme_stylebox_override("panel", sb)
 	elif node is Polygon2D:
 		if node.color.v > 0.8 and node.color.a > 0.8:
@@ -514,11 +542,12 @@ func generate_spritesheets() -> void:
 			continue
 			
 		icon_keys.sort()
+		var p = spritesheet_padding
 		var count = icon_keys.size()
 		var cols = int(ceil(sqrt(count)))
 		var rows = int(ceil(float(count) / float(cols)))
-		var sheet_w = cols * cell_w
-		var sheet_h = rows * cell_h
+		var sheet_w = cols * cell_w + (cols + 1) * p
+		var sheet_h = rows * cell_h + (rows + 1) * p
 		
 		var file_base = "icons_%s_%s_%d_spritesheet" % [cat_name, theme_slug, cell_w]
 		var png_name = file_base + ".png"
@@ -536,6 +565,8 @@ func generate_spritesheets() -> void:
 				"theme": theme_display_name,
 				"theme_slug": theme_slug,
 				"icon_size": cell_w,
+				"padding": p,
+				"margin": p,
 				"cell_size": [cell_w, cell_h],
 				"sheet_size": [sheet_w, sheet_h],
 				"total_icons": count
@@ -546,8 +577,10 @@ func generate_spritesheets() -> void:
 		for i in range(count):
 			var icon_key = icon_keys[i]
 			var img: Image = rendered_images[icon_key]
-			var dest_x = (i % cols) * cell_w
-			var dest_y = floori(float(i) / float(cols)) * cell_h
+			var col = i % cols
+			var row = floori(float(i) / float(cols))
+			var dest_x = p + col * (cell_w + p)
+			var dest_y = p + row * (cell_h + p)
 			
 			sheet_img.blit_rect(img, Rect2i(0, 0, img.get_width(), img.get_height()), Vector2i(dest_x, dest_y))
 			

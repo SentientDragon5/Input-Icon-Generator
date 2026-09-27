@@ -88,6 +88,30 @@ min_value = 16.0
 max_value = 256.0
 value = 64.0
 
+[node name="HSeparatorParam2" type="HSeparator" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PaddingHeader" type="HBoxContainer" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PaddingLabel" type="Label" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/PaddingHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Padding:"
+
+[node name="PaddingSpinBox" type="SpinBox" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer/PaddingHeader"]
+layout_mode = 2
+min_value = 0.0
+max_value = 32.0
+value = 4.0
+suffix = "px"
+
+[node name="PaddingSlider" type="HSlider" parent="UI/Sidebar/VBoxContainer/ParametersPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 32.0
+value = 4.0
+
 [node name="RenderAllButton" type="Button" parent="UI/Sidebar/VBoxContainer"]
 layout_mode = 2
 text = "Render All Icons"
