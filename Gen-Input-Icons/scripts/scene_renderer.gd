@@ -22,6 +22,56 @@ class_name SceneRenderer
 @onready var progress_bar: ProgressBar = $UI/ProgressBar
 @onready var button_list: VBoxContainer = $UI/Sidebar/VBoxContainer/ScrollContainer/ButtonList
 
+const MOUSE_BUTTON_MAPPINGS: Dictionary = {
+	"mouse_left": MOUSE_BUTTON_LEFT,          # 1
+	"mouse_right": MOUSE_BUTTON_RIGHT,        # 2
+	"mouse_middle": MOUSE_BUTTON_MIDDLE,      # 3
+	"mouse_scroll_up": MOUSE_BUTTON_WHEEL_UP,  # 4
+	"mouse_scroll_down": MOUSE_BUTTON_WHEEL_DOWN, # 5
+	"mouse_side_1": MOUSE_BUTTON_XBUTTON1,    # 8
+	"mouse_side_2": MOUSE_BUTTON_XBUTTON2,    # 9
+}
+
+const JOY_BUTTON_MAPPINGS: Dictionary = {
+	"button_a": JOY_BUTTON_A,                         # 0
+	"button_b": JOY_BUTTON_B,                         # 1
+	"button_x": JOY_BUTTON_X,                         # 2
+	"button_y": JOY_BUTTON_Y,                         # 3
+	"button_select": JOY_BUTTON_BACK,                 # 4
+	"button_view": JOY_BUTTON_BACK,                   # 4
+	"button_home": JOY_BUTTON_GUIDE,                  # 5
+	"button_start": JOY_BUTTON_START,                 # 6
+	"button_options": JOY_BUTTON_START,               # 6
+	"stick_l3": JOY_BUTTON_LEFT_STICK,                # 7
+	"stick_r3": JOY_BUTTON_RIGHT_STICK,               # 8
+	"bumper_left": JOY_BUTTON_LEFT_SHOULDER,          # 9
+	"bumper_right": JOY_BUTTON_RIGHT_SHOULDER,        # 10
+	"dpad_up": JOY_BUTTON_DPAD_UP,                    # 11
+	"dpad_down": JOY_BUTTON_DPAD_DOWN,                # 12
+	"dpad_left": JOY_BUTTON_DPAD_LEFT,                # 13
+	"dpad_right": JOY_BUTTON_DPAD_RIGHT,              # 14
+	"button_share": JOY_BUTTON_MISC1,                 # 15
+	"paddle_p1": JOY_BUTTON_PADDLE1,                  # 16
+	"paddle_p2": JOY_BUTTON_PADDLE2,                  # 17
+	"paddle_p3": JOY_BUTTON_PADDLE3,                  # 18
+	"paddle_p4": JOY_BUTTON_PADDLE4,                  # 19
+}
+
+const JOY_AXIS_MAPPINGS: Dictionary = {
+	"trigger_left": JOY_AXIS_TRIGGER_LEFT,            # 4
+	"trigger_right": JOY_AXIS_TRIGGER_RIGHT,          # 5
+}
+
+const KEY_MAPPINGS: Dictionary = {
+	"key_alt": KEY_ALT,
+	"key_backspace": KEY_BACKSPACE,
+	"key_ctrl": KEY_CTRL,
+	"key_enter": KEY_ENTER,
+	"key_shift": KEY_SHIFT,
+	"key_space": KEY_SPACE,
+	"key_tab": KEY_TAB,
+}
+
 var key_base_scene: PackedScene = preload("res://templates/key_base.tscn")
 var key_wide_base_scene: PackedScene = preload("res://templates/key_wide_base.tscn")
 
@@ -165,13 +215,21 @@ func build_items_registry() -> void:
 				var item_name = file_name.get_basename()
 				var loaded_res = load("res://generated/" + file_name)
 				if loaded_res is PackedScene:
+					var meta_keycode: int = KEY_MAPPINGS.get(item_name, 0)
+					var meta_mouse_btn: int = MOUSE_BUTTON_MAPPINGS.get(item_name, -1)
+					var meta_joy_btn: int = JOY_BUTTON_MAPPINGS.get(item_name, -1)
+					var meta_joy_axis: int = JOY_AXIS_MAPPINGS.get(item_name, -1)
+					
 					items_registry[item_name] = {
 						"type": "scene",
 						"name": item_name,
 						"scene": loaded_res,
 						"category": determine_category(item_name),
 						"readable_name": item_name.replace("_", " ").capitalize(),
-						"keycode": 0
+						"keycode": meta_keycode,
+						"mouse_button": meta_mouse_btn,
+						"joy_button": meta_joy_btn,
+						"joy_axis": meta_joy_axis
 					}
 			file_name = dir.get_next()
 		dir.list_dir_end()
@@ -221,14 +279,15 @@ func _register_procedural_keys() -> void:
 		
 	# Numpad
 	for i in range(10):
-		_add_key_entry("key_kp_" + str(i), "Num " + str(i), "Num " + str(i), key_base_scene, 11, KEY_KP_0 + i)
+		_add_key_entry("key_kp_" + str(i), "Num " + str(i), "Num " + str(i), key_base_scene, 9, KEY_KP_0 + i)
 	var numpad_ops = [
 		["key_kp_add", "Num +", KEY_KP_ADD], ["key_kp_subtract", "Num -", KEY_KP_SUBTRACT],
 		["key_kp_multiply", "Num *", KEY_KP_MULTIPLY], ["key_kp_divide", "Num /", KEY_KP_DIVIDE],
-		["key_kp_period", "Num .", KEY_KP_PERIOD], ["key_kp_enter", "Num Enter", KEY_KP_ENTER]
+		["key_kp_period", "Num .", KEY_KP_PERIOD]
 	]
 	for op in numpad_ops:
-		_add_key_entry(op[0], op[1], op[1], key_base_scene, 10, op[2])
+		_add_key_entry(op[0], op[1], op[1], key_base_scene, 9, op[2])
+	_add_key_entry("key_kp_enter", "Num Enter", "Num Enter", key_wide_base_scene, 9, KEY_KP_ENTER)
 		
 	# Navigation & special keys
 	var nav_keys = [
@@ -243,7 +302,7 @@ func _register_procedural_keys() -> void:
 		["key_meta", "Meta", "Win / Cmd", KEY_META, true]
 	]
 	for nk in nav_keys:
-		_add_key_entry(nk[0], nk[1], nk[2], key_wide_base_scene if nk[4] else key_base_scene, 12, nk[3])
+		_add_key_entry(nk[0], nk[1], nk[2], key_wide_base_scene if nk[4] else key_base_scene, 11 if nk[4] else 12, nk[3])
 
 func _add_key_entry(id_name: String, label: String, readable: String, tmpl: PackedScene, font_size: int, code: int) -> void:
 	items_registry[id_name] = {
@@ -254,7 +313,10 @@ func _add_key_entry(id_name: String, label: String, readable: String, tmpl: Pack
 		"template": tmpl,
 		"font_size": font_size,
 		"category": "keyboard",
-		"keycode": code
+		"keycode": code,
+		"mouse_button": -1,
+		"joy_button": -1,
+		"joy_axis": -1
 	}
 
 func apply_theme_to_tree(node: Node, theme_res: Theme) -> void:
@@ -299,6 +361,8 @@ func instantiate_item(item_data: Dictionary) -> Node:
 	elif item_data["type"] == "procedural_key":
 		inst = item_data["template"].instantiate()
 		var label_node = inst.get_node_or_null("Panel/Label") as Label
+		if not label_node:
+			label_node = inst.find_child("Label", true, false) as Label
 		if label_node:
 			label_node.text = item_data["label"]
 			if item_data.has("font_size"):
@@ -486,8 +550,14 @@ func generate_spritesheets() -> void:
 				"width": cell_w,
 				"height": cell_h
 			}
-			if meta_info.has("keycode") and meta_info["keycode"] != 0:
+			if meta_info.get("keycode", 0) != 0:
 				entry["keycode"] = meta_info["keycode"]
+			if meta_info.get("mouse_button", -1) != -1:
+				entry["mouse_button"] = meta_info["mouse_button"]
+			if meta_info.get("joy_button", -1) != -1:
+				entry["joy_button"] = meta_info["joy_button"]
+			if meta_info.get("joy_axis", -1) != -1:
+				entry["joy_axis"] = meta_info["joy_axis"]
 			json_data["data"][icon_key] = entry
 			
 		sheet_img.save_png(spritesheet_dir + png_name)

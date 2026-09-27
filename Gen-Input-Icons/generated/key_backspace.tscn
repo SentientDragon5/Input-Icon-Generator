@@ -5,4 +5,5 @@
 [node name="ColorRect" instance=ExtResource("1_base")]
 
 [node name="Label" parent="Panel" index="0"]
+theme_override_font_sizes/font_size = 9
 text = "Backspace"
