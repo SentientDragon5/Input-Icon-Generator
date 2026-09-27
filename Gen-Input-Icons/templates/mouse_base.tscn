@@ -2,30 +2,30 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mouse_body"]
 bg_color = Color(0.15, 0.15, 0.15, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.5, 0.5, 0.5, 1)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.55, 0.55, 0.55, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_left"]
 bg_color = Color(0.25, 0.25, 0.25, 1)
-corner_radius_top_left = 12
+corner_radius_top_left = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_right"]
 bg_color = Color(0.25, 0.25, 0.25, 1)
-corner_radius_top_right = 12
+corner_radius_top_right = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wheel"]
 bg_color = Color(0.4, 0.4, 0.4, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_side_btn"]
 bg_color = Color(0.4, 0.4, 0.4, 1)
@@ -45,10 +45,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -24.0
-offset_right = 16.0
-offset_bottom = 24.0
+offset_left = -22.0
+offset_top = -32.0
+offset_right = 22.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -63,42 +63,42 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_mouse_body")
 
 [node name="LeftButton" type="Panel" parent="MouseRoot"]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 14.0
-offset_bottom = 18.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 19.0
+offset_bottom = 24.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_btn_left")
 
 [node name="RightButton" type="Panel" parent="MouseRoot"]
 layout_mode = 0
-offset_left = 18.0
-offset_top = 2.0
-offset_right = 30.0
-offset_bottom = 18.0
+offset_left = 25.0
+offset_top = 3.0
+offset_right = 41.0
+offset_bottom = 24.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_btn_right")
 
 [node name="ScrollWheel" type="Panel" parent="MouseRoot"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 18.0
-offset_bottom = 16.0
+offset_left = 19.0
+offset_top = 5.0
+offset_right = 25.0
+offset_bottom = 21.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_wheel")
 
 [node name="SideButton1" type="Panel" parent="MouseRoot"]
 visible = false
 layout_mode = 0
-offset_left = -2.0
-offset_top = 18.0
-offset_right = 2.0
-offset_bottom = 26.0
+offset_left = -3.0
+offset_top = 24.0
+offset_right = 3.0
+offset_bottom = 36.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_side_btn")
 
 [node name="SideButton2" type="Panel" parent="MouseRoot"]
 visible = false
 layout_mode = 0
-offset_left = -2.0
-offset_top = 28.0
-offset_right = 2.0
-offset_bottom = 36.0
+offset_left = -3.0
+offset_top = 38.0
+offset_right = 3.0
+offset_bottom = 50.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_side_btn")

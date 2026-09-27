@@ -2,39 +2,39 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arm_up"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_color = Color(0.55, 0.55, 0.55, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arm_down"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
-border_width_left = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.55, 0.55, 0.55, 1)
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arm_left"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_bottom = 2
-border_color = Color(0.55, 0.55, 0.55, 1)
-corner_radius_top_left = 4
-corner_radius_bottom_left = 4
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 6
+corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arm_right"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.55, 0.55, 0.55, 1)
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_center"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
@@ -52,63 +52,65 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -22.0
-offset_top = -22.0
-offset_right = 22.0
-offset_bottom = 22.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ArmUp" type="Panel" parent="DPadRoot"]
 layout_mode = 0
-offset_left = 14.0
-offset_right = 30.0
-offset_bottom = 14.0
+offset_left = 21.0
+offset_top = 0.0
+offset_right = 43.0
+offset_bottom = 21.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_arm_up")
 
 [node name="ArmDown" type="Panel" parent="DPadRoot"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 30.0
-offset_right = 30.0
-offset_bottom = 44.0
+offset_left = 21.0
+offset_top = 43.0
+offset_right = 43.0
+offset_bottom = 64.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_arm_down")
 
 [node name="ArmLeft" type="Panel" parent="DPadRoot"]
 layout_mode = 0
-offset_top = 14.0
-offset_right = 14.0
-offset_bottom = 30.0
+offset_left = 0.0
+offset_top = 21.0
+offset_right = 21.0
+offset_bottom = 43.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_arm_left")
 
 [node name="ArmRight" type="Panel" parent="DPadRoot"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 14.0
-offset_right = 44.0
-offset_bottom = 30.0
+offset_left = 43.0
+offset_top = 21.0
+offset_right = 64.0
+offset_bottom = 43.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_arm_right")
 
 [node name="Center" type="Panel" parent="DPadRoot"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 14.0
-offset_right = 30.0
-offset_bottom = 30.0
+offset_left = 21.0
+offset_top = 21.0
+offset_right = 43.0
+offset_bottom = 43.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_center")
 
 [node name="ArrowUp" type="Polygon2D" parent="DPadRoot"]
 color = Color(0.45, 0.45, 0.45, 1)
-polygon = PackedVector2Array(22, 4, 16, 10, 28, 10)
+polygon = PackedVector2Array(32, 5, 25, 14, 39, 14)
 
 [node name="ArrowDown" type="Polygon2D" parent="DPadRoot"]
 color = Color(0.45, 0.45, 0.45, 1)
-polygon = PackedVector2Array(22, 40, 16, 34, 28, 34)
+polygon = PackedVector2Array(32, 59, 25, 50, 39, 50)
 
 [node name="ArrowLeft" type="Polygon2D" parent="DPadRoot"]
 color = Color(0.45, 0.45, 0.45, 1)
-polygon = PackedVector2Array(4, 22, 10, 16, 10, 28)
+polygon = PackedVector2Array(5, 32, 14, 25, 14, 39)
 
 [node name="ArrowRight" type="Polygon2D" parent="DPadRoot"]
 color = Color(0.45, 0.45, 0.45, 1)
-polygon = PackedVector2Array(40, 22, 34, 16, 34, 28)
+polygon = PackedVector2Array(59, 32, 50, 25, 50, 39)

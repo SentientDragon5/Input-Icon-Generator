@@ -83,6 +83,7 @@ var theme_names: Array[String] = []
 var current_theme: Theme = null
 var current_theme_name: String = ""
 var current_size: int = 64
+var bold_font: FontVariation = null
 var current_selected_key: String = ""
 
 func get_output_icons_dir() -> String:
@@ -92,6 +93,9 @@ func get_output_spritesheets_dir() -> String:
 	return output_dir + "spritesheets/"
 
 func _ready() -> void:
+	bold_font = FontVariation.new()
+	bold_font.variation_embolden = 0.65
+	
 	create_gdignore(output_dir)
 	create_gdignore(get_output_icons_dir())
 	create_gdignore(get_output_spritesheets_dir())
@@ -250,59 +254,59 @@ func _register_procedural_keys() -> void:
 	# A-Z
 	for code in range(KEY_A, KEY_Z + 1):
 		var char_str = String.chr(code)
-		_add_key_entry("key_" + char_str.to_lower(), char_str, char_str, key_base_scene, 18, code)
+		_add_key_entry("key_" + char_str.to_lower(), char_str, char_str, key_base_scene, 28, code)
 		
 	# 0-9
 	for code in range(KEY_0, KEY_9 + 1):
 		var char_str = String.chr(code)
-		_add_key_entry("key_" + char_str, char_str, char_str, key_base_scene, 18, code)
+		_add_key_entry("key_" + char_str, char_str, char_str, key_base_scene, 28, code)
 		
 	# F1-F12
 	for i in range(1, 13):
-		_add_key_entry("key_f" + str(i), "F" + str(i), "F" + str(i), key_base_scene, 14, KEY_F1 + (i - 1))
+		_add_key_entry("key_f" + str(i), "F" + str(i), "F" + str(i), key_base_scene, 20, KEY_F1 + (i - 1))
 		
 	# Symbols
 	var symbols = [
-		[",", "key_comma", KEY_COMMA, 20], [".", "key_period", KEY_PERIOD, 20], ["/", "key_slash", KEY_SLASH, 18],
-		["\\", "key_backslash", KEY_BACKSLASH, 18], [";", "key_semicolon", KEY_SEMICOLON, 18], ["'", "key_apostrophe", KEY_APOSTROPHE, 20],
-		["[", "key_bracketleft", KEY_BRACKETLEFT, 18], ["]", "key_bracketright", KEY_BRACKETRIGHT, 18], ["-", "key_minus", KEY_MINUS, 20],
-		["=", "key_equal", KEY_EQUAL, 18], ["`", "key_backquote", KEY_QUOTELEFT, 20], ["!", "key_exclam", KEY_EXCLAM, 18],
-		["?", "key_question", KEY_QUESTION, 18], ["+", "key_plus", KEY_PLUS, 18], [":", "key_colon", KEY_COLON, 18],
-		["\"", "key_quotedbl", KEY_QUOTEDBL, 18], ["<", "key_less", KEY_LESS, 18], [">", "key_greater", KEY_GREATER, 18],
-		["_", "key_underscore", KEY_UNDERSCORE, 18], ["{", "key_braceleft", KEY_BRACELEFT, 18], ["}", "key_braceright", KEY_BRACERIGHT, 18],
-		["|", "key_bar", KEY_BAR, 18], ["~", "key_tilde", KEY_ASCIITILDE, 18], ["~", "key_asciitilde", KEY_ASCIITILDE, 18], ["@", "key_at", KEY_AT, 16],
-		["#", "key_hash", KEY_NUMBERSIGN, 18], ["$", "key_dollar", KEY_DOLLAR, 18], ["%", "key_percent", KEY_PERCENT, 16],
-		["&", "key_ampersand", KEY_AMPERSAND, 16], ["*", "key_asterisk", KEY_ASTERISK, 20]
+		[",", "key_comma", KEY_COMMA, 28], [".", "key_period", KEY_PERIOD, 28], ["/", "key_slash", KEY_SLASH, 26],
+		["\\", "key_backslash", KEY_BACKSLASH, 26], [";", "key_semicolon", KEY_SEMICOLON, 26], ["'", "key_apostrophe", KEY_APOSTROPHE, 28],
+		["[", "key_bracketleft", KEY_BRACKETLEFT, 26], ["]", "key_bracketright", KEY_BRACKETRIGHT, 26], ["-", "key_minus", KEY_MINUS, 28],
+		["=", "key_equal", KEY_EQUAL, 26], ["`", "key_backquote", KEY_QUOTELEFT, 28], ["!", "key_exclam", KEY_EXCLAM, 26],
+		["?", "key_question", KEY_QUESTION, 26], ["+", "key_plus", KEY_PLUS, 26], [":", "key_colon", KEY_COLON, 26],
+		["\"", "key_quotedbl", KEY_QUOTEDBL, 26], ["<", "key_less", KEY_LESS, 26], [">", "key_greater", KEY_GREATER, 26],
+		["_", "key_underscore", KEY_UNDERSCORE, 26], ["{", "key_braceleft", KEY_BRACELEFT, 26], ["}", "key_braceright", KEY_BRACERIGHT, 26],
+		["|", "key_bar", KEY_BAR, 26], ["~", "key_tilde", KEY_ASCIITILDE, 26], ["~", "key_asciitilde", KEY_ASCIITILDE, 26], ["@", "key_at", KEY_AT, 22],
+		["#", "key_hash", KEY_NUMBERSIGN, 26], ["$", "key_dollar", KEY_DOLLAR, 26], ["%", "key_percent", KEY_PERCENT, 22],
+		["&", "key_ampersand", KEY_AMPERSAND, 22], ["*", "key_asterisk", KEY_ASTERISK, 28]
 	]
 	for sym in symbols:
 		_add_key_entry(sym[1], sym[0], sym[0], key_base_scene, sym[3], sym[2])
 		
 	# Numpad
 	for i in range(10):
-		_add_key_entry("key_kp_" + str(i), "Num " + str(i), "Num " + str(i), key_base_scene, 9, KEY_KP_0 + i)
+		_add_key_entry("key_kp_" + str(i), "Num " + str(i), "Num " + str(i), key_base_scene, 18, KEY_KP_0 + i)
 	var numpad_ops = [
 		["key_kp_add", "Num +", KEY_KP_ADD], ["key_kp_subtract", "Num -", KEY_KP_SUBTRACT],
 		["key_kp_multiply", "Num *", KEY_KP_MULTIPLY], ["key_kp_divide", "Num /", KEY_KP_DIVIDE],
 		["key_kp_period", "Num .", KEY_KP_PERIOD]
 	]
 	for op in numpad_ops:
-		_add_key_entry(op[0], op[1], op[1], key_base_scene, 9, op[2])
-	_add_key_entry("key_kp_enter", "Num Enter", "Num Enter", key_wide_base_scene, 9, KEY_KP_ENTER)
+		_add_key_entry(op[0], op[1], op[1], key_base_scene, 18, op[2])
+	_add_key_entry("key_kp_enter", "Num Enter", "Num Enter", key_wide_base_scene, 14, KEY_KP_ENTER)
 		
 	# Navigation & special keys
 	var nav_keys = [
-		["key_escape", "Esc", "Escape", KEY_ESCAPE, false], ["key_insert", "Ins", "Insert", KEY_INSERT, false],
-		["key_delete", "Del", "Delete", KEY_DELETE, false], ["key_home", "Home", "Home", KEY_HOME, false],
-		["key_end", "End", "End", KEY_END, false], ["key_pageup", "PgUp", "Page Up", KEY_PAGEUP, false],
-		["key_pagedown", "PgDn", "Page Down", KEY_PAGEDOWN, false], ["key_up", "Up", "Up Arrow", KEY_UP, false],
-		["key_down", "Down", "Down Arrow", KEY_DOWN, false], ["key_left", "Left", "Left Arrow", KEY_LEFT, false],
-		["key_right", "Right", "Right Arrow", KEY_RIGHT, false], ["key_capslock", "Caps", "Caps Lock", KEY_CAPSLOCK, true],
-		["key_numlock", "NumLk", "Num Lock", KEY_NUMLOCK, true], ["key_scrolllock", "ScrLk", "Scroll Lock", KEY_SCROLLLOCK, true],
-		["key_printscreen", "PrtSc", "Print Screen", KEY_PRINT, true], ["key_pause", "Pause", "Pause", KEY_PAUSE, false],
-		["key_meta", "Meta", "Win / Cmd", KEY_META, true]
+		["key_escape", "Esc", "Escape", KEY_ESCAPE, false, 20], ["key_insert", "Ins", "Insert", KEY_INSERT, false, 20],
+		["key_delete", "Del", "Delete", KEY_DELETE, false, 20], ["key_home", "Home", "Home", KEY_HOME, false, 18],
+		["key_end", "End", "End", KEY_END, false, 20], ["key_pageup", "PgUp", "Page Up", KEY_PAGEUP, false, 18],
+		["key_pagedown", "PgDn", "Page Down", KEY_PAGEDOWN, false, 18], ["key_up", "Up", "Up Arrow", KEY_UP, false, 20],
+		["key_down", "Down", "Down Arrow", KEY_DOWN, false, 18], ["key_left", "Left", "Left Arrow", KEY_LEFT, false, 18],
+		["key_right", "Right", "Right Arrow", KEY_RIGHT, false, 18], ["key_capslock", "Caps", "Caps Lock", KEY_CAPSLOCK, true, 18],
+		["key_numlock", "NumLk", "Num Lock", KEY_NUMLOCK, true, 18], ["key_scrolllock", "ScrLk", "Scroll Lock", KEY_SCROLLLOCK, true, 18],
+		["key_printscreen", "PrtSc", "Print Screen", KEY_PRINT, true, 18], ["key_pause", "Pause", "Pause", KEY_PAUSE, false, 18],
+		["key_meta", "Meta", "Win / Cmd", KEY_META, true, 18]
 	]
 	for nk in nav_keys:
-		_add_key_entry(nk[0], nk[1], nk[2], key_wide_base_scene if nk[4] else key_base_scene, 11 if nk[4] else 12, nk[3])
+		_add_key_entry(nk[0], nk[1], nk[2], key_wide_base_scene if nk[4] else key_base_scene, nk[5], nk[3])
 
 func _add_key_entry(id_name: String, label: String, readable: String, tmpl: PackedScene, font_size: int, code: int) -> void:
 	items_registry[id_name] = {
@@ -333,6 +337,8 @@ func apply_theme_to_tree(node: Node, theme_res: Theme) -> void:
 func _apply_theme_node(node: Node, theme_sb: StyleBoxFlat, fg: Color, inactive_fg: Color, is_open: bool) -> void:
 	if node is Label:
 		node.add_theme_color_override("font_color", fg)
+		if bold_font:
+			node.add_theme_font_override("font", bold_font)
 	elif node is Panel:
 		var current_sb = node.get_theme_stylebox("panel")
 		if current_sb is StyleBoxFlat and theme_sb:
@@ -342,6 +348,10 @@ func _apply_theme_node(node: Node, theme_sb: StyleBoxFlat, fg: Color, inactive_f
 			else:
 				sb.bg_color = theme_sb.bg_color if not is_open else Color(0, 0, 0, 0)
 			sb.border_color = theme_sb.border_color
+			sb.border_width_left = theme_sb.border_width_left
+			sb.border_width_top = theme_sb.border_width_top
+			sb.border_width_right = theme_sb.border_width_right
+			sb.border_width_bottom = theme_sb.border_width_bottom
 			node.add_theme_stylebox_override("panel", sb)
 	elif node is Polygon2D:
 		if node.color.v > 0.8 and node.color.a > 0.8:
@@ -365,6 +375,8 @@ func instantiate_item(item_data: Dictionary) -> Node:
 			label_node = inst.find_child("Label", true, false) as Label
 		if label_node:
 			label_node.text = item_data["label"]
+			if bold_font:
+				label_node.add_theme_font_override("font", bold_font)
 			if item_data.has("font_size"):
 				label_node.add_theme_font_size_override("font_size", item_data["font_size"])
 	
